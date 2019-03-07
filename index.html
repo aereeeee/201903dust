@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <meta property="og:image" content="./img/title.jpg">
+    <!-- <link rel="stylesheet" type="text/css" href="css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="css/template.css"> -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            list-style:none;
+            text-decoration: none;
+        }
+        body{
+            overflow:hidden;
+        }
+        .container{
+            position:absolute;
+            top:200px;
+            left:50%;
+            width:100%;
+            height:200px;
+            background-color:#ddd; 
+            transform: translate(-50%);
+        }
+        ul{
+            border:1px solid #f00;
+            height:200px;
+        }
+        li{
+            float:left;
+            /* width:0.25%; */
+            height:200px;
+            border:1px solid #000;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <ul class="image">
+    </ul>
+    </div>
+</body>
+<script>
+    const datasize=365;
+    const data=Array.from(new Array(datasize),(val,index)=>index);
+    const windowwidth=window.innerWidth;
+
+    const ul=d3.select('.image');
+    ul.selectAll('li')
+        .data(data)
+        .enter()
+        .append('li')
+        .style('width',100/datasize+'%')
+        .on('click',function(d,i){
+            
+            d3.select(this)
+                .transition().duration(400)
+                .style('width','200px')
+            d3.select('.container')
+                .style('width','400%')
+                .style('transform','translate('+(windowwidth*4/datasize)*-i+'px)');    
+        })
+
+
+
+</script>
+</html>

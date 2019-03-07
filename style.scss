@@ -1,0 +1,358 @@
+//variables
+$slider-height: 500px;
+$text-block-width: 400px;
+
+$dark-font-color: #212121;
+$accent-font-color: #CA9CE1;
+$light-font-color: #fff;
+$text-overlay-color: #000;
+$text-overlay-opacity: 0.6;
+$slide-overlay-color: #fff;
+$slide-overlay-opacity: 0.6;
+
+//transitions and mixins
+
+//transitions mixin
+@mixin transition-mix($property: all, $duration: 0.2s, $timing: linear, $delay: 0s) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+  transition-delay: $delay;
+}
+
+//position absolute mixin
+@mixin position-absolute ($top: null, $left: null, $right: null, $bottom: null) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+}
+
+/*common styles !!!YOU DON'T NEED THEM */
+body {
+  font: {
+      family: 'Poppins', sans-serif;
+      weight: 400;
+      size: 17px;
+    }
+  color: $dark-font-color;
+  line-height: 1.4;
+}
+
+.container {
+  width: 1100px;
+  margin: 50px auto 0;
+  
+  h1 {
+    font: {
+      size: 25px;
+    }
+    text-align: center;
+    
+    span {
+      position: relative;
+      font: {
+        family: 'Merienda', cursive;
+      }
+      color: $accent-font-color;
+      
+      &:after {
+        @include position-absolute($bottom: -10px, $left: 0);
+        content: "~";
+        
+        width: 100%;
+        text-align:  center;
+      }
+    }
+  }
+  
+  .subheader {
+    text-align: center;
+    margin-top: 15px;
+  }
+}
+
+  .link {
+    display: flex;
+    justify-content: center;
+    width: 800px;
+    margin: 30px auto 0;
+    
+    a {
+      @include transition-mix;
+      
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      margin-right: 40px;
+      color: inherit;
+      font: {
+        size: inherit;
+      }
+      text-decoration: none;
+      
+      &:hover {
+        color: $accent-font-color;
+      }
+      
+      &:last-child {
+        margin-right: 0;
+      }
+
+      i {
+        color: $accent-font-color;
+        margin-right: 9px;
+        font-size: 30px;
+      }
+    }
+  }
+
+.slider-containers {
+  width: 100%;
+  margin-top: 60px;
+}
+
+.slider-container {
+  margin-bottom: 60px;
+  
+  h2 {
+    text-align: center;
+  }
+}
+
+.flexbox-slider {
+  margin-top: 50px;
+}
+
+/*slide styles !!!YOU NEED THEM */
+.flexbox-slider {
+  display: flex;
+  width: 100%;
+  height: $slider-height;
+  visibility: hidden;
+  
+  .flexbox-slide {
+    @include transition-mix($duration: .3s);
+    
+    width: 20%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    visibility: visible;
+    
+    //overlay
+    &:after {
+      @include position-absolute($top: 0, $left: 0);
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($slide-overlay-color, $slide-overlay-opacity);
+      z-index: 2;
+      
+      opacity: 0;
+    }
+    
+    img {
+      @include position-absolute($top: 50%, $left: 50%);
+      height: auto;
+      width: auto;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+    
+    .text-block {
+      @include position-absolute($bottom: 30px, $left: 30px);
+      max-width: $text-block-width;
+      padding: 20px;
+      border-radius: 5px;
+      background-color: rgba($text-overlay-color, $text-overlay-opacity);
+      color: $light-font-color;
+      
+      z-index: 4;
+      
+      visibility: hidden;
+      opacity: 0;
+      
+      h3 {
+        font: {
+          size: 20px;
+          weight: 700;
+        }
+      }
+    }
+  }
+  
+    &:hover {
+    
+    .flexbox-slide:hover {
+      flex-shrink: 0;
+      width: 80%;
+    }
+  }
+}
+
+/* effect 1 styles */
+.flexbox-slider.flexbox-slider-1 {
+  
+  .flexbox-slide {
+    
+    .text-block {
+      bottom: 60px;
+    }
+  }
+  
+  &:hover {
+    
+    .flexbox-slide:hover {
+      
+      .text-block {
+        @include transition-mix($delay: .5s);
+        bottom: 30px;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+/* effect 2 styles */
+.flexbox-slider.flexbox-slider-2 {
+  
+  .flexbox-slide {
+    
+    .text-block {
+        left: -60px;
+      }
+  }
+  
+  &:hover {
+    
+    .flexbox-slide:not(:hover) {
+      
+      
+      &:after {
+        @include transition-mix;
+        opacity: 1;
+      }
+    }
+    
+    .flexbox-slide:hover {
+      
+      .text-block {
+        @include transition-mix($delay: .5s, $timing: cubic-bezier(0, 0, 0, 1.82), $duration: .3s);
+        left: 30px;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+/* effect 3 styles */
+.flexbox-slider.flexbox-slider-3 {
+  
+  .flexbox-slide {
+    
+    &:after {
+      transform: scale(.5);
+      transform-origin: center center;
+    }
+    
+    .text-block {
+      transform: rotate(-20deg);
+    }
+  }
+  
+  &:hover {
+    
+    .flexbox-slide:hover {
+      
+      &:after {
+        @include transition-mix($delay: .4s);
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .text-block {
+        @include transition-mix($delay: .6s);
+        transform: rotate(0deg);
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+/* effect 4 styles */
+.flexbox-slider.flexbox-slider-4 {
+  
+  .flexbox-slide {
+    
+    &:after {
+      top: -100%;
+    }
+    
+    .text-block {
+      transform: scale(1.2);
+    }
+  }
+  
+  &:hover {
+    
+    .flexbox-slide:not(:hover) {
+      
+      &:after {
+        @include transition-mix;
+        top: 0;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    
+    .flexbox-slide:hover {
+      
+      .text-block {
+        @include transition-mix($delay: .5s);
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+/* effect 5 styles */
+.flexbox-slider.flexbox-slider-5 {
+  
+  .flexbox-slide {
+    
+    .text-block {
+      transform: scale(.85);
+    }
+  }
+  
+  &:hover {
+    
+    .flexbox-slide:hover {
+      
+      .text-block {
+        @include transition-mix($delay: .7s);
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      &:after {
+        @include transition-mix($delay: .4s);
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
