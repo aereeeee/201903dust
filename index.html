@@ -21,7 +21,7 @@
         body{
             overflow:hidden;
         }
-        .container{
+        /* .container{
             position:absolute;
             top:200px;
             left:50%;
@@ -34,41 +34,122 @@
             border:1px solid #f00;
             height:200px;
         }
-        li{
+        .flexitem{
             float:left;
-            /* width:0.25%; */
+            width:0.25%;
             height:200px;
             border:1px solid #000;
             box-sizing: border-box;
+        } */
+
+        .container{
+            /* width:100%; */
+            /* height:400px; */
+            width:100%;
+            position:absolute;
+            left:0;
+            top:200px;
+            /* display:flex;
+            justify-content: space-around;
+            padding:20px;
+            flex-wrap:nowrap;
+            justify-content: center;
+            align-items: stretch; */
         }
+        .flexitem{
+            float:left;
+            border:.5px solid #fff;
+            box-sizing: border-box;
+            /* flex-shrink: 0; */
+            /* flex-basis: 10px; */
+            overflow:hidden;
+            position:relative;
+        }
+        .picture{
+            width:100%;
+            height:200px;
+            overflow:hidden;
+        }
+        .palette{
+            /* position:absolute;
+            bottom:0; */
+            width:100%;
+            height:100px;
+            margin-top:30px;
+            display:flex;
+            flex-direction:column;
+            background-color:#ff0;
+        }
+        .palette div{
+            width:100%;
+            height:20%;
+        }
+        .color1{background-color:teal;}
+        .color2{background-color:turquoise;}
+        .color3{background-color:steelblue;}
+        .color4{background-color:slategray;}
+        .color5{background-color:skyblue;}
     </style>
 </head>
 <body>
     <div class="container">
-    <ul class="image">
-    </ul>
     </div>
 </body>
 <script>
-    const datasize=365;
+    const datasize=360;
     const data=Array.from(new Array(datasize),(val,index)=>index);
     const windowwidth=window.innerWidth;
+    const itemwidth=windowwidth/datasize;
 
-    const ul=d3.select('.image');
-    ul.selectAll('li')
+    const container=d3.select('.container');
+    container.selectAll('div')
         .data(data)
         .enter()
-        .append('li')
-        .style('width',100/datasize+'%')
+        .append('div')
+        .attr('class','flexitem')
+        .style('width',itemwidth+'px')
         .on('click',function(d,i){
-            
+
+            d3.selectAll('.flexitem')
+            .transition().duration(700)
+                .style('width','30px')
             d3.select(this)
-                .transition().duration(400)
-                .style('width','200px')
+                .transition().duration(1000)
+                .style('width','300px')
             d3.select('.container')
-                .style('width','400%')
-                .style('transform','translate('+(windowwidth*4/datasize)*-i+'px)');    
+                // .transition().duration(200)
+                .style('width',datasize*30+270+"px")
+                .style('left',-1*(d*30-d*itemwidth)+"px");    
+        });
+    d3.selectAll('.flexitem')
+        .append('div')
+        .attr('class',function(d){
+            return 'picture';
+        })    
+        
+    d3.selectAll('.picture')
+        .append('img')
+        .attr('src',function(d){
+            return 'sky.jpg'
         })
+
+    d3.selectAll('.flexitem')
+        .append('div')
+        .attr('class',function(d){
+            return 'palette';
+        })
+								
+    const palettedata=[1,2,3,4,5];
+    d3.selectAll('.palette')
+        .selectAll('div')
+        .data(palettedata)
+        .enter()
+        .append('div')
+        .attr('class',function(d){
+            return 'color'+d;
+        })
+    
+
 
 
 
