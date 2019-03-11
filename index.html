@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/template.css"> -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/rgbaster@2.1.1/dist/rgbaster.umd.min.js"></script>
+    <!-- <script src="./rgbaster.min.js"></script> -->
 	<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <style>
         *{
@@ -65,7 +65,7 @@
             height:200px;
             overflow:hidden;
         }
-        .palette{
+        #Palette{
             /* position:absolute;
             bottom:0; */
             width:100%;
@@ -73,11 +73,11 @@
             margin-top:30px;
             display:flex;
             flex-direction:column;
-            background-color:#ff0;
+            background-color:#fff;
         }
-        .palette div{
+        #Palette div{
             width:100%;
-            height:20%;
+            /* height:20%; */
         }
         .color1{background-color:teal;}
         .color2{background-color:turquoise;}
@@ -90,6 +90,8 @@
     <div class="container">
     </div>
 </body>
+<!-- <script src="rgb.js"></script> -->
+<script src="./colorgram.js"></script>
 <script>
     const datasize=360;
     const data=Array.from(new Array(datasize),(val,index)=>index);
@@ -129,21 +131,79 @@
 
     d3.selectAll('.flexitem')
         .append('div')
+        .attr('id','Palette')
         .attr('class',function(d){
-            return 'palette';
-        })
-								
-    const palettedata=[1,2,3,4,5];
-    d3.selectAll('.palette')
-        .selectAll('div')
-        .data(palettedata)
-        .enter()
-        .append('div')
-        .attr('class',function(d){
-            return 'color'+d;
+            return 'palette'+d;
         })
 
+    // const palettedata=[1,2,3,4,5];
+    // d3.selectAll('.palette')
+    //     .selectAll('div')
+    //     .data(palettedata)
+    //     .enter()
+    //     .append('div')
+    //     .attr('class','paletteitem');
 
+</script>
+<script>
+	var width, height, previewHeight;
+	width = height = 340;
+    var images=Array(360).fill('./sky.jpg');
     
+	window.onload = function () {
+		for (var i = 0; i < images.length; i++) {
+			(function (i) {
+				setTimeout(function () {
+					processImage(images[i],false);
+				}, i * 5);
+			})(i);
+		}
+	};
+
+	function loadImage(path, done) {
+		var img = new Image();
+		img.onload = function () {
+			var canvas = document.createElement('canvas');
+			canvas.width = width;
+			canvas.height = width * (img.height / img.width);
+			var ctx = canvas.getContext('2d');
+			ctx.drawImage(img, 0, 0, width, canvas.height);
+			var id = ctx.getImageData(0, 0, canvas.width, canvas.height);
+			done({width: canvas.width, height: canvas.height, data: id.data, channels: 4, canvas: canvas});
+		};
+		img.src = path;
+    } 
+    var count=-1;
+    const palettedata=[0,1,2,3,4];
+	function processImage(imagePath, prepend) {
+		loadImage(imagePath, function (img) {
+            count++;
+            var stats = Colorgram.extract(img);
+            console.log(stats);
+        d3.select('.palette'+count)
+                .selectAll('div')
+                .data(palettedata)
+                .enter()
+                .append('div')
+                .style('height',function(d){
+                    return stats[d][3]*100+'%';
+                })
+                .style('background-color',function(d){
+                        return 'rgb('+stats[d][0]+','+stats[d][1]+','+stats[d][2]+')';
+                });
+    
+
+            
+    // d3.selectAll('.palette')
+    //     .selectAll('div')
+    //     .data(palettedata)
+    //     .enter()
+    //     .append('div')
+    //     .attr('class','paletteitem');
+        // for(d=0;d<5;d++)
+        // console.log('rgb('+stats[d][0]+','+stats[d][1]+','+stats[d][2]+')');
+
+    })
+	}
 </script>
 </html>
