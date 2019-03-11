@@ -54,7 +54,7 @@
         }
         .flexitem{
             float:left;
-            border:.5px solid #fff;
+            /* border:.5px solid #fff; */
             flex-shrink: 0;
             /* flex-basis: 10px; */
             overflow:hidden;
@@ -64,6 +64,9 @@
             width:100%;
             height:200px;
             overflow:hidden;
+        }
+        .picture img{
+            height:100%;
         }
         #Palette{
             /* position:absolute;
@@ -125,8 +128,7 @@
     d3.selectAll('.picture')
         .append('img')
         .attr('src',function(d){
-            if(d>150&&d<170){return 'sky2.jpg'}
-            else return 'sky.jpg'
+           return 'image/img ('+(d+1)+').png'
         })
 
     d3.selectAll('.flexitem')
@@ -147,8 +149,12 @@
 </script>
 <script>
 	var width, height, previewHeight;
-	width = height = 340;
-    var images=Array(360).fill('./sky.jpg');
+    width = height = 340;
+
+    var images=[];
+    for(i=1;i<361;i++){
+    images.push('image/img ('+i+').png');
+    }
     
 	window.onload = function () {
 		for (var i = 0; i < images.length; i++) {
@@ -174,7 +180,7 @@
 		img.src = path;
     } 
     var count=-1;
-    const palettedata=[0,1,2,3,4];
+    const palettedata=[0];
 	function processImage(imagePath, prepend) {
 		loadImage(imagePath, function (img) {
             count++;
