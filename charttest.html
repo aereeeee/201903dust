@@ -24,6 +24,10 @@
 <svg width="1000" height="500"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
+window.addEventListener("wheel", function(e) {
+    var dir = Math.sign(e.deltaY);
+    console.log(dir);
+});
 var svg = d3.select("svg"),
     margin = {top: 20, right: 20, bottom: 110, left: 40},
     margin2 = {top: 430, right: 20, bottom: 30, left: 40},
@@ -31,7 +35,7 @@ var svg = d3.select("svg"),
     height = +svg.attr("height") - margin.top - margin.bottom,
     height2 = +svg.attr("height") - margin2.top - margin2.bottom;
 
-var parseDate = d3.timeParse("%b %Y");
+var parseDate = d3.timeParse("%Y-%m-%d");
 
 var x = d3.scaleTime().range([0, width]),
     x2 = d3.scaleTime().range([0, width]),
@@ -56,19 +60,19 @@ var area = d3.area()
     .curve(d3.curveMonotoneX)
     .x(function(d) { return x(d.date); })
     .y0(height)
-    .y1(function(d) { return y(d.price); });
+    .y1(function(d) { return y(d.pm25); });
 
 var area2 = d3.area()
     .curve(d3.curveMonotoneX)
     .x(function(d) { return x2(d.date); })
     .y0(height2)
-    .y1(function(d) { return y2(d.price); });
+    .y1(function(d) { return y2(d.pm25); });
 
-svg.append("defs").append("clipPath")
-    .attr("id", "clip")
-  .append("rect")
-    .attr("width", width)
-    .attr("height", height);
+// svg.append("defs").append("clipPath")
+//     .attr("id", "clip")
+//   .append("rect")
+//     .attr("width", width)
+//     .attr("height", height);
 
 var focus = svg.append("g")
     .attr("class", "focus")
@@ -82,11 +86,11 @@ d3.csv("data.csv", type, function(error, data) {
   if (error) throw error;
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.price; })]);
+  y.domain([0, d3.max(data, function(d) { return d.pm25; })]);
   x2.domain(x.domain());
   y2.domain(y.domain());
-
-  focus.append("rect")
+//focus=main,  context=interface
+  focus.append("path")
       .datum(data)
       .attr("class", "area")
       .attr("d", area);
@@ -145,10 +149,9 @@ function zoomed() {
 
 function type(d) {
   d.date = parseDate(d.date);
-  d.price = +d.price;
+  d.pm25 = +d.pm25;
   return d;
 }
-
 
 </script>
 </body>

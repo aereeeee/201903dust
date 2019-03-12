@@ -35,6 +35,8 @@ build/Release
 # Dependency directories
 node_modules/
 image/
+image960/
+low/
 
 # TypeScript v1 declaration files
 typings/
