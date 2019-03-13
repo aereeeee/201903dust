@@ -21,7 +21,7 @@
         }
         body{
             overflow:hidden;
-            background-color:#ddd;
+            background-color:#fff;
         }
         /* .container{
             position:absolute;
@@ -56,21 +56,26 @@
         .flexitem{
             float:left;
             /* border:.5px solid #fff; */
-            flex-shrink: 0;
+            /* flex-shrink: 0; */
             /* flex-basis: 10px; */
             overflow:hidden;
             position:relative;
+            box-shadow:none;
+            z-index:0;
+            margin:0;
+            /* -webkit-box-shadow: 2px 4px 72px -20px rgba(0,0,0,0.77);
+            -moz-box-shadow: 2px 4px 72px -20px rgba(0,0,0,0.77); */
         }
         .picture{
             width:100%;
-            height:200px;
+            height:300px;
             overflow:hidden;
         }
         .picture img{
             /* left:-50%; */
             height:100%;
         }
-        #Palette{
+        .Palette{
             /* position:absolute;
             bottom:0; */
             width:100%;
@@ -80,11 +85,23 @@
             flex-direction:column;
             background-color:#ddd;
         }
-        #Palette div{
+        .Palette div{
             width:100%;
             /* height:20%; */
         }
-
+        .pm25{
+            height:100px;
+            width:100%;
+            /* margin:0 1px; */
+            background-color:#ddd;
+            position:relative;
+        }
+        .pm25bar{
+            width:100%;
+            position:absolute;
+            bottom:0;
+            background-color:#888;
+        }
         .area {
         fill: steelblue;
         clip-path: url(#clip);
@@ -107,7 +124,7 @@
 <script src="./colorgram.js"></script>
 <script>
 
-    const datasize=351;
+    const datasize=365;
     const data=Array.from(new Array(datasize),(val,index)=>index);
     const windowwidth=window.innerWidth;
 
@@ -122,9 +139,13 @@
             d3.selectAll('.flexitem')
             .transition().duration(700)
                 .style('flex-basis','30px')
+                .style('margin','0 1px')
             d3.select(this)
                 .transition().duration(1000)
                 .style('flex-basis','300px')
+                .style('z-index','999')
+                .style('margin','0 8px')
+                .style('box-shadow', '2px 4px 72px -20px rgba(0,0,0,0.77)')
             // d3.select('.container')
             //     // .transition().duration(200)
             //     .style('width','400%')
@@ -139,17 +160,30 @@
     d3.selectAll('.picture')
         .append('img')
         .attr('src',function(d){
-           return 'image/img ('+(d+1)+').jpg'
+           return 'image/img ('+(d+1)+').png'
             // return 'sky.jpg'
+        })
+
+    //class랑 id랑 바꾸기
+    d3.selectAll('.flexitem')
+        .append('div')
+        .attr('class','Palette')
+        .attr('id',function(d){
+            return 'palette'+d;
         })
 
     d3.selectAll('.flexitem')
         .append('div')
-        .attr('id','Palette')
-        .attr('class',function(d){
-            return 'palette'+d;
+        .attr('class','pm25')
+        .attr('id',function(d){
+            return 'pm25'+d;
         })
-
+    d3.selectAll('.pm25')
+        .append('div')
+        .attr('class','pm25bar')
+        .attr('id',function(d){
+            return 'pm25bar'+d;
+        })
     // const palettedata=[1,2,3,4,5];
     // d3.selectAll('.palette')
     //     .selectAll('div')
@@ -157,31 +191,21 @@
     //     .enter()
     //     .append('div')
     //     .attr('class','paletteitem');
-        
-    window.addEventListener("wheel", function(e) {
-        let itemwidth=$('.flexitem').width();
-        console.log(itemwidth);
-    var dir = Math.sign(e.deltaY);
-    if(dir===-1){
-        itemwidth=itemwidth-10;
-        d3.selectAll('.flexitem')
-        .style('flex-basis',itemwidth+'px')
-    }
-    else{
-        itemwidth=itemwidth+10;
-        d3.selectAll('.flexitem')
-        .style('flex-basis',itemwidth+'px')
-    }
-});
+    
 
 </script>
 <script>
 	var width, height, previewHeight;
     width = height = 340;
-
+    var out=[48,55,78,93,94,166,190,191,192,193,209,353,354,28,29,44,53,63,67,108];
     var images=[];
-    for(i=1;i<352;i++){
-        images.push('image/img ('+i+').jpg');
+    for(i=1;i<365;i++){
+        
+        if(out.includes(i)){
+            images.push('out.png');
+        }else{
+            images.push('image/img ('+i+').png');
+        }
         // images.push('sky.jpg');
     }
     
@@ -190,7 +214,7 @@
 			(function (i) {
 				setTimeout(function () {
 					processImage(images[i],false);
-				}, i * 5);
+				}, i * 50);
 			})(i);
 		}
 	};
@@ -214,7 +238,7 @@
 		loadImage(imagePath, function (img) {
             count++;
             var stats = Colorgram.extract(img);
-        d3.select('.palette'+count)
+        d3.select('#palette'+count)
                 .selectAll('div')
                 .data(palettedata)
                 .enter()
@@ -251,8 +275,12 @@
         .extent([[0, 0], [width, height2]])
         .on("brush end", brushed);
     
+    var domainStart = new Date('3/11/2018'),
+    domainEnd = new Date('3/10/2019');    
+    var zoomMax = (domainEnd.getTime() - domainStart.getTime()) / (86400000*5),
+    zoomMin = 1;  
     var zoom = d3.zoom()
-        .scaleExtent([1, Infinity])
+        .scaleExtent([zoomMin, zoomMax])
         .translateExtent([[0, 0], [width, height]])
         .extent([[0, 0], [width, height]])
         .on("zoom", zoomed);
@@ -285,7 +313,15 @@
     
     d3.csv("data.csv", type, function(error, data) {
       if (error) throw error;
-    
+
+    /////////////////////////////////////////
+        d3.selectAll('.pm25bar')
+            .datum(data)
+            .style('height',function(d){
+                return d.pm25;
+            });
+
+    //////////////////////////////////////////////
       x.domain(d3.extent(data, function(d) { return d.date; }));
       y.domain([0, d3.max(data, function(d) { return d.pm25; })]);
       x2.domain(x.domain());
@@ -340,14 +376,32 @@
     }
     
     function zoomed() {
+    let itemwidth=$('.flexitem').width();
       if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return; // ignore zoom-by-brush
       var t = d3.event.transform;
       x.domain(t.rescaleX(x2).domain());
       focus.select(".area").attr("d", area);
       focus.select(".axis--x").call(xAxis);
       context.select(".brush").call(brush.move, x.range().map(t.invertX, t));
+      d3.selectAll('.flexitem')
+        .style('flex-basis',itemwidth+13+'px')
+
     }
-    
+//     window.addEventListener("wheel", function(e) {
+//         let itemwidth=$('.flexitem').width();
+//         console.log(itemwidth);
+//     var dir = Math.sign(e.deltaY);
+//     if(dir===-1){
+//         itemwidth=itemwidth-10;
+//         d3.selectAll('.flexitem')
+//         .style('flex-basis',itemwidth+'px')
+//     }
+//     else{
+//         itemwidth=itemwidth+10;
+//         d3.selectAll('.flexitem')
+//         .style('flex-basis',itemwidth+'px')
+//     }
+// });
     function type(d) {
       d.date = parseDate(d.date);
       d.pm25 = +d.pm25;

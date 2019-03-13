@@ -6,4 +6,5 @@
 - heatmap of year color + search local
 - compare two picture  
   
-https://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172
+https://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172  
+https://observablehq.com/@d3/zoomable-bar-chart
