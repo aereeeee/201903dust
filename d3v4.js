@@ -16625,13 +16625,14 @@ function zoom() {
     var t0 = this.__zoom,
         p0 = mouse(this),
         p1 = t0.invert(p0),
-        // k1 = t0.k * (exports.event.shiftKey ? 0.5 : maxextent),
-        k1 = t0.k * (exports.event.shiftKey ? 0.5 : 50),
+        k1 = t0.k * (exports.event.shiftKey ? 0.5 : maxextent),
+        // k1 = t0.k * (exports.event.shiftKey ? 0.5 : 50),
         t1 = constrain(translate(scale(t0, k1), p0, p1), extent.apply(this, arguments), translateExtent);
         
     noevent$2();
     if (duration > 0) select(this).transition().duration(duration).call(schedule, t1, p0);
     else select(this).call(zoom.transform, t1);
+
   }
 
   function touchstarted() {
