@@ -9,6 +9,15 @@
     <!-- <link rel="stylesheet" type="text/css" href="css/semantic.css">
     <link rel="stylesheet" type="text/css" href="css/template.css"> -->
     <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+    <script type="text/javascript">
+        var filter = "win16|win32|win64|mac";
+     
+        if( navigator.platform  ){
+            if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
+                window.location.href = "mobile.html";
+            }
+        }
+    </script>
     <script src="d3v4.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="lib/itemslide.min.js"></script>
