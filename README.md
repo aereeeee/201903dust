@@ -11,12 +11,18 @@
 https://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172  
 https://observablehq.com/@d3/zoomable-bar-chart
 
-- 0381
+#### 0318
 - ^^줌+tX+포지션absolute.......
 - container height 잡고 absolute로 라벨 붙이기
 - d3chart brush 붙이기
   
-- 0319
+#### 0319
+- 모바일 carousel
+- 웹 line chart, brush
+- 웹 scroll -> focusing
+- 스크롤 애니메이션. 고정 필수
+- 로딩프로세스
+---------
 # transform.scale(k) <>
 
 Returns a transform whose scale k₁ is equal to k₀k, where k₀ is this transform’s scale.

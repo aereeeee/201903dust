@@ -11,6 +11,8 @@
     <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
     <script src="d3v4.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <!-- <link href="css/foundation.css" rel="stylesheet" type="text/css" /> -->
+    <link href="css/twentytwenty.css" rel="stylesheet" type="text/css" />
     <!-- <script src="./rgbaster.min.js"></script> -->
 	<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <style>
@@ -24,9 +26,9 @@
             overflow-x:hidden;
             background-color:#fff;
         }
-        ::-webkit-scrollbar { 
+        /* ::-webkit-scrollbar { 
             display: none; 
-        }
+        } */
         .container{
             /* margin-top:100px; */
             position:relative;
@@ -155,7 +157,6 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
         }
         .imgsection{
             width:100%;
-            float:left;
             margin:30px 0;
         }
         .imgsection .map{
@@ -164,6 +165,14 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
             height:200px;
             box-sizing: border-box;
             border:1px solid #000;
+        }
+        .imgsection::after { content: ''; dispaly: table; clear: both }
+        #diff{
+            width:80%;
+            margin:30px auto;
+        }
+        #diff img{
+            width:100%;
         }
     </style>
 </head>
@@ -185,12 +194,19 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
             <div class="map">실제 사진</div>
             <div class="map">서울 지도에 SBS 위치와 북쪽 카메라 전망 표시하고, 성산대교 정도 표시</div>
             <div class="map">실제 사진</div>
-        </div>        
+        </div> 
     </div>
-<!-- <script src="rgb.js"></script> -->
-<script src="./colorgram.js"></script>
-<script>
 
+    <div id="diff">
+        <img src="image/img1.png">
+        <img src="image/img100.png">
+    </div>
+    <p>청명한 날과 미세먼지가 가득한 날의 가시거리 차이는 상당합니다. 초미세먼지(PM 2.5) 농도가 높아지면 빛이 미세먼지에 의해 여러 방향으로 흩어지거나, 미세먼지에 흡수돼 가시거리가 감소합니다. 황산염, 질산염 등 초미세먼지 농도가 높은 상태에서 습도까지 높아지면 대기오염물질이 수분을 흡수해 가시거리는 더욱 짧아집니다. 물론 미세먼지 농도가 높을 때 뿐 아니라 날씨가 흐리거나 안개 낀 날에도 가시거리는 짧아집니다.
+        초미세먼지가 4㎍/㎥를 기록했던 2018년 7월 7일에는 SBS에서 직선거리로 3.6km인 국회의사당은 물론, 10,4km 떨어진 서울N타워 역시 뚜렷하게 보입니다. 반면 초미세먼지가 119㎍/㎥를 기록했던 2019년 3월 4일에는 3.6km 떨어진 국회의사당 조차 제대로 보이지 않고 강북쪽 건물은 식별조차 되지 않습니다.
+    </p>
+<!-- <script src="rgb.js"></script> -->
+<!-- <script src="./colorgram.js"></script> -->
+<script>
     const datasize=365;
     const imagewidth=498;
     var margin = {top: 0, right: 20, bottom: 0, left: 20},
@@ -376,7 +392,17 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
         d.pm25 = +d.pm25;
         return d;
     }
+    
+    
+ 
 
+</script>
+<script src="lib/jquery.event.move.js"></script>
+<script src="lib/jquery.twentytwenty.js"></script>
+<script>
+$(window).load(function() {
+  $("#diff").twentytwenty();
+});
 </script>
 </body>
 </html>

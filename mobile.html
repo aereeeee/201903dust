@@ -6,8 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <meta property="og:image" content="./img/title.jpg">
+    <!-- <link rel="stylesheet" type="text/css" href="css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="css/template.css"> -->
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
     <script src="d3v4.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="lib/itemslide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.12/jquery.mousewheel.min.js"></script>
+    <!-- <link href="css/foundation.css" rel="stylesheet" type="text/css" /> -->
+    <link href="css/twentytwenty.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="css/sliding.css" rel="stylesheet" /> -->
+    <!-- <script src="./rgbaster.min.js"></script> -->
+	<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <style>
         *{
             margin:0;
@@ -16,27 +26,49 @@
             text-decoration: none;
         }
         body{
-            overflow-x:hidden;
+            /* overflow-x:hidden; */
             background-color:#fff;
         }
-        ::-webkit-scrollbar { 
+        /* ::-webkit-scrollbar { 
             display: none; 
-        }
+        } */
         .container{
             /* margin-top:100px; */
             position:relative;
-            height:700px;
+            height:100vh;
             white-space: nowrap;
         }
-        .flexitem{
+        .itemcontainer{
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            position: absolute;
+            /*top:10%;*/
             height:100%;
-            position:absolute;
-            left:0;
-            top:0;
-            box-shadow:none;
-            z-index:0;
-            margin:0;
+            -webkit-transform-style: preserve-3d;
+	        -ms-transform-style: preserve-3d;
+	        transform-style: preserve-3d;
         }
+        .flexitem{
+            float: left;
+            width: 80vw;
+            height: 90%;
+            /* -webkit-transform:  scaleY(0.9);
+            -ms-transform:  scaleY(0.9);
+            -moz-transform:  scaleY(0.9);
+            transform: scaleY(0.9); */
+            box-shadow:none;
+        }
+        .itemslide-active
+        {/*applied to current active item*/
+            /* -webkit-transform:  scaleY(1);
+            -ms-transform:  scaleY(1);
+            -moz-transform:  scaleY(1);
+            transform: scaleY(1); */
+            height: 100%;
+        }
+
         .date{
             height:5%;
             overflow:visible !important;
@@ -51,20 +83,7 @@
             box-shadow:none;
             z-index: initial;
         }
-         #active .picture, #active .Palette{
-             z-index:999;
-            -webkit-box-shadow: 10px 10px 44px 0px rgba(0,0,0,0.75);
-            -moz-box-shadow: 10px 10px 44px 0px rgba(41, 37, 37, 0.75);
-            box-shadow: 10px 10px 44px 0px rgba(0,0,0,0.75);
-            transition: all ease 0.5s 0s;
-        }
-        #active .baraxis{
-            font-weight:bold;
-        }
-        #active .pm25bar{
-            background-color: #f00;
-            transition: all ease 0.5s 0s;
-        }
+
         .picture img{
             height:99%;
         }
@@ -74,9 +93,6 @@
             width:100%;
             height:20%;
             /* margin-top:3px; */
-            display:flex;
-            flex-direction:column;
-            /* background-color:#ddd; */
         }
         .Palette div{
             width:100%;
@@ -137,6 +153,9 @@
             color:white;
             font-size: .7em;
         }
+
+
+
         h2{
             margin:20px 20px;
         }
@@ -147,7 +166,6 @@
         }
         .imgsection{
             width:100%;
-            float:left;
             margin:30px 0;
         }
         .imgsection .map{
@@ -156,6 +174,14 @@
             height:200px;
             box-sizing: border-box;
             border:1px solid #000;
+        }
+        .imgsection::after { content: ''; dispaly: table; clear: both }
+        #diff{
+            width:80%;
+            margin:30px auto;
+        }
+        #diff img{
+            width:100%;
         }
     </style>
 </head>
@@ -177,12 +203,19 @@
             <div class="map">실제 사진</div>
             <div class="map">서울 지도에 SBS 위치와 북쪽 카메라 전망 표시하고, 성산대교 정도 표시</div>
             <div class="map">실제 사진</div>
-        </div>        
+        </div> 
     </div>
-<!-- <script src="rgb.js"></script> -->
-<script src="./colorgram.js"></script>
-<script>
 
+    <div id="diff">
+        <img src="image/img1.png">
+        <img src="image/img100.png">
+    </div>
+    <p>청명한 날과 미세먼지가 가득한 날의 가시거리 차이는 상당합니다. 초미세먼지(PM 2.5) 농도가 높아지면 빛이 미세먼지에 의해 여러 방향으로 흩어지거나, 미세먼지에 흡수돼 가시거리가 감소합니다. 황산염, 질산염 등 초미세먼지 농도가 높은 상태에서 습도까지 높아지면 대기오염물질이 수분을 흡수해 가시거리는 더욱 짧아집니다. 물론 미세먼지 농도가 높을 때 뿐 아니라 날씨가 흐리거나 안개 낀 날에도 가시거리는 짧아집니다.
+        초미세먼지가 4㎍/㎥를 기록했던 2018년 7월 7일에는 SBS에서 직선거리로 3.6km인 국회의사당은 물론, 10,4km 떨어진 서울N타워 역시 뚜렷하게 보입니다. 반면 초미세먼지가 119㎍/㎥를 기록했던 2019년 3월 4일에는 3.6km 떨어진 국회의사당 조차 제대로 보이지 않고 강북쪽 건물은 식별조차 되지 않습니다.
+    </p>
+<!-- <script src="rgb.js"></script> -->
+<!-- <script src="./colorgram.js"></script> -->
+<script>
     const datasize=365;
     const imagewidth=498;
     var margin = {top: 0, right: 20, bottom: 0, left: 20},
@@ -190,67 +223,22 @@
     height = window.innerHeight;
 
     const parseDate = d3.timeParse("%Y-%m-%d");
-
-    var x = d3.scaleBand()
-          .range([margin.left, width - margin.right])
-          .padding(0);
-
-
     const monthformat = d3.timeFormat('%_m월');
     const dayformat= d3.timeFormat('%_m월 %_d일');
-    
-    const firstwidth=width/365;
-    const maxextent=imagewidth/firstwidth;
-
-    const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];       
-    var zoom=d3.zoom()
-            .scaleExtent([1, maxextent])
-            .translateExtent(extent)
-            .extent(extent)
-            .duration(750)
-            .on("zoom", zoomed);
-    
-    // var brush = d3.brushX()
-    // .extent(extent)
-    // .on("brush end", brushed);
 
 
     const container=d3.select('.container');
-    var context = container.append("svg").append('g')
-    .attr("class", "context")
 
     d3.csv("data.csv", type, function(error, data) {
       if (error) throw error;
 
-        x.domain(data.map(function(d) { return d.date; }));
-
-        container.selectAll('div')
+        container.append('ul').attr('class','itemcontainer')
+            .selectAll('li')
             .data(data)
             .enter()
-            .append('div')
+            .append('li')
             .attr('class','flexitem')
-            .style('transform', function(d){
-            return 'translateX('+x(d.date)+'px)'
-            })
-            .style("width", x.bandwidth()+'px')
-            .on('click',function(d,i){
-                d3.selectAll('.flexitem').attr('id',null);
-                d3.select(this).attr('id','active')
-
-                // d3.select(this).select('.pm25bar')
-                // .transition().duration(800)
-                // .style('background-color',function(d){
-                //     return 'rgb('+d.R+','+d.G+','+d.B+')';
-                // });
-
-                // d3.select(this).select('.picture')
-                // .
-
-                // d3.select(this).select('.baraxis')
-        
-            })
-
-        
+  
         const flexitem=d3.selectAll('.flexitem');
 
         flexitem.append('div')
@@ -324,51 +312,53 @@
             .attr('class','axisline')
             .style('width',width+'px')
             .html('<span>나쁨 기준선 35</span>');
-    
-    container.call(zoom);
 
-    //     context.append("g")
-    //   .attr("class", "brush")
-    //   .call(brush)
-    //   .call(brush.move, x.range());
     });
         
-    function zoomed() {
-        x.range([margin.left, width - margin.right].map(d => d3.event.transform.applyX(d)));
-        container.selectAll(".flexitem")
-        .style('transform', function(d){
-        return 'translateX('+x(d.date)+'px)'
-        })
-        .style("width", (x.bandwidth())+'px');
-        
-
-        // d3.select('axisline').style('width',width+'px')
-
-        if(x.bandwidth()>60){
-            d3.selectAll('.baraxis').html(function(d,i){
-            return dayformat(parseDate(d.date));
-            });
-            d3.selectAll('.pm25bar').html(function(d,i){
-            return '<span>'+d.pm25+'</span>';
-            });
-        }else{
-            d3.selectAll('.baraxis').html(function(d,i){
-            if(i%30==1){
-            return monthformat(parseDate(d.date));}
-            else return;
-            });
-
-            d3.selectAll('.pm25bar').html('');
-            d3.selectAll('.flexitem').attr('id',null);
-        }
-    }
 
 
     function type(d) {
         d.pm25 = +d.pm25;
         return d;
     }
+    
+    
+ 
 
+</script>
+<script>
+var carousel;
+$(window).load(function() {
+
+    carousel = $(".itemcontainer");
+
+    carousel.itemslide({
+
+    }); //initialize itemslide
+
+    $(window).resize(function () {
+        carousel.reload();
+    }); //Recalculate width and center positions and sizes when window is resized
+
+    // $("#next").click(function() {
+    //     carousel.next();
+    // });
+
+    // $("#previous").click(function() {
+    //     carousel.previous();
+    // });
+
+
+});
+
+
+</script>
+<script src="lib/jquery.event.move.js"></script>
+<script src="lib/jquery.twentytwenty.js"></script>
+<script>
+$(window).load(function() {
+  $("#diff").twentytwenty();
+});
 </script>
 </body>
 </html>
