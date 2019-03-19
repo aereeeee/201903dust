@@ -9,6 +9,14 @@
     <!-- <link rel="stylesheet" type="text/css" href="css/semantic.css">
     <link rel="stylesheet" type="text/css" href="css/template.css"> -->
     <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+        <script type="text/javascript">
+        if (isMobile()) {
+window.location.href = "mobile.html";
+}
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+    </script>
     <script src="d3v4.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <!-- <link href="css/foundation.css" rel="stylesheet" type="text/css" /> -->
