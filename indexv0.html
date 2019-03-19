@@ -21,7 +21,6 @@
             text-decoration: none;
         }
         body{
-            height:100%;
             overflow-x:hidden;
             background-color:#fff;
         }
@@ -29,7 +28,7 @@
             display: none; 
         }
         .container{
-            /* margin-top:100px; */
+            margin-top:100px;
             position:relative;
             /* height:540px; */
             /* width:20000px; */
@@ -44,10 +43,6 @@
 
             /* overflow-x: scroll; */
             white-space: nowrap;
-        }
-        svg{
-            position:absolute;
-            bottom:0;
         }
         .flexitem{
             /* float:left; */
@@ -73,7 +68,7 @@
         }
         .picture{
             width:100%;
-            height:100px;
+            height:280px;
             overflow:hidden;
             /* background:url(
 data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2NkwAT/GdHE/jMwMDAiC4IFQIpggnABmCCKAEgQAABOBQUaykC8AAAAAElFTkSuQmCC
@@ -140,58 +135,28 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
 <script>
 
     const datasize=365;
-    const imagewidth=300;
+    const imagewidth=498;
     const windowwidth=window.innerWidth;
     var margin = {top: 0, right: 20, bottom: 0, left: 20},
     width = window.innerWidth,
-    height = 30;
-
+    height = 0;
 
     const parseDate = d3.timeParse("%Y-%m-%d");
 
     var x = d3.scaleBand()
           .range([margin.left, width - margin.right])
           .padding(0);
-
-    var y = d3.scaleLinear().range([height, 0])
-    y2 = d3.scaleLinear().range([height, 0]);
-
-
-    var xAxis = d3.axisBottom(x),
-    yAxis = d3.axisLeft(y);
-
     const monthformat = d3.timeFormat('%_m월');
     const dayformat= d3.timeFormat('%_m월 %_d일');
     
-    var brush = d3.brushX()
-    .extent([[0, 0], [width, height]])
-    .on("brush end", brushed);
-
-    var area = d3.area()
-    .curve(d3.curveMonotoneX)
-    .x(function(d) { return x(d.date); })
-    .y0(height)
-    .y1(function(d) { return y(d.pm25); });
-
-
-var area2 = d3.area()
-    .curve(d3.curveMonotoneX)
-    .x(function(d) { return x(d.date); })
-    .y0(height)
-    .y1(function(d) { return y(d.pm25); });
-
-
-    ////
+    
     d3.csv("data.csv", type, function(error, data) {
       if (error) throw error;
 
-        const container=d3.select('.container').style('height',window.innerHeight+'px')
+        const container=d3.select('.container')
         .call(zoom);
 
         x.domain(data.map(function(d) { return d.date; }));
-
-        y.domain([0, d3.max(data, function(d) { return d.pm25; })]);
-        y2.domain(y.domain());
     //   d.date = parseDate(d.date);
         container.selectAll('div')
             .data(data)
@@ -212,12 +177,11 @@ var area2 = d3.area()
             //     //     .style('z-index','999')
             //         // .style('margin','0 8px')
             //         // .style('box-shadow', '2px 4px 72px -20px rgba(0,0,0,0.77)'); 
-
             // });
 
 
-        const flexitem=d3.selectAll('.flexitem');
         
+        const flexitem=d3.selectAll('.flexitem');
         
         // container.append('div')
         //     .attr('class','label')
@@ -283,48 +247,6 @@ var area2 = d3.area()
             .attr('class','text')
             .html('PM2.5 초미세먼지 농도');
 
-
-
-        ///
-
-        var svg=container.append('svg').attr('width',width).attr('height',100);
- var focus = svg.append("g")
-    .attr("class", "focus")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-var context = svg.append("g")
-    .attr("class", "context")
-    .attr("transform", "translate(" + margin.left + "," + (margin.top +50)+ ")");
- 
-// focus.append("path")
-//       .datum(data)
-//       .attr("class", "area")
-//       .attr("d", area);
-
-//   focus.append("g")
-//       .attr("class", "axis axis--x")
-//       .attr("transform", "translate(0," + height + ")")
-//       .call(xAxis);
-
-//   focus.append("g")
-//       .attr("class", "axis axis--y")
-//       .call(yAxis);
-
-  context.append("path")
-      .datum(data)
-      .attr("class", "area")
-      .attr("d", area2);
-
-  context.append("g")
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
-
-  context.append("g")
-      .attr("class", "brush")
-      .call(brush)
-      .call(brush.move, x.range());
-
     });
     const firstwidth=window.innerWidth/365;
     const maxextent=imagewidth/firstwidth;
@@ -366,21 +288,8 @@ var context = svg.append("g")
 
                 d3.selectAll('.pm25bar').html('');
             }
-
-            //
-            context.select(".brush").call(brush.move, x.range().map(t.invertX, t));
         }
     }
-    function brushed() {
-        if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return; // ignore brush-by-zoom
-        var s = d3.event.selection || x.range();
-        x.domain(s.map(x.invert, x));
-        // focus.select(".area").attr("d", area);
-        // focus.select(".axis--x").call(xAxis);
-        d3.select(".container").call(zoom.transform, d3.zoomIdentity
-            .scale(width / (s[1] - s[0]))
-            .translate(-s[0], 0));
-        }
 
 
 
@@ -390,6 +299,95 @@ var context = svg.append("g")
         d.pm25 = +d.pm25;
         return d;
     }
+
+//초반엔 조금씩 커지고 ++3 후반엔 ++20되는// pow..
+    // const firstwidth=windowwidth/datasize;
+    // const container=document.getElementsByClassName("container");
+
+    // container[0].addEventListener("wheel", function(e) {
+    //     let itemwidth=$('.flexitem').width();
+    //     console.log(itemwidth);
+    // let dir = Math.sign(e.deltaY);
+    // if(dir===-1){
+    //     itemwidth=itemwidth-10;
+    //     if(itemwidth<firstwidth){itemwidth=firstwidth;}//처음위드보다 작으면 처음으로 두기이프문걸기
+    //     d3.selectAll('.flexitem')
+    //     .style('width',itemwidth+'px')
+    // }
+    // else{
+    //     //그 최대위드보다 크면 안커지게 이프문걸기
+    //     itemwidth=itemwidth+10;
+    //     if(itemwidth>500){itemwidth=500;}
+    //     d3.selectAll('.flexitem')
+    //     .style('width',itemwidth+'px')
+    // }
+    // });
+
+    //////////////////////////////////////
+    //어차피 365개 가는거면 걍 헥사다 받아놓고 한방에 띄워도 될듯
+
+    // const colorwidth=200;
+    // const colorheight = 200;
+    // //그냥 폴더 따로 두는게 낫겟다..
+    // // var out=[48,55,78,93,94,166,167,190,191,192,193,209,353,354,28,29,44,53,63,67,108];
+    // const images=[];
+    // for(i=1;i<366;i++){
+        
+    //     // if(out.includes(i)){
+    //     //     images.push('out.png');
+    //     // }else{
+    //         images.push('image/img'+i+'.png');
+    //     // }
+    //     // images.push('sky.jpg');
+    // }
+    
+	// window.onload = function () {
+	// 	for (let i =0; i < images.length; i++) {
+	// 		(function (i) {
+	// 			setTimeout(function () {
+	// 				processImage(images[i],false);
+	// 			}, i * 10);
+	// 		})(i);
+	// 	}
+	// };
+    // // setTimeout(function () {
+	// // 				console.log(colarray)
+	// // 			}, 400*100);
+	// function loadImage(path, done) {
+	// 	let img = new Image();
+	// 	img.onload = function () {
+	//         const canvas = document.createElement('canvas');
+	// 		canvas.width = colorwidth;
+    //         canvas.height = colorwidth * (img.height / img.width);
+	// 		const ctx = canvas.getContext('2d');
+	// 		ctx.drawImage(img, 0, 0, colorwidth, canvas.height);
+	// 		const id = ctx.getImageData(0, 0, canvas.width, canvas.height*0.4);
+	// 		done({width: canvas.width, height: canvas.height, data: id.data, channels: 4, canvas: canvas});
+	// 	};
+	// 	img.src = path;
+    // } 
+    // let count=-1;
+    // const palettedata=[0];
+    // var colarray=[];
+	// function processImage(imagePath, prepend) {
+	// 	loadImage(imagePath, function (img) {
+    //         count++;
+    //         const stats = Colorgram.extract(img);
+    //         // colarray.push(stats);
+
+    //         d3.select('#palette'+count)
+    //             .selectAll('div')
+    //             .data(palettedata)
+    //             .enter()
+    //             .append('div')
+    //             // .style('height',function(d){
+    //             //     return stats[d][3]*100+'%';
+    //             // })
+    //             .style('background-color',function(d){
+    //                     return 'rgb('+stats[d][0]+','+stats[d][1]+','+stats[d][2]+')';
+    //             });
+    // })
+    // }
     
 </script>
 </body>
