@@ -7,7 +7,8 @@
 - compare two pictures  
 - how can load image faster?
 - 
-  
+https://github.com/codepink/codepink.github.com/wiki/%EC%84%B1%EB%8A%A5-%EC%A2%8B%EC%9D%80-%EC%9B%B9-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98%EA%B3%BC-%EC%9D%B8%ED%84%B0%EB%A0%89%EC%85%98:-60-FPS-%EB%8B%AC%EC%84%B1  
+https://blog.outsider.ne.kr/1073  
 https://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172  
 https://observablehq.com/@d3/zoomable-bar-chart
 
