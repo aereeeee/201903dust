@@ -8,27 +8,38 @@
     <script src="d3v4.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <style>
-    .scrolling-wrapper {
+    .container {
+      position:relative;
+      overflow:hidden;
+      /* overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      overflow-y: hidden;
+      white-space: nowrap; */
+    }
+    .itemcontainer{
       overflow-x: scroll;
       scroll-snap-type: x mandatory;
       overflow-y: hidden;
       white-space: nowrap;
     }
-    .scrolling-wrapper::-webkit-scrollbar {
+    .container::-webkit-scrollbar {
     display: none;
     }
-    .card {
-      width:300px;
-      height:300px;
-      border:1px solid #000;
+    .flexitem {
+      width:80vw;
+      height:70vh;
       display: inline-block;
       scroll-snap-align: center;
+      /* z-index:0; */
+      box-shadow:none;
+      opacity: .5;
     }
-    .card.active{
-      width:310px;
-      border:1px solid #f00;
+    .flexitem.active{
+      transition: all .5s;
+      /* z-index:999; */
+      opacity: 1;
     }   
-    .scrolling-wrapper {
+    .itemcontainer {
     -webkit-overflow-scrolling: touch;
     }
     ::-webkit-scrollbar {
@@ -38,20 +49,102 @@
       width:90%;
       margin:0 auto;
     }
+
+    /* .......... */
+    .date{
+            height:5%;
+            overflow:visible !important;
+        }
+        .date span{
+            font-size:16px;
+        }
+        .picture{
+            width:100%;
+            height:40%;
+            overflow:hidden;
+            box-shadow:none;
+            z-index: initial;
+        }
+
+        .picture img{
+            height:99%;
+        }
+        .Palette{
+            /* position:absolute;
+            bottom:0; */
+            width:100%;
+            height:20%;
+            /* margin-top:3px; */
+        }
+        .Palette div{
+            width:100%;
+            height:100%
+            /* height:20%; */
+        }
+        .pm25{
+            height:25%;
+            width:100%;
+            /* margin:0 1px; */
+            /* background-color:#ddd; */
+            position:relative;
+        }
+        .pm25bar{
+            width:100%;
+            position:absolute;
+            bottom:0;
+            background-color:#888;
+        }
+        .pm25bar span{
+            position:absolute;
+            top:-30px;
+            background-color:#000;
+            padding:0 10px;
+            color:#fff;
+            font-weight: bold;
+        }
+        .baraxis{
+            height:5%;
+        }
+        .label{
+            position:absolute;
+            left:20px;
+            background-color:#000;
+            color:#fff;
+            font-size:.7em;
+        }
+        .axis{
+            height:25%;
+            width:100%;
+            position:absolute;
+            top:65%;
+        }
+        .axisline{
+            height:35px;
+            position: absolute;
+            bottom:0;
+            /* left:20px; */
+            z-index:999;
+            border-top:1px solid #f00;
+        }
+        .axisline span{
+            display:block;
+            position:absolute;
+            top:0;
+            left:20px;
+            background-color:#f00;
+            color:white;
+            font-size: .7em;
+        }
+
+        h2{
+            margin:20px 20px;
+        }
     </style>
 </head>
 <body>
-        <div class="scrolling-wrapper"  onscroll='scrollfind();'>
-                <div class="card"><h2>Card</h2></div>
-                <div class="card"><h2>Card</h2></div>
-                <div class="card"><h2>Card</h2></div>
-                <div class="card"><h2>Card</h2></div>
-                <div class="card"><h2>Card</h2></div>
-                <div class="card"><h2>Card</h2></div>
-                <div class="card"><h2>Card</h2></div>
-                <div class="card"><h2>Card</h2></div>
-                <div class="card"><h2>Card</h2></div>
-              </div>
+        <h2>스브스 시점으로 본 대한민국 하늘(feat.미세먼지)</h2>
+        <div class="container">
+        </div>
               <div class="article">
                 <div class="horizontal">
                   
@@ -83,19 +176,128 @@
           </div>
 </body>
 <script>
-// var cards=$('.scrolling-wrapper').children();
-var cards=$('.card');
-function scrollfind(){
-  // var offset= cards.offset();
-  cards.each(function(){
-    var offset=$(this).offset();
-    if(offset.left>0 && offset.left<window.innerWidth/2){
-        $(this).css('background-color','#f00')
-    }else{
-      $(this).css('background-color','#fff')
-    }
-  })
+    const datasize=365;
+    const imagewidth=498;
+    var margin = {top: 0, right: 20, bottom: 0, left: 20},
+    width = window.innerWidth,
+    height = window.innerHeight;
 
-};
+    const parseDate = d3.timeParse("%Y-%m-%d");
+    const monthformat = d3.timeFormat('%_m월');
+    const dayformat= d3.timeFormat('%_m월 %_d일');
+
+
+    const container=d3.select('.container');
+
+    d3.csv("data.csv", type, function(error, data) {
+      if (error) throw error;
+
+        container.append('div').attr('class','itemcontainer')
+            .selectAll('div')
+            .data(data)
+            .enter()
+            .append('div')
+            .attr('class','flexitem')
+  
+        const flexitem=d3.selectAll('.flexitem');
+
+        flexitem.append('div')
+            .attr('class','date')
+            .html(function(d,i){
+                if(i==0)
+                return '2018';
+                else if(i==296)
+                return '2019';
+            });
+        
+        const picture=flexitem.append('div')
+            .attr('class',function(d){
+                return 'picture';
+            })    
+    
+        picture.append('img')
+            .attr('src',function(d,i){
+            return 'image/img'+(i+1)+'.png';
+                // return 'sky.jpg'
+            })
+
+        flexitem.append('div')
+            .attr('class','Palette')
+            .attr('id',function(d,i){
+                return 'palette'+i;
+            })
+            .style('background-color',function(d){
+                return 'rgb('+d.R+','+d.G+','+d.B+')';
+            })
+
+        const bar=flexitem.append('div')
+            .attr('class','pm25')
+            .attr('id',function(d,i){
+                return 'pm25'+i;
+            })
+        bar.append('div')
+            .attr('class','pm25bar')
+            .attr('id',function(d,i){
+                return 'pm25bar'+i;
+            })
+        d3.selectAll('.pm25bar')
+            .style('height',function(d){
+                return d.pm25+'px';
+            });
+
+       var baraxis = flexitem.append('div')
+            .attr('class','baraxis')
+            .html(function(d,i){
+                // if(i%30==1)
+                return dayformat(parseDate(d.date));
+            });
+            d3.selectAll('.pm25bar').html(function(d,i){
+            return '<span>'+d.pm25+'</span>';
+            });
+    container.append('div')
+            .attr('class','label')
+            .style('top','5%')
+            .html('하늘사진');
+    container.append('div')
+            .attr('class','label')
+            .style('top','45%')
+            .html('색상값');
+    container.append('div')
+            .attr('class','label')
+            .style('top','65%')
+            .html('PM2.5 초미세 먼지 수치');
+
+    container.append('div')
+            .attr('class','axis')
+            .style('top','65%');
+    d3.select('.axis').append('div')
+            .attr('class','axisline')
+            .style('width',width+'px')
+            .html('<span>나쁨 기준선 35</span>');
+
+            var cards=$('.flexitem');
+            $('.itemcontainer').scroll(function(){
+              cards.each(function(){
+                var offset=$(this).offset();
+                if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){
+                    $(this).addClass( 'active' );
+                }else{
+                  $(this).removeClass( 'active' );
+                }
+              })
+
+            })
+
+    });
+
+
+    function type(d) {
+        d.pm25 = +d.pm25;
+        return d;
+    }
+    
+    
+ 
+
 </script>
 </html>
