@@ -1,7 +1,19 @@
 # 201903dust
+### class
+- h2
+- container
+- article
+    - p
+    - imgsection
+      - map
+    - title
+    - diff
+    - imagsection2
+      - imgpart2
+    - imgcalendar
 
-- rgbaster
-     
+---
+- color extractor : colorgram
 - image and color wheel (horizon) + chart
 - heatmap of year color + search local
 - compare two pictures  
@@ -13,17 +25,22 @@ https://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172
 https://observablehq.com/@d3/zoomable-bar-chart
 
 #### 0318
-- ^^줌+tX+포지션absolute.......
+- ^^줌+tX+포지션absolute^____^
 - container height 잡고 absolute로 라벨 붙이기
 - d3chart brush 붙이기
   
 #### 0319
-- 모바일 carousel
+- ~~모바일 carousel~~ fail 
 - 웹 line chart, brush
 - 웹 scroll -> focusing
-- 스크롤 애니메이션. 고정 필수
+- 스크롤 애니메이션. 고정 필수 -scrollto, css snap ...
 - 로딩프로세스
----------
+
+#### 0320
+- 모바일 carousel자체제작
+- slider brush ..
+- 
+---
 # transform.scale(k) <>
 
 Returns a transform whose scale k₁ is equal to k₀k, where k₀ is this transform’s scale.
