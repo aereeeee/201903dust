@@ -30,7 +30,7 @@ https://observablehq.com/@d3/zoomable-bar-chart
 - d3chart brush 붙이기
   
 #### 0319
-- ~~모바일 carousel~~ fail 
+- ~~모바일 carousel lib~~ fail 
 - 웹 line chart, brush
 - 웹 scroll -> focusing
 - 스크롤 애니메이션. 고정 필수 -scrollto, css snap ...
@@ -38,7 +38,10 @@ https://observablehq.com/@d3/zoomable-bar-chart
 
 #### 0320
 - 모바일 carousel자체제작
-- slider brush ..
+- slider brush!!
+- scrollto!!
+- 디자인
+
 - 
 ---
 # transform.scale(k) <>

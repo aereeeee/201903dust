@@ -11,11 +11,11 @@
     <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
         <script type="text/javascript">
         if (isMobile()) {
-window.location.href = "horizon.html";
-}
-function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
+        window.location.href = "horizon.html";
+        }
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
     </script>
     <script src="d3v4.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -30,17 +30,19 @@ function isMobile() {
             list-style:none;
             text-decoration: none;
         }
+
         body{
             overflow-x:hidden;
             background-color:#fff;
+            scroll-snap-type: y mandatory;
         }
         /* ::-webkit-scrollbar { 
             display: none; 
         } */
         .container{
-            /* margin-top:100px; */
+
             position:relative;
-            height:700px;
+            height:90%;
             white-space: nowrap;
         }
         .flexitem{
@@ -51,6 +53,13 @@ function isMobile() {
             box-shadow:none;
             z-index:0;
             margin:0;
+        }
+        .brushsec{
+            position:absolute;
+            bottom:0;
+            height:5%;
+            width:100%;
+            border:1px solid #000;
         }
         .date{
             height:5%;
@@ -159,6 +168,11 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
             margin:20px 20px;
         }
         .article{
+            /* width:80%; */
+            height:100vh;
+            scroll-snap-align: start;
+        }
+        .content{
             width:80%;
             margin:0 auto;
             font-size:17px;
@@ -199,13 +213,16 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
     </style>
 </head>
 <body>
+    <div class="article">
     <h2>스브스 시점으로 본 대한민국 하늘(feat.미세먼지)</h2>
     <div class="container">
         <!-- <div class="label skypic">하늘사진</div>
         <div class="label color">하늘 대표 색상값</div>
         <div class="label graph">초미세먼지 농도 그래프</div> -->
     </div>
+    </div>
     <div class="article">
+        <div class="content">
         <p>
         2019년 3월 5일은 관측 이래 최악의 초미세먼지(PM 2.5)가 한반도를 덮쳤습니다. 이날 서울의 일평균 초미세먼지는 137㎍/㎥로 2015년 관측 이래 역대 최고치로 기록됐습니다. 아울러 3월 1일부터 7일까지 수도권에서 사상 최초로 비상저감조치가 7일 연속으로 시행됐습니다.
         매일 정오에 방송되는 'SBS 12시 뉴스'는 앵커의 인사와 함께 서울 도심을 보여주는 실시간 영상으로 끝납니다. SBS 데이터저널리즘팀 <마부작침>은 '12시 뉴스'를 통해 방송된 최근 1년간(2018년 3월 11일~2019년 3월 10일) 서울 도심 영상을 캡처해 서울시 초미세먼지 수치와 비교했습니다. 남북정상회담 또는 북미정상회담 등으로 '12시 뉴스'가 방송되지 않은 14일은 제외했습니다.  (실제 12시 뉴스 엔딩 영상을 보여줄까?)
@@ -217,8 +234,10 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
             <div class="map">서울 지도에 SBS 위치와 북쪽 카메라 전망 표시하고, 성산대교 정도 표시</div>
             <div class="map">실제 사진</div>
         </div> 
+        </div>
     </div>
     <div class="article">
+        <div class="content">
         <div class="title">초미세먼지와 가시거리</div>
         <div id="diff">
             <img src="image/img1.png">
@@ -227,8 +246,10 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
         <p>청명한 날과 미세먼지가 가득한 날의 가시거리 차이는 상당합니다. 초미세먼지(PM 2.5) 농도가 높아지면 빛이 미세먼지에 의해 여러 방향으로 흩어지거나, 미세먼지에 흡수돼 가시거리가 감소합니다. 황산염, 질산염 등 초미세먼지 농도가 높은 상태에서 습도까지 높아지면 대기오염물질이 수분을 흡수해 가시거리는 더욱 짧아집니다. 물론 미세먼지 농도가 높을 때 뿐 아니라 날씨가 흐리거나 안개 낀 날에도 가시거리는 짧아집니다.
             초미세먼지가 4㎍/㎥를 기록했던 2018년 7월 7일에는 SBS에서 직선거리로 3.6km인 국회의사당은 물론, 10,4km 떨어진 서울N타워 역시 뚜렷하게 보입니다. 반면 초미세먼지가 119㎍/㎥를 기록했던 2019년 3월 4일에는 3.6km 떨어진 국회의사당 조차 제대로 보이지 않고 강북쪽 건물은 식별조차 되지 않습니다.
         </p>
+        </div>
     </div>
     <div class="article">
+        <div class="content">
         <div class="title">초미세먼지 나쁜 날, 좋은 날</div>
         <div class="imgsection2">
             <div class="imgpart2"><img src="" alt=""></div>
@@ -256,8 +277,10 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
         2018년 3월 11일부터 2019년 3월 10일까지 1년 동안 서울의 평균 초미세먼지는 26㎍/㎥를 기록했습니다. 우리나라 대기환경기준에서 정하고 있는 연평균 25㎍/㎥를 초과했고, 미세먼지에 대한 WHO 권고기준인 10㎍/㎥의 2배가 넘습니다.
         위 사진은 지난 1년 동안 초미세먼지가 가장 높았던 날들과 가장 낮았던 날들입니다. 가장 높았던 날은 2019년 3월 5일로 초미세먼지 137㎍/㎥를 기록했고, 가장 낮았던 날은 2018년 7월 6일로 3㎍/㎥를 기록해 약 46배 차이를 보였습니다.
         </p>
+        </div>
     </div>
     <div class="article">
+        <div class="content">
         <div class="title">1년 서울 일평균 초미세먼지 캘린더</div>
         <div class="imgcalendar"></div>
         <p>
@@ -266,8 +289,8 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
                 
                 초미세먼지 '나쁨' 이상의 날은 주로 며칠간 이어집니다. 2018년 3월 23일부터 3월 30일까지 8일간 초미세먼지 나쁨 이상의 수치가 이어졌는데, 2019년 2월 27일부터 3월 7일까지 9일 연속 초미세먼지 수치가 '나쁨' 이상을 기록하면서 또 새로운 기록을 세웠습니다.                
         </p>
-    </div>
-
+        </div>
+</div>
 <script>
     const datasize=365;
     const imagewidth=498;
@@ -280,14 +303,16 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
     var x = d3.scaleBand()
           .range([margin.left, width - margin.right])
           .padding(0);
-
+    var x2 = d3.scaleBand()
+          .range([margin.left, width - margin.right])
+          .padding(0);
 
     const monthformat = d3.timeFormat('%_m월');
     const dayformat= d3.timeFormat('%_m월 %_d일');
     
     const firstwidth=width/365;
     const maxextent=imagewidth/firstwidth;
-
+    
     const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];       
     var zoom=d3.zoom()
             .scaleExtent([1, maxextent])
@@ -296,20 +321,19 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
             .duration(750)
             .on("zoom", zoomed);
     
-    // var brush = d3.brushX()
-    // .extent(extent)
-    // .on("brush end", brushed);
+    var brush = d3.brushX()
+    .extent(extent)
+    .on("brush end", brushed);
 
 
     const container=d3.select('.container');
-    var context = container.append("svg").append('g')
-    .attr("class", "context")
 
     d3.csv("data.csv", type, function(error, data) {
       if (error) throw error;
 
         x.domain(data.map(function(d) { return d.date; }));
-
+        x2.domain(x.domain());
+        console.log(x.domain())
         container.selectAll('div')
             .data(data)
             .enter()
@@ -336,7 +360,14 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
         
             })
 
-        
+        container.append('div').attr('class','brushsec').append('svg')
+                    .attr('width',width-margin.left-margin.right)
+                    .attr('height',height*0.05)
+                    .append("g")
+                    .attr("class", "brush")
+                .call(brush)
+                .call(brush.move, x.range());
+
         const flexitem=d3.selectAll('.flexitem');
 
         flexitem.append('div')
@@ -418,17 +449,25 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
     //   .call(brush)
     //   .call(brush.move, x.range());
     });
-        
-    function zoomed() {
-        x.range([margin.left, width - margin.right].map(d => d3.event.transform.applyX(d)));
-        container.selectAll(".flexitem")
+    function brushed() {
+  if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return; // ignore brush-by-zoom
+        var s = d3.event.selection;
+        var r0 = x2.range()[0];
+        var r1 = x2.range()[1];
+        var s0= s[0];
+        var s1= s[1];
+            var p=maxextent-r0;
+            var left=(r0-s0)*p;
+            var right=(r1-s1)*p;
+        x.range([margin.left+left, width - margin.right+right]);
+//   x.range([margin.left, width - margin.right].map(d => d3.event.transform.applyX(d)));
+// s.map(x2.invert, x2);
+
+  container.selectAll(".flexitem")
         .style('transform', function(d){
         return 'translateX('+x(d.date)+'px)'
         })
         .style("width", (x.bandwidth())+'px');
-        console.log(d3.event);
-
-        // d3.select('axisline').style('width',width+'px')
 
         if(x.bandwidth()>60){
             d3.selectAll('.baraxis').html(function(d,i){
@@ -447,6 +486,36 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
             d3.selectAll('.pm25bar').html('');
             d3.selectAll('.flexitem').attr('id',null);
         }
+
+}
+    function zoomed() {
+        x.range([margin.left, width - margin.right].map(d => d3.event.transform.applyX(d)));
+        console.log(x.range());
+        container.selectAll(".flexitem")
+        .style('transform', function(d){
+        return 'translateX('+x(d.date)+'px)'
+        })
+        .style("width", (x.bandwidth())+'px');
+
+        if(x.bandwidth()>60){
+            d3.selectAll('.baraxis').html(function(d,i){
+            return dayformat(parseDate(d.date));
+            });
+            d3.selectAll('.pm25bar').html(function(d,i){
+            return '<span>'+d.pm25+'</span>';
+            });
+        }else{
+            d3.selectAll('.baraxis').html(function(d,i){
+            if(i%30==1){
+            return monthformat(parseDate(d.date));}
+            else return;
+            });
+
+            d3.selectAll('.pm25bar').html('');
+            d3.selectAll('.flexitem').attr('id',null);
+        }
+
+        d3.select(".brush").call(brush.move, x.range().map(d3.event.transform.invertX, d3.event.transform));
     }
 
 
@@ -455,9 +524,6 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
         return d;
     }
     
-    
- 
-
 </script>
 <!-- image compare -->
 <script src="lib/jquery.event.move.js"></script>
