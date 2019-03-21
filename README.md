@@ -42,7 +42,10 @@ https://observablehq.com/@d3/zoomable-bar-chart
 - scrollto!!
 - 디자인
 
-- 
+#### 0321
+- snap to 말고 fulljs.?
+- 슬라이더 달, pow
+
 ---
 # transform.scale(k) <>
 
