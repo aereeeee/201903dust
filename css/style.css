@@ -126,13 +126,18 @@
 
         @media screen and (max-width: 900px) {
            
+            body{
+                overflow-x:hidden;
+                background-color:#fff;
+                scroll-snap-type:none;
+            }
             .articlefull{
                 margin-top:20px;
                 height:auto;
-                scroll-snap-align: start;
+                scroll-snap-align:none;
             }
             .article{
-                scroll-snap-align: start;
+                scroll-snap-align:none;
             }
             .content{
                 width:90%;

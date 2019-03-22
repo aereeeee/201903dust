@@ -160,11 +160,12 @@ $(window).load(function() {
   });
 
 
-    const datasize=365;
-    const imagewidth=498;
-    var margin = {top: 0, right: 50, bottom: 0, left: 50},
+    var margin = {top: 0, right: 20, bottom: 0, left: 20},
     width = window.innerWidth,
     height = window.innerHeight;
+
+    const datasize=365;
+    const imagewidth=height*0.6
 
     const parseDate = d3.timeParse("%Y-%m-%d");
 
@@ -201,7 +202,7 @@ $(window).load(function() {
 
         x.domain(data.map(function(d) { return d.date; }));
         x2.domain(x.domain());
-        console.log(x.domain())
+        // console.log(x.domain())
         container.selectAll('div')
             .data(data)
             .enter()
@@ -211,25 +212,25 @@ $(window).load(function() {
             return 'translateX('+x(d.date)+'px)'
             })
             .style("width", x.bandwidth()+'px')
-            .on('click',function(d,i){
-                d3.selectAll('.flexitem').attr('id',null);
-                d3.select(this).attr('id','active')
+            // .on('click',function(d,i){
+            //     d3.selectAll('.flexitem').attr('id',null);
+            //     d3.select(this).attr('id','active')
 
-                // d3.select(this).select('.pm25bar')
-                // .transition().duration(800)
-                // .style('background-color',function(d){
-                //     return 'rgb('+d.R+','+d.G+','+d.B+')';
-                // });
+            //     // d3.select(this).select('.pm25bar')
+            //     // .transition().duration(800)
+            //     // .style('background-color',function(d){
+            //     //     return 'rgb('+d.R+','+d.G+','+d.B+')';
+            //     // });
 
-                // d3.select(this).select('.picture')
-                // .
+            //     // d3.select(this).select('.picture')
+            //     // .
 
-                // d3.select(this).select('.baraxis')
+            //     // d3.select(this).select('.baraxis')
         
-            })
+            // })
 
         container.append('div').attr('class','brushsec').append('svg')
-                    .attr('width',width-margin.left-margin.right)
+                    .attr('width',width-margin.left)
                     .attr('height',height*0.05)
                     .append("g")
                     .attr("class", "brush")
@@ -358,7 +359,7 @@ $(window).load(function() {
 }
     function zoomed() {
         x.range([margin.left, width - margin.right].map(d => d3.event.transform.applyX(d)));
-        console.log(x.range());
+        // console.log(x.range());
         container.selectAll(".flexitem")
         .style('transform', function(d){
         return 'translateX('+x(d.date)+'px)'
