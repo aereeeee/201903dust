@@ -2,12 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>스브스 시점으로 본 대한민국 하늘(feat.미세먼지)</title>
+    <meta property="og:image" content="./img/title.jpg">
+    <link rel="stylesheet" type="text/css" href="css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="css/template.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="css/twentytwenty.css" rel="stylesheet" type="text/css" />
     <script src="d3v4.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <link href="css/twentytwenty.css" rel="stylesheet" type="text/css" />
     <style>
     .container {
       position:relative;
@@ -47,10 +51,6 @@
     ::-webkit-scrollbar {
         display: none;
       }
-    .article{
-      width:90%;
-      margin:0 auto;
-    }
 
     /* .......... */
     .date{
@@ -109,7 +109,7 @@
         }
         .label{
             position:absolute;
-            left:20px;
+            left:0;
             background-color:#000;
             color:#fff;
             font-size:.7em;
@@ -132,7 +132,7 @@
             display:block;
             position:absolute;
             top:0;
-            left:20px;
+            left:0;
             background-color:#f00;
             color:white;
             font-size: .7em;
@@ -144,73 +144,144 @@
     </style>
 </head>
 <body>
-        <h2>스브스 시점으로 본 대한민국 하늘(feat.미세먼지)</h2>
-        <div class="container">
-        </div>
-        <div class="article">
-            <p>
-            2019년 3월 5일은 관측 이래 최악의 초미세먼지(PM 2.5)가 한반도를 덮쳤습니다. 이날 서울의 일평균 초미세먼지는 137㎍/㎥로 2015년 관측 이래 역대 최고치로 기록됐습니다. 아울러 3월 1일부터 7일까지 수도권에서 사상 최초로 비상저감조치가 7일 연속으로 시행됐습니다.
-            매일 정오에 방송되는 'SBS 12시 뉴스'는 앵커의 인사와 함께 서울 도심을 보여주는 실시간 영상으로 끝납니다. SBS 데이터저널리즘팀 <마부작침>은 '12시 뉴스'를 통해 방송된 최근 1년간(2018년 3월 11일~2019년 3월 10일) 서울 도심 영상을 캡처해 서울시 초미세먼지 수치와 비교했습니다. 남북정상회담 또는 북미정상회담 등으로 '12시 뉴스'가 방송되지 않은 14일은 제외했습니다.  (실제 12시 뉴스 엔딩 영상을 보여줄까?)
-            카메라는 서울 양천구 목동 SBS 본사 옥상에 고정돼 있습니다. 카메라가 동쪽을 찍으면 목동운동장과 국회의사당, 남산서울타워 등이 보이고, 북쪽을 찍으면 성산대교 등이 보입니다.
-            </p>
-            <div class="imgsection">
-                <div class="map">서울 지도에 SBS 위치와 동쪽 카메라 전망 표시하고, 목동운동장, 국회의사당, 서울N타워 정도 표시</div>
-                <div class="map">실제 사진</div>
-                <div class="map">서울 지도에 SBS 위치와 북쪽 카메라 전망 표시하고, 성산대교 정도 표시</div>
-                <div class="map">실제 사진</div>
-            </div> 
-        </div>
-        <div class="article">
-            <div class="title">초미세먼지와 가시거리</div>
-            <div id="diff">
-                <img src="image/img1.png">
-                <img src="image/img100.png">
+        <header id="headerbar">
+                <a href="http://news.sbs.co.kr/"><img src="./img/logo.png" alt="" class="sbslogo"></a>
+                <a href="http://news.sbs.co.kr/news/newsPlusList.do?themeId=10000000114"><img src="./img/mabulogo.png" alt="" class="mabulogo"> </a>
+                <img src="http://img.sbs.co.kr/newimg/news/20170406/201037558.png" alt="" class="social" id="twitter">
+                <img src="http://img.sbs.co.kr/newimg/news/20170406/201037559.png" alt="" class="social" id="facebook">
+            </header>
+            <div id="progress">
+                <div id="bar"></div>
             </div>
-            <p>청명한 날과 미세먼지가 가득한 날의 가시거리 차이는 상당합니다. 초미세먼지(PM 2.5) 농도가 높아지면 빛이 미세먼지에 의해 여러 방향으로 흩어지거나, 미세먼지에 흡수돼 가시거리가 감소합니다. 황산염, 질산염 등 초미세먼지 농도가 높은 상태에서 습도까지 높아지면 대기오염물질이 수분을 흡수해 가시거리는 더욱 짧아집니다. 물론 미세먼지 농도가 높을 때 뿐 아니라 날씨가 흐리거나 안개 낀 날에도 가시거리는 짧아집니다.
-                초미세먼지가 4㎍/㎥를 기록했던 2018년 7월 7일에는 SBS에서 직선거리로 3.6km인 국회의사당은 물론, 10,4km 떨어진 서울N타워 역시 뚜렷하게 보입니다. 반면 초미세먼지가 119㎍/㎥를 기록했던 2019년 3월 4일에는 3.6km 떨어진 국회의사당 조차 제대로 보이지 않고 강북쪽 건물은 식별조차 되지 않습니다.
-            </p>
-        </div>
-        <div class="article">
-            <div class="title">초미세먼지 나쁜 날, 좋은 날</div>
-            <div class="imgsection2">
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
-                <div class="imgpart2"><img src="" alt=""></div>
+            <div class="intro">
+                <img src="test.png" alt="">
             </div>
-            <p>            
-            2018년 3월 11일부터 2019년 3월 10일까지 1년 동안 서울의 평균 초미세먼지는 26㎍/㎥를 기록했습니다. 우리나라 대기환경기준에서 정하고 있는 연평균 25㎍/㎥를 초과했고, 미세먼지에 대한 WHO 권고기준인 10㎍/㎥의 2배가 넘습니다.
-            위 사진은 지난 1년 동안 초미세먼지가 가장 높았던 날들과 가장 낮았던 날들입니다. 가장 높았던 날은 2019년 3월 5일로 초미세먼지 137㎍/㎥를 기록했고, 가장 낮았던 날은 2018년 7월 6일로 3㎍/㎥를 기록해 약 46배 차이를 보였습니다.
-            </p>
-        </div>
-        <div class="article">
-            <div class="title">1년 서울 일평균 초미세먼지 캘린더</div>
-            <div class="imgcalendar"></div>
-            <p>
-                    365일 가운데 초미세먼지 수치가 '좋음'을 기록한 날은 116일, '보통'은 171일, '나쁨'은 67일, '매우나쁨'은 11일이었습니다.
-                    (좋음 0~15 보통 16~35 나쁨 36~75 매우나쁨 76~)
-                    
-                    초미세먼지 '나쁨' 이상의 날은 주로 며칠간 이어집니다. 2018년 3월 23일부터 3월 30일까지 8일간 초미세먼지 나쁨 이상의 수치가 이어졌는데, 2019년 2월 27일부터 3월 7일까지 9일 연속 초미세먼지 수치가 '나쁨' 이상을 기록하면서 또 새로운 기록을 세웠습니다.                
-            </p>
-        </div>>
+            <div class="articlefull">
+            <div class="container">
+                <!-- <div class="label skypic">하늘사진</div>
+                <div class="label color">하늘 대표 색상값</div>
+                <div class="label graph">초미세먼지 농도 그래프</div> -->
+            </div>
+            </div>
+            <div class="article">
+                <div class="content">
+                <p>
+                        2019년 3월 5일 관측 이래 최악의 초미세먼지(PM 2.5)가 한반도를 덮쳤습니다. 이날 서울의 초미세먼지 일평균 농도는 137㎍/㎥로 2015년 초미세먼지 공식 관측 이래 역대 최고치를 기록됐습니다. 아울러 수도권에는 3월 1일부터 7일까지 비상저감조치가 7일 연속으로 시행됐습니다. 이 역시 사상 최초입니다.
+                        <br>
+                        매일 정오에 방송되는 'SBS 12시 뉴스'는 앵커의 인사와 함께 서울 도심을 보여주는 실시간 영상으로 끝납니다. SBS 데이터저널리즘팀 <마부작침>은 '12시 뉴스'를 통해 방송된 최근 1년간(2018년 3월 11일~2019년 3월 10일) 서울 도심 영상을 캡처해 서울시 초미세먼지 수치와 비교했습니다. 남북정상회담 또는 북미정상회담 등으로 '12시 뉴스'가 방송되지 않은 14일은 제외했습니다.  (실제 12시 뉴스 엔딩 영상을 보여줄까?)
+                        <br> 
+                        사진 아래 색깔은 서울 도심 사진에서 위쪽 30% 부분, 하늘 부분의 색깔만 추출한 결과입니다.
+                        
+                </p>
+                <div class="imgsection">
+                    <div class="map"><img src="map.png" alt=""></div>
+                    <div class="cam"><img src="img/north.png" alt="" srcset=""><div class="camnum">카메라①</div></div>
+                    <div class="cam"><img src="img/east.png" alt="" srcset=""><div class="camnum">카메라②</div></div>
+                </div>
+                <p>
+                        카메라는 서울 양천구 목동 SBS 본사 옥상에 고정돼 있습니다. 카메라가 동쪽을 찍으면 목동운동장과 국회의사당, 남산서울타워 등이 보이고, 북쪽을 찍으면 성산대교 등이 보입니다.
+                </p> 
+                </div>
+            </div>
+            <div class="article">
+                <div class="content">
+                <div class="title">초미세먼지와 가시거리</div>
+                <div id="diff">
+                    <img src="img/good.png">
+                    <img src="img/bad.png">
+                </div>
+                <p>     
+                    청명한 날과 미세먼지가 가득한 날의 가시거리 차이는 상당합니다. 초미세먼지(PM 2.5) 농도가 높아지면 빛이 미세먼지에 의해 여러 방향으로 흩어지거나, 미세먼지에 흡수돼 가시거리가 감소합니다. 황산염, 질산염 등 초미세먼지 농도가 높은 상태에서 습도까지 높아지면 대기오염물질이 수분을 흡수해 가시거리는 더욱 짧아집니다. 물론 미세먼지 농도가 높을 때 뿐 아니라 날씨가 흐리거나 안개 낀 날에도 가시거리는 짧아집니다.
+                    <br>
+                    초미세먼지 일평균 농도가 4㎍/㎥를 기록했던 2018년 7월 7일에는 SBS에서 직선거리로 3.6km인 국회의사당은 물론, 10,4km 떨어진 서울N타워 역시 뚜렷하게 보입니다. 반면 일평균 농도가 119㎍/㎥를 기록했던 2019년 3월 4일에는 3.6km 떨어진 국회의사당 조차 제대로 보이지 않고 강북 쪽 건물은 식별조차 되지 않습니다.
+                </p>
+                </div>
+            </div>
+            <div class="article">
+                <div class="content">
+                <div class="title">초미세먼지 나쁜 날, 좋은 날</div>
+                <div class="imgsection2">
+                <div class="subtitle">나쁜 날 TOP10</div>
+                <div class="top5">
+                    <div class="imgpart2"><img src="img/top10/bad120190305.jpg" alt=""><div class="order">1</div><div class="info">2019년 3월 5일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/bad220190114.jpg" alt=""><div class="order">2</div><div class="info">2019년 1월 14일 <div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/bad320190304.jpg" alt=""><div class="order">3</div><div class="info">2019년 3월 4일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/bad420190306.jpg" alt=""><div class="order">4</div><div class="info">2019년 3월 6일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/bad520180325.jpg" alt=""><div class="order">5</div><div class="info">2018년 3월 25일<div class="pm">PM2.5 - 137</div></div></div>
+                </div>
+                <div class="top5">
+                    <div class="imgpart2"><img src="img/top10/bad620180324.jpg" alt=""><div class="order">6</div><div class="info">2018년 3월 24일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/bad720180302.jpg" alt=""><div class="order">7</div><div class="info">2018년 3월 2일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/bad820190301.jpg" alt=""><div class="order">8</div><div class="info">2019년 3월 1일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/bad920190113.jpg" alt=""><div class="order">9</div><div class="info">2019년 1월 13일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/bad1020190115.jpg" alt=""><div class="order">10</div><div class="info">2019년 1월 15일<div class="pm">PM2.5 - 137</div></div></div>
+                </div>
+                <div class="subtitle">좋은 날 TOP10</div>
+                <div class="top5">
+                    <div class="imgpart2"><img src="img/top10/good120180706.jpg" alt=""><div class="order">1</div><div class="info">2018년 7월 6일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/good220180707.jpg" alt=""><div class="order">2</div><div class="info">2018년 7월 7일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/good320180405.jpg" alt=""><div class="order">3</div><div class="info">2018년 4월 5일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/good420180519.jpg" alt=""><div class="order">4</div><div class="info">2018년 5월 19일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/good520180610.jpg" alt=""><div class="order">5</div><div class="info">2018년 6월 10일<div class="pm">PM2.5 - 137</div></div></div>
+                </div>
+                <div class="top5">
+                    <div class="imgpart2"><img src="img/top10/good620180709.jpg" alt=""><div class="order">6</div><div class="info">2018년 7월 9일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/good720180910.jpg" alt=""><div class="order">7</div><div class="info">2018년 9월 10일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/good820180921.jpg" alt=""><div class="order">8</div><div class="info">2018년 9월 21일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/good920180926.jpg" alt=""><div class="order">9</div><div class="info">2018년 9월 26일<div class="pm">PM2.5 - 137</div></div></div>
+                    <div class="imgpart2"><img src="img/top10/good1020180927.jpg" alt=""><div class="order">10</div><div class="info">2018년 9월 27일<div class="pm">PM2.5 - 137</div></div></div>
+                </div>
+                </div>
+                    <p>                  
+            2018년 3월 11일부터 2019년 3월 10일까지 1년 동안 서울의 평균 초미세먼지는 25.8㎍/㎥를 기록했습니다. 우리나라 대기환경기준에서 정하고 있는 연평균 25㎍/㎥를 초과했고, 초미세먼지에 대한 WHO 권고기준인 10㎍/㎥의 2배가 넘습니다. 서울 양천구 측정소 역시 지난 1년 동안 평균 초미세먼지 농도는 25.5㎍/㎥를 기록해 대기환경기준을 초과했습니다.
+            <br>
+            위 사진은 지난 1년 동안 초미세먼지 농도가 가장 높았던 날들과 가장 낮았던 날들입니다. 초미세먼지 농도가 가장 높았던 날은 2019년 3월 5일로 137㎍/㎥를 기록했고, 가장 낮았던 날은 2018년 7월 6일로 3㎍/㎥를 기록해 약 46배 차이를 보였습니다.
+                </p>
+                </div>
+            </div>
+            <div class="article">
+                <div class="content">
+                <div class="title">1년 서울 일평균 초미세먼지 캘린더</div>
+                <div class="imgcalendar"><img src="img/cal.png" alt="" srcset=""></div>
+                <p>
+                        365일 가운데 서울의 초미세먼지 수치가 '좋음'을 기록한 날은 116일, '보통'은 171일, '나쁨'은 67일, '매우나쁨'은 11일이었습니다. 365일 가운데 78일이 초미세먼지 농도 ‘나쁨’ 이상이었던 것으로, 5일 가운데 하루 꼴로 숨 쉬기 힘든 날이었다는 게 기록으로 확인됩니다.
+                        <br>
+                        초미세먼지 '나쁨' 이상인 날은 주로 며칠간 이어졌습니다. 2018년 3월 23일부터 3월 30일까지 8일간 초미세먼지 나쁨 이상의 수치가 이어졌는데, 2019년 2월 27일부터 3월 7일까지 9일 연속 초미세먼지 수치가 '나쁨' 이상을 기록하면서 또 새로운 기록을 세웠습니다.
+                        <br>              
+                        세계보건기구(WHO) 기준으로 서울의 초미세먼지 수치를 살펴보면 더욱 심각합니다. WHO의 일평균 권고기준은 25㎍/㎥, 이 수준을 유지해야 초미세먼지로 인한 사망률 증가를 막을 수 있다는 의미입니다. 지난 1년간 WHO의 권고기준을 만족하지 못한 날은 총 140일. 특히 2월과 3월은 한 달에 20일 이상씩 권고기준을 넘었습니다.
+                </p>
+                </div>
+            </div>
+            <footer id="footerbar">
+                <div class="articlebox">
+                    <a href="http://news.sbs.co.kr/news/newsPlusList.do?themeId=10000000114">
+                        <p id="fteamname">SBS 데이터저널리즘팀 마부작침</p>
+                    </a>
+                    <br><br>
+                    <p>
+                    심영구 기자 (so5what@sbs.co.kr)<br>
+                    김학휘 기자 (hwi@sbs.co.kr)<br>
+                    안혜민 기자·분석가 (hyeminan@sbs.co.kr)<br>
+                    조애리 디자이너·개발자 (dofl5576@gmail.com)<br>
+                    인턴: 박지영</p>
+                </div>
+            </footer>
 </body>
+<!-- image compare -->
+<script src="lib/jquery.event.move.js"></script>
+<script src="lib/jquery.twentytwenty.js"></script>
 <script>
+$(window).load(function() {
+
+    $("#diff").twentytwenty({
+    default_offset_pct: 0.2, 
+    before_label: 'January 2017',
+    after_label: 'March 2017',
+    no_overlay: true,
+
+  });
+
+
     const datasize=365;
     const imagewidth=498;
     var margin = {top: 0, right: 20, bottom: 0, left: 20},
@@ -219,7 +290,7 @@
 
     const parseDate = d3.timeParse("%Y-%m-%d");
     const monthformat = d3.timeFormat('%_m월');
-    const dayformat= d3.timeFormat('%_m월 %_d일');
+    const dayformat= d3.timeFormat('%y년 %_m월 %_d일');
 
 
     const container=d3.select('.container');
@@ -292,11 +363,11 @@
     container.append('div')
             .attr('class','label')
             .style('top','5%')
-            .html('하늘사진');
+            .html('하늘 사진');
     container.append('div')
             .attr('class','label')
             .style('top','45%')
-            .html('색상값');
+            .html('하늘 색상 추출');
     container.append('div')
             .attr('class','label')
             .style('top','65%')
@@ -332,15 +403,7 @@
     }
     
     
- 
+  });   
 
-</script>
-<!-- image compare -->
-<script src="lib/jquery.event.move.js"></script>
-<script src="lib/jquery.twentytwenty.js"></script>
-<script>
-// $(window).load(function() {
-  $("#diff").twentytwenty();
-// });
 </script>
 </html>
