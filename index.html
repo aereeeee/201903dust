@@ -407,8 +407,6 @@ function brushed() {
             var left=Math.pow((s0-r0),2)*p*0.0001;
             var right=Math.pow((r1-s1),2)*p*0.0001;
         x.range([margin.left-left, width - margin.right+right]);
-//   x.range([margin.left, width - margin.right].map(d => d3.event.transform.applyX(d)));
-// s.map(x2.invert, x2);
 
   container.selectAll(".flexitem")
         .style('transform', function(d){
@@ -438,7 +436,9 @@ function brushed() {
 
 }
     function zoomed() {
+        if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return;
         x.range([margin.left, width - margin.right].map(d => d3.event.transform.applyX(d)));
+        var t = d3.event.transform;
 
         container.selectAll(".flexitem")
         .style('transform', function(d){
@@ -463,6 +463,9 @@ function brushed() {
             d3.selectAll('.pm25bar').html('');
             d3.selectAll('.flexitem').attr('id',null);
         }
+
+
+        d3.select(".brush").call(brush.move, x2.range().map(t.invertX, t));
     }
 
 
