@@ -150,7 +150,38 @@
         footer{
             margin-top:50px;
         }
-
+        .tooltip {
+            position: absolute;
+            top: 100px;
+            left:100px;
+            /* -moz-border-radius:5px;
+            border-radius: 5px; */
+            border: 2px solid #000;
+            background: #fff;
+            opacity: .9;
+            color: black;
+            padding:5px 10px;
+            z-index: 10;
+          }
+          .tooltip div{
+            line-height:12px !important;
+          }
+          .tooltip span{
+            font-size:12px !important;
+          }
+          .tooltip .value {
+            font-weight:bold;
+          }
+          .date{
+              position: relative;
+          }
+          .red{
+              position: absolute;
+              bottom:5px;
+              width:100%;
+              height:10px;
+              background-color:#f00;
+          }
         @media screen and (max-width: 900px) {
            
             body{

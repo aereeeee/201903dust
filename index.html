@@ -174,6 +174,7 @@
 <!-- image compare -->
 <script src="lib/jquery.event.move.js"></script>
 <script src="lib/jquery.twentytwenty.js"></script>
+<script src="js/tooltip.js"></script>
 <script>
 $(window).load(function() {
 
@@ -193,7 +194,7 @@ $(window).load(function() {
     }, 500);
   }
   $('[data-scroll]').on('click', scrollToSection);
-
+  var tooltipfix = floatingTooltip('tooltip-fix', 240);
 
     var margin = {top: 0, right: 40, bottom: 0, left: 20},
     width = window.innerWidth,
@@ -245,7 +246,7 @@ $(window).load(function() {
         d3.select('.axis').append('div')
             .attr('class','axisline')
             .style('width',width+'px')
-            .html('<span>나쁨 기준선 35</span>');
+            .html("<span>'나쁨' 기준 (35㎍/㎥)</span>");
 
 
         container.selectAll('.flexitem')
@@ -258,8 +259,22 @@ $(window).load(function() {
             })
             .style("width", x.bandwidth()+'px')
             .on('mouseover',function(d){
+                d3.select(this).select('.pm25').style('background-color',"#eee");
+                var content = '<div><span class="name">날짜: </span><span class="value">' +
+                            d.date +
+                            '</span></div>' +
+                            '<div><span class="name">초미세먼지 수치: </span><span class="value">' +
+                            d.pm25+
+                            '㎍/㎥</span></div>';
+                if(x.bandwidth()<60){
+              tooltipfix.showTooltip(content, d3.event);}
+            })
+            .on('mouseout', function(d){
+                d3.select(this).select('.pm25').style('background-color',"transparent");
+                tooltipfix.hideTooltip();
             })
             .on('click',function(d,i){
+                console.log(i);
                 d3.selectAll('.flexitem').attr('id',null);
                 if(x.bandwidth()<60){             
                 d3.select(this).transition().delay(800).attr('id','active');}
@@ -299,14 +314,17 @@ $(window).load(function() {
                 .call(brush.move, x.range());
 
         const flexitem=d3.selectAll('.flexitem');
-
+        const bisang=[15,16,241,308,309,310,348,349,355,356,357,358,359,360,361];
         flexitem.append('div')
             .attr('class','date')
             .html(function(d,i){
-                if(i==0)
-                return '2018';
-                else if(i==296)
-                return '2019';
+                if(bisang.includes(i)){
+                    return '<div class="red"></div>';
+                }
+                // else if(i==0)
+                // return '2018';
+                // else if(i==296)
+                // return '2019';
             });
         
         const picture=flexitem.append('div')
