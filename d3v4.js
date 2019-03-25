@@ -16607,7 +16607,7 @@ function zoom() {
       noevent$2();
       if (!g.moved) {
         var dx = exports.event.clientX - x0, dy = exports.event.clientY - y0;
-        g.moved = dx * dx + dy * dy > clickDistance2;
+        g.moved =dx * dx + dy * dy > clickDistance2;
       }
       g.zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = mouse(g.that), g.mouse[1]), g.extent, translateExtent));
     }
@@ -16620,6 +16620,9 @@ function zoom() {
     }
   }
 
+  const imagewidth=window.innerHeight*0.58
+  const firstwidth=window.innerWidth/365;
+  const maxextent=imagewidth/firstwidth;
   function dblclicked() {
     if (!filter.apply(this, arguments)) return;
     var t0 = this.__zoom,
@@ -16632,7 +16635,6 @@ function zoom() {
     noevent$2();
     if (duration > 0) select(this).transition().duration(duration).call(schedule, t1, p0);
     else select(this).call(zoom.transform, t1);
-
   }
 
   function touchstarted() {
