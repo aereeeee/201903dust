@@ -16,10 +16,7 @@
     .container {
       position:relative;
       overflow:hidden;
-      /* overflow-x: scroll;
-      scroll-snap-type: x mandatory;
-      overflow-y: hidden;
-      white-space: nowrap; */
+
     }
     .itemcontainer{
       overflow-x: scroll;
@@ -32,7 +29,7 @@
     }
     .flexitem {
       width:80vw;
-      height:70vh;
+      height:80vh;
       display: inline-block;
       scroll-snap-align: center;
       /* z-index:0; */
@@ -56,6 +53,7 @@
     .date{
             height:5%;
             overflow:visible !important;
+            text-align: right;
         }
         .date span{
             font-size:16px;
@@ -84,7 +82,7 @@
             /* height:20%; */
         }
         .pm25{
-            height:25%;
+            height:30%;
             width:100%;
             /* margin:0 1px; */
             /* background-color:#ddd; */
@@ -112,6 +110,7 @@
         .baraxis span{
             position:absolute;
             right:0;
+            font-weight: bold;
         }
         .label{
             position:absolute;
@@ -121,16 +120,15 @@
             font-size:.7em;
         }
         .axis{
-            height:25%;
+            height:30%;
             width:100%;
             position:absolute;
             top:65%;
         }
         .axisline{
-            height:35px;
+            height:1px;
             position: absolute;
-            bottom:0;
-            /* left:20px; */
+            bottom:34px;
             z-index:999;
             border-top:1px solid #f00;
         }
@@ -183,6 +181,7 @@
                     </div>
                 </div>
                 <div class="articlefull" id="section2">
+                <input type="range" min="0" max="364" value="0" class="slider" id="myRange">
                 <div class="container">
                     <!-- <div class="label skypic">하늘사진</div>
                     <div class="label color">하늘 대표 색상값</div>
@@ -292,7 +291,6 @@ $(window).load(function() {
 
   });
 
-
     const datasize=365;
     const imagewidth=498;
     var margin = {top: 0, right: 20, bottom: 0, left: 20},
@@ -308,6 +306,15 @@ $(window).load(function() {
 
     d3.csv("data.csv", type, function(error, data) {
       if (error) throw error;
+      
+      container.append('div')
+            .attr('class','axis')
+            .style('top','65%');
+        d3.select('.axis').append('div')
+            .attr('class','axisline')
+            .style('width',width+'px')
+            .html("<span>'나쁨' 기준 (35㎍/㎥)</span>");
+
 
         container.append('div').attr('class','itemcontainer')
             .selectAll('div')
@@ -315,16 +322,24 @@ $(window).load(function() {
             .enter()
             .append('div')
             .attr('class','flexitem')
+            .attr('id',function(d,i){
+                return 'item'+i;
+            });
   
         const flexitem=d3.selectAll('.flexitem');
 
         flexitem.append('div')
             .attr('class','date')
             .html(function(d,i){
-                if(i==0)
-                return '2018';
-                else if(i==296)
-                return '2019';
+                if(d.pm25<16){
+                    return "<span class='status'>&#x1F606; 좋음</span>"
+                }else if(d.pm25>=16 && d.pm25<36){
+                    return "<span class='status'>&#x1F644; 보통</span>"
+                }else if(d.pm25>=36 && d.pm25<76){
+                    return "<span class='status'>&#x1F61F; 나쁨</span>"
+                }else{
+                    return "<span class='status'>&#x1F631; 매우 나쁨</span>"
+                }
             });
         
         const picture=flexitem.append('div')
@@ -344,7 +359,11 @@ $(window).load(function() {
                 return 'palette'+i;
             })
             .style('background-color',function(d){
+                if(d.R==''){
+                    d3.select(this).style('background-image','url("line.png")');
+                }else{
                 return 'rgb('+d.R+','+d.G+','+d.B+')';
+                }
             })
 
         const bar=flexitem.append('div')
@@ -384,20 +403,21 @@ $(window).load(function() {
             .style('top','65%')
             .html('PM2.5 초미세 먼지 수치');
 
-    container.append('div')
-            .attr('class','axis')
-            .style('top','65%');
-    d3.select('.axis').append('div')
-            .attr('class','axisline')
-            .style('width',width+'px')
-            .html('<span>나쁨 기준선 35</span>');
-
             var cards=$('.flexitem');
+            var slider = document.getElementById("myRange");
+                slider.addEventListener('input', function(){
+                    var val=this.value;  
+                    var $section = $('#item'+val); 
+                    $('.itemcontainer').scrollLeft($section.offset().left); 
+                });
+
             $('.itemcontainer').scroll(function(){
-              cards.each(function(){
+              cards.each(function(){       
                 var offset=$(this).offset();
                 if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){
                     $(this).addClass( 'active' );
+                    slider.value=$(this).index();
+                    console.log($(this).select('.pm25bar'))
                 }else{
                   $(this).removeClass( 'active' );
                 }
