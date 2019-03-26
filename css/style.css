@@ -7,7 +7,7 @@
     }
         #navigation{
             position:fixed;
-            left:20px;
+            right:20px;
             top:40%;
             z-index:1000;
         }
@@ -30,7 +30,6 @@
         }
         .intro{
             width:100%;
-            margin-bottom:50px;
             position: relative;
         }
         .intro img{
@@ -49,12 +48,11 @@
         }
 
         .articlefull{
-            margin-top:100px;
+            position: relative;
             height:90vh;
-            /* scroll-snap-align: start; */
         }
         .article{
-            /* scroll-snap-align: start; */
+            margin:50px 0;
         }
         .content{
             width:900px;
@@ -75,7 +73,7 @@
             overflow:hidden;
         }
         .imgsection .cam{
-            width:80%;
+            width:100%;
             margin:0 auto;
             position: relative;
         }
@@ -88,7 +86,7 @@
             padding:2px 4px;
         }
         .imgsection .map{
-            width:80%;
+            width:100%;
             margin:0 auto;
         }
         .imgsection img{
@@ -149,6 +147,11 @@
         }
         footer{
             margin-top:50px;
+        }
+        .subtitle{
+            margin-top:10px;
+            color:#999;
+            font-weight: bold;
         }
         .tooltip {
             position: absolute;
@@ -221,15 +224,15 @@
             }
 
             .top5{
-                width:50%;
-                float:left;
+                width:100%;
+                float:none;
                 overflow:hidden;
                 margin-bottom:5px;
             }
             .imgpart2{
                 float:none;
                 width:100%;
-                margin:4px 2px;
+                margin:20px 0;
             }
             .imgpart2 img{
                 width:100%;
