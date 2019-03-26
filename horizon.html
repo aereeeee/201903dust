@@ -25,16 +25,16 @@
       white-space: nowrap;
     }
     .container::-webkit-scrollbar {
-    display: none;
+        display: none;
     }
     .flexitem {
       width:80vw;
-      height:80vh;
+      height:70vh;
       display: inline-block;
       scroll-snap-align: center;
       /* z-index:0; */
       box-shadow:none;
-      opacity: .5;
+      opacity: .2;
       transition:all .5s;
     }
     .flexitem.active{
@@ -158,7 +158,7 @@
                 <div id="bar"></div>
             </div>
             <a class="intro">
-                    <img src="test.png" alt="">
+                    <img src="banner.png" alt="">
                     <a data-scroll class="scrolldown" href="#section1">
                         <img src="down.gif" alt="">
                     </a>    
@@ -208,8 +208,8 @@
                     <div class="title">남산타워가 사라진 날... 초미세먼지와 가시거리
                         </div>
                     <div id="diff">
-                        <img src="img/good.png">
-                        <img src="img/bad.png">
+                        <img src="good.png">
+                        <img src="bad.png">
                     </div>
                     <p class="explain">*화면 중앙의 버튼을 마우스로 클릭하고 오른쪽으로 이동하면 2018년 7월 7일, 왼쪽으로 이동하면 2019년 3월 4일의 하늘을 볼 수 있습니다.
                     </p>
@@ -417,7 +417,7 @@ $(window).load(function() {
                 if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){
                     $(this).addClass( 'active' );
                     slider.value=$(this).index();
-                    console.log($(this).select('.pm25bar'))
+                
                 }else{
                   $(this).removeClass( 'active' );
                 }
