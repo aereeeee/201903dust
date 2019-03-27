@@ -1,9 +1,9 @@
         .container{
-
             position:absolute;
             height:80%;
             white-space: nowrap;
             bottom:10%;
+            margin-left:20px;
         }
         .flexitem{
             height:100%;
@@ -20,7 +20,6 @@
             bottom:0;
             height:5%;
             width:100%;
-            margin:0 auto;
         }
         .date{
             opacity:0;

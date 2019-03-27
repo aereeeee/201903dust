@@ -19,6 +19,7 @@
 
     }
     .itemcontainer{
+    padding:0 10vw;
       overflow-x: scroll;
       scroll-snap-type: x mandatory;
       overflow-y: hidden;
@@ -405,42 +406,45 @@ $(window).load(function() {
             .html('PM2.5 초미세먼지 농도');
 
 
-            // var val;
-            var timer = null;
-            // var idx;
+
             var cards=$('.flexitem');
+            var cardwidth=$('#item0').width();
+            var cardpadding=width*0.2;
             // var slider = document.getElementById("myRange");
             var slider=$('.slider');
             var plag=0;
             
-            slider.on('change', function() {
+            slider.on('input', function() {
                 plag=1;
                 var val = slider.val();
-                var $section = $('#item'+val); 
-                $('.itemcontainer').scrollLeft($section.offset().left);
-                plag=0;
+                var trans=cardwidth*val;
+                // if(val==0){trans=0;}
+                // else{trans=cardwidth*val;}
+                $('.itemcontainer').scrollLeft(trans);
+
+                // console.log($section.offset().left);
+                // console.log('아이템 인덱스'+val)
+                // console.log('현재 스크롤레프트'+$('.itemcontainer').scrollLeft())
             });
-            // slider.on('change',function(){
-            //     plag=0;
-                
-            // })
+            slider.on('change',function(){
+                plag=0;              
+            })
+
+        if(plag==0){
             $('.itemcontainer').scroll(function(){
-
-              cards.each(function(){//스크롤시 모든 카드에 대해서        
-                var offset=$(this).offset();//자기의 오프셋을 계산하여 
-                if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){//그오프셋이 화면 중앙에 오면
-                    $(this).addClass( 'active' ); //클래스를 단다
+              cards.each(function(){      
+                var offset=$(this).offset();
+                if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){
+                    $(this).addClass( 'active' ); 
                        var idx=$(this).index();
-                        if(plag==0)
-                            slider.val(idx);
-
+                        slider.val(idx);
                 }else{
                   $(this).removeClass( 'active' );
                 }
               })
 
             })
-
+        }
     });
 
 

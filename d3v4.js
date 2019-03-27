@@ -16310,6 +16310,7 @@ Transform.prototype = {
     return [(location[0] - this.x) / this.k, (location[1] - this.y) / this.k];
   },
   invertX: function(x) {
+    console.log((x - this.x) / this.k)
     return (x - this.x) / this.k;
   },
   invertY: function(y) {

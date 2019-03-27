@@ -13,7 +13,7 @@
     <link href="css/twentytwenty.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         if (isMobile()) {
-        window.location.href = "horizon.html";
+            window.location.href = "horizon.html";
         }
         function isMobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -73,10 +73,10 @@
             <div class="guide">
                 도움말
             </div>
-        <!-- <div class="btn">
+        <div class="btn">
         <div class="reset">처음으로</div>
         <div class="help">도움말</div>
-        </div> -->
+        </div>
     <div class="container">
         <!-- <div class="label skypic">하늘사진</div>
         <div class="label color">하늘 대표 색상값</div>
@@ -200,8 +200,6 @@ $(window).load(function() {
 
 
 let mainNavLinks = document.querySelectorAll("#navigation a");
-
-console.log(mainNavLinks);
   window.addEventListener("scroll", event => {
   let fromTop = window.scrollY;
 
@@ -225,6 +223,7 @@ console.log(mainNavLinks);
     var margin = {top: 0, right: 40, bottom: 0, left: 20},
     width = window.innerWidth,
     height = window.innerHeight;
+    
 
     const datasize=365;
     const imagewidth=height*0.58
@@ -232,10 +231,10 @@ console.log(mainNavLinks);
     const parseDate = d3.timeParse("%Y-%m-%d");
 
     var x = d3.scaleBand()
-          .range([margin.left, width - margin.right])
+          .range([0,width-margin.left-margin.right,height])
           .padding(0);
     var x2 = d3.scaleBand()
-          .range([margin.left, width - margin.right])
+          .range([0,width-margin.left-margin.right,height])
           .domain(monthdata)
           .padding(0.01);
 
@@ -246,7 +245,7 @@ console.log(mainNavLinks);
     const firstwidth=width/365;
     const maxextent=imagewidth/firstwidth;
     
-    const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];       
+    const extent = [[0,0], [width-margin.left-margin.right,height]];       
     var zoom=d3.zoom()
             .scaleExtent([1, maxextent])
             .translateExtent(extent)
@@ -259,14 +258,13 @@ console.log(mainNavLinks);
     .on("brush end", brushed);
 
 
-    const container=d3.select('.container').call(zoom);
+    const container=d3.select('.container');
 
     d3.csv("data.csv", type, function(error, data) {
       if (error) throw error;
 
         x.domain(data.map(function(d) { return d.date; }));
-
-
+    
         container.append('div')
             .attr('class','axis')
             .style('top','65%');
@@ -329,11 +327,15 @@ console.log(mainNavLinks);
         
 
         const rectheight=height*0.05;
-        var context=container.append('div').attr('class','brushsec')
+        var svg=container.append('div').attr('class','brushsec')
                 .append('svg')
-                .attr('width',width-margin.left)
+                .attr('width',width-margin.left-margin.right)
                 .attr('height',rectheight)
-                
+
+        var context = svg.append("g")
+            .style('transform','translateX('+margin.left+')')
+            .attr("class", "context");
+
         var monrect=context.append('g')
                 .selectAll('rect')
                 .data(monthdata)
@@ -343,13 +345,7 @@ console.log(mainNavLinks);
                 .attr("x", function(d) { return x2(d); })
                 .attr("width", x2.bandwidth())
                 .attr("height",rectheight)
-                .attr('fill','#ddd')
-            monrect
-                .append('text')
-                .attr("x", function(d) { return x2(d); })
-                // .attr("y", rectheight / 2)
-                .attr("dy", ".35em")
-                .text(function(d) { return d+'월'; });
+                .attr('fill','#ddd');
 
             
             context.append('g')
@@ -437,22 +433,29 @@ console.log(mainNavLinks);
             .attr('class','label')
             .style('top','65%')
             .html('PM2.5 초미세먼지 농도');
+
+            container.call(zoom);
     
     });
 
 function brushed() {
   if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return; // ignore brush-by-zoom
-        var s = d3.event.selection;
-        var r0 = x2.range()[0];
-        var r1 = x2.range()[1];
-        var s0= s[0];
-        var s1= s[1];
-            var p=maxextent-r0;
-            // var left=Math.pow((s0-r0),(s0-r0)*0.0005)*p;
-            // var right=Math.pow((r1-s1),(r1-s1)*0.0005)*p;
-            var left=Math.pow((s0-r0),2)*p*0.0001;
-            var right=Math.pow((r1-s1),2)*p*0.0001;
-        x.range([margin.left-left, width - margin.right+right]);
+        var s = d3.event.selection || x2.range();
+        // x.range(s.map(s.invertX, s));
+        // var r0 = x2.range()[0];
+        // var r1 = x2.range()[1];
+        // var s0= s[0];
+        // var s1= s[1];
+        //     var p=maxextent-r0;
+        //     // var left=Math.pow((s0-r0),(s0-r0)*0.0005)*p;
+        //     // var right=Math.pow((r1-s1),(r1-s1)*0.0005)*p;
+        //     var left=Math.pow((s0-r0),2)*p*0.0001;
+        //     var right=Math.pow((r1-s1),2)*p*0.0001;
+        // var mul=(width-margin.left-margin.right) / (s[1] - s[0]);
+        // console.log(mul)
+        // console.log(s[1])
+        // console.log(s[0])
+        // x.range([-s0*mul,mul*(r1)]);
 
   container.selectAll(".flexitem")
         .style('transform', function(d){
@@ -488,14 +491,18 @@ function brushed() {
             d3.selectAll('.flexitem').attr('id',null);
         }
 
-        container.call(zoom);
+        container.call(zoom.transform, d3.zoomIdentity
+        .scale((width-margin.left-margin.right) / (s[1] - s[0]))
+        .translate(-s[0], 0));
 
 }
     function zoomed() {
         if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return;
-        x.range([margin.left, width - margin.right].map(d => d3.event.transform.applyX(d)));
+        x.range([0, width - margin.right-margin.left].map(d => d3.event.transform.applyX(d)));
         var t = d3.event.transform;
-
+        // console.log(t)
+        // console.log(x.range())
+        // console.log(x2.range())
         container.selectAll(".flexitem")
         .style('transform', function(d){
         return 'translateX('+x(d.date)+'px)'
@@ -528,6 +535,7 @@ function brushed() {
             d3.selectAll('.pmlabel').style('opacity','0');
             d3.selectAll('.flexitem').attr('id',null);
         }
+
         d3.select(".brush").call(brush.move, x2.range().map(t.invertX, t));
     }
 
@@ -537,14 +545,16 @@ function brushed() {
         return d;
     }
 
-    // d3.select('.reset').on('click',function(){
-    //     d3.select(".brush").call(brush.move, x2.range([margin.left, width - margin.right]));
-    // });
-    // d3.select('.help').on('mouseover',function(){
-    //     d3.select('.guide').style('display','block')
-    // }).on('mouseout',function(){
-    //     d3.select('.guide').style('display','none')
-    // })
+    d3.select('.reset').on('click',function(){
+        container.call(zoom.transform, d3.zoomIdentity
+        .scale(1)
+        .translate(0, 0));
+    });
+    d3.select('.help').on('mouseover',function(){
+        d3.select('.guide').style('display','block')
+    }).on('mouseout',function(){
+        d3.select('.guide').style('display','none')
+    })
  });   
 </script>
 </body>
