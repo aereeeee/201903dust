@@ -176,7 +176,7 @@
                         <마부작침>은 또 각 영상의 대표 색을 추출해 그날의 하늘을 색상 하나로 표현했습니다.  
                         <br><br>
                         *그래픽 감상법<br>
-                        아래 영상은 2018.3.11~2019.3.10 서울 SBS 목동사옥 주변의 하늘을 촬영한 것입니다. 아무 곳이나 클릭하면 확대됩니다. 개별 영상을 클릭하면 최대 크기로 볼 수 있습니다. 또한 마우스 휠을 앞으로 굴리면 확대, 뒤로 굴리면 축소해서 볼 수 있습니다. 그 아래 막대 차트는 같은 기간 서울의 일평균 초미세먼지 농도를 가리킵니다. 마우스로 클릭하면 그날의 초미세먼지 농도가 얼마였는지 확인할 수 있습니다
+                        아래 영상은 2018.3.11~2019.3.10 SBS 목동사옥 주변의 하늘을 촬영한 것입니다. 화면을 좌우로 밀면서 각 날짜의 하늘을 볼 수 있습니다. 그 아래 막대 차트는 같은 기간 서울의 일평균 초미세먼지 농도를 가리킵니다. 각 막대를 누르면 그날 초미세먼지 농도가 얼마였는지 확인할 수 있습니다.
             
                     </p>
                     </div>
@@ -402,23 +402,38 @@ $(window).load(function() {
     container.append('div')
             .attr('class','label')
             .style('top','65%')
-            .html('PM2.5 초미세 먼지 수치');
+            .html('PM2.5 초미세먼지 농도');
 
+
+            // var val;
+            var timer = null;
+            // var idx;
             var cards=$('.flexitem');
-            var slider = document.getElementById("myRange");
-                slider.addEventListener('input', function(){
-                    var val=this.value;  
-                    var $section = $('#item'+val); 
-                    $('.itemcontainer').scrollLeft($section.offset().left); 
-                });
-
-            $('.itemcontainer').scroll(function(){
-              cards.each(function(){       
-                var offset=$(this).offset();
-                if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){
-                    $(this).addClass( 'active' );
-                    slider.value=$(this).index();
+            // var slider = document.getElementById("myRange");
+            var slider=$('.slider');
+            var plag=0;
+            
+            slider.on('change', function() {
+                plag=1;
+                var val = slider.val();
+                var $section = $('#item'+val); 
+                $('.itemcontainer').scrollLeft($section.offset().left);
+                plag=0;
+            });
+            // slider.on('change',function(){
+            //     plag=0;
                 
+            // })
+            $('.itemcontainer').scroll(function(){
+
+              cards.each(function(){//스크롤시 모든 카드에 대해서        
+                var offset=$(this).offset();//자기의 오프셋을 계산하여 
+                if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){//그오프셋이 화면 중앙에 오면
+                    $(this).addClass( 'active' ); //클래스를 단다
+                       var idx=$(this).index();
+                        if(plag==0)
+                            slider.val(idx);
+
                 }else{
                   $(this).removeClass( 'active' );
                 }

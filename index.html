@@ -33,12 +33,12 @@
 		<div id="bar"></div>
     </div>
     <div id="navigation">
-        <a data-scroll class="hov-color-red" href="#section1"></a>
-        <a data-scroll class="hov-color-red" href="#section2"></a>
-        <a data-scroll class="hov-color-red" href="#section3"></a>
-        <a data-scroll class="hov-color-red" href="#section4"></a>
-        <a data-scroll class="hov-color-red" href="#section5"></a>
-        <a data-scroll class="hov-color-red" href="#section6"></a>
+        <a data-scroll href="#section1"></a>
+        <a data-scroll href="#section2"></a>
+        <a data-scroll href="#section3"></a>
+        <a data-scroll href="#section4"></a>
+        <a data-scroll href="#section5"></a>
+        <a data-scroll href="#section6"></a>
     </div>
     <a class="intro">
         <img src="banner.png" alt="">
@@ -51,24 +51,32 @@
         <p>
             2019년 3월 5일. 최악의 초미세먼지(PM 2.5)가 한반도를 덮쳤습니다. 이날 서울의 하루 평균 초미세먼지 농도는 137㎍/㎥, 2015년 초미세먼지 농도를 공식 관측한 이후 역대 최고치를 5기록했습니다. 수도권에 3월 1일부터 7일 연속 고농도 초미세먼지 비상저감조치가 시행된 것도 사상 최초입니다.
             <br><br>
-            SBS 데이터저널리즘팀 <마부작침>은 최근 1년간(2018.3.11~2019.3.10) 대한민국 서울의 하늘 영상을 모았습니다. 영상의 출처는 SBS 12시 뉴스로, 남북정상회담 등 대형이벤트로 뉴스가 결방된 날을 제외하면 영상은 350개입니다. 이를 서울의 일평균 초미세먼지 농도와 함께 비교해서 볼 수 있게 시각화했습니다.
+            SBS 데이터저널리즘팀 <마부작침>은 최근 1년간(2018.3.11~2019.3.10) 대한민국 서울의 하늘 영상을 모았습니다. 영상의 출처는 SBS 12시 뉴스로, 남북정상회담 등 대형이벤트로 뉴스가 결방된 날을 제외하면 영상은 351개입니다. 이를 서울의 일평균 초미세먼지 농도와 함께 비교해서 볼 수 있게 시각화했습니다.
             <br>
             (매일 정오 방송되는 SBS 12시 뉴스는 뉴스 말미에 SBS 목동사옥 옥상에 설치된 카메라로 서울 하늘을 실시간으로 보여줍니다.)
             <br><br>
             <마부작침>은 또 각 영상의 대표 색을 추출해 그날의 하늘을 색상 하나로 표현했습니다.  
-
+            <br><br><br><br>
+            하늘 영상이 빠진 14일(빗금 표시)<br>
+            2018년 4월 27일, 5월 4일, 5월 27일, 6월 11일, 6월 12일, 8월 23일, 8월 24일, 9월 17일, 9월 18일, 9월 19일, 9월 20일, 10월 6일
+            2019년 2월 27일, 2월 28일
         </p>
-        </div>
-    </div>   
-    <div class=manual>
+        <div class=manual>
         *그래픽 감상법<br>
         아래 영상은 2018.3.11~2019.3.10 서울 SBS 목동사옥 주변의 하늘을 촬영한 것입니다. 아무 곳이나 클릭하면 확대됩니다. 개별 영상을 클릭하면 최대 크기로 볼 수 있습니다. 또한 마우스 휠을 앞으로 굴리면 확대, 뒤로 굴리면 축소해서 볼 수 있습니다. 그 아래 막대 차트는 같은 기간 서울의 일평균 초미세먼지 농도를 가리킵니다. 마우스로 클릭하면 그날의 초미세먼지 농도가 얼마였는지 확인할 수 있습니다
-    </div>
+        </div>
+        </div>   
+       
+    </div>   
+ 
     <div class="articlefull" id="section2">
-        <div class="btn">
+            <div class="guide">
+                도움말
+            </div>
+        <!-- <div class="btn">
         <div class="reset">처음으로</div>
         <div class="help">도움말</div>
-        </div>
+        </div> -->
     <div class="container">
         <!-- <div class="label skypic">하늘사진</div>
         <div class="label color">하늘 대표 색상값</div>
@@ -137,7 +145,7 @@
     </div>
     <div class="article" id="section6">
         <div class="content">
-        <div class="title">닷새 중 하루는 숨 편히 쉬기 힘들었다... 달력으로 보는 서울 초미세먼지(PM 2.5)
+        <div class="title">닷새 중 하루는 힘들었다... 달력으로 보는 서울 초미세먼지(PM 2.5)
             </div>
         <div class="imgcalendar"><img src="img/cal.png" alt="" srcset=""></div>
         <p>
@@ -185,8 +193,34 @@ $(window).load(function() {
       scrollTop: $section.offset().top
     }, 500);
   }
+
+
   $('[data-scroll]').on('click', scrollToSection);
   var tooltipfix = floatingTooltip('tooltip-fix', 240);
+
+
+let mainNavLinks = document.querySelectorAll("#navigation a");
+
+console.log(mainNavLinks);
+  window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach(link => {
+    let section = document.querySelector(link.hash);
+
+    if (
+      section.offsetTop-50 <= fromTop 
+      &&
+      section.offsetTop + section.offsetHeight > fromTop
+    ) {
+      link.classList.add("current");
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
 
     var margin = {top: 0, right: 40, bottom: 0, left: 20},
     width = window.innerWidth,
@@ -256,7 +290,7 @@ $(window).load(function() {
                 var content = '<div><span class="name">날짜: </span><span class="value">' +
                             d.date +
                             '</span></div>' +
-                            '<div><span class="name">초미세먼지 수치: </span><span class="value">' +
+                            '<div><span class="name">초미세먼지 농도: </span><span class="value">' +
                             d.pm25+
                             '㎍/㎥</span></div>';
                 if(x.bandwidth()<60){
@@ -402,7 +436,7 @@ $(window).load(function() {
     container.append('div')
             .attr('class','label')
             .style('top','65%')
-            .html('PM2.5 초미세 먼지 수치');
+            .html('PM2.5 초미세먼지 농도');
     
     });
 
@@ -454,6 +488,8 @@ function brushed() {
             d3.selectAll('.flexitem').attr('id',null);
         }
 
+        container.call(zoom);
+
 }
     function zoomed() {
         if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return;
@@ -500,6 +536,15 @@ function brushed() {
         d.pm25 = +d.pm25;
         return d;
     }
+
+    // d3.select('.reset').on('click',function(){
+    //     d3.select(".brush").call(brush.move, x2.range([margin.left, width - margin.right]));
+    // });
+    // d3.select('.help').on('mouseover',function(){
+    //     d3.select('.guide').style('display','block')
+    // }).on('mouseout',function(){
+    //     d3.select('.guide').style('display','none')
+    // })
  });   
 </script>
 </body>
