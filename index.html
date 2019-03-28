@@ -58,7 +58,7 @@
             <마부작침>은 또 각 영상의 대표 색을 추출해 그날의 하늘을 색상 하나로 표현했습니다.  
             <br><br><br><br>
             하늘 영상이 빠진 14일(빗금 표시)<br>
-            2018년 4월 27일, 5월 4일, 5월 27일, 6월 11일, 6월 12일, 8월 23일, 8월 24일, 9월 17일, 9월 18일, 9월 19일, 9월 20일, 10월 6일
+            2018년 4월 27일, 5월 4일, 5월 27일, 6월 11일, 6월 12일, 8월 23일, 8월 24일, 9월 17일, 9월 18일, 9월 19일, 9월 20일, 10월 6일, 
             2019년 2월 27일, 2월 28일
         </p>
         <div class=manual>
@@ -201,7 +201,7 @@ let mainNavLinks = document.querySelectorAll("#navigation a");
 window.addEventListener("scroll", event => {
     let fromTop = window.scrollY;
 
-    if($(document).scrollTop()>$('#section1').offset().top-50){
+    if($(document).scrollTop()>$('#section1').offset().top-200){
         $('#navigation').css({opacity:'1'});
     }else{
         $('#navigation').css({opacity:'0'});
@@ -212,7 +212,7 @@ window.addEventListener("scroll", event => {
     if (
       section.offsetTop-10 <= fromTop 
       &&
-      section.offsetTop + section.offsetHeight-10 > fromTop
+      section.offsetTop + section.offsetHeight-9 > fromTop
     ) {
       link.classList.add("current");
     } else {
