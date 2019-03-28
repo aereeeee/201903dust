@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport"content="width=device-width, initial-scale=1, maximumscale=1.0, minimum-scale=1, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>스브스 시점으로 본 대한민국 하늘(feat.미세먼지)</title>
     <meta property="og:image" content="./img/title.jpg">
@@ -16,17 +16,20 @@
     .container {
       position:relative;
       overflow:hidden;
-
     }
     .itemcontainer{
-    padding:0 10vw;
+      padding:0 10vw;
       overflow-x: scroll;
       scroll-snap-type: x mandatory;
       overflow-y: hidden;
       white-space: nowrap;
+      scrollbar-width: none;
+    -ms-overflow-style: none; 
     }
     .container::-webkit-scrollbar {
-        display: none;
+       display: none;
+       width: 0;
+        height: 0;
     }
     .flexitem {
       width:80vw;
@@ -48,7 +51,7 @@
     }
     ::-webkit-scrollbar {
         display: none;
-      }
+    }
 
     /* .......... */
     .date{
@@ -183,12 +186,9 @@
                     </div>
                 </div>
                 <div class="articlefull" id="section2">
-                <input type="range" min="0" max="364" value="0" class="slider" id="myRange">
                 <div class="container">
-                    <!-- <div class="label skypic">하늘사진</div>
-                    <div class="label color">하늘 대표 색상값</div>
-                    <div class="label graph">초미세먼지 농도 그래프</div> -->
                 </div>
+                <input type="range" min="0" max="364" value="0" class="slider" id="myRange">
                 </div>
                 <div class="article" id="section3">
                     <div class="content">
