@@ -71,7 +71,8 @@
  
     <div class="articlefull" id="section2">
             <div class="guide">
-                도움말
+                <div class="guideback"></div>
+               <img src="guide.png" alt="">
             </div>
         <div class="btn">
         <div class="reset">처음으로</div>
@@ -190,23 +191,28 @@ $(window).load(function() {
       scrollTop: $section.offset().top
     }, 500);
   }
-
-
   $('[data-scroll]').on('click', scrollToSection);
+
   var tooltipfix = floatingTooltip('tooltip-fix', 240);
 
 
 let mainNavLinks = document.querySelectorAll("#navigation a");
-  window.addEventListener("scroll", event => {
-  let fromTop = window.scrollY;
+  
+window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
 
+    if($(document).scrollTop()>$('#section1').offset().top-50){
+        $('#navigation').css({opacity:'1'});
+    }else{
+        $('#navigation').css({opacity:'0'});
+    }
   mainNavLinks.forEach(link => {
     let section = document.querySelector(link.hash);
 
     if (
-      section.offsetTop-50 <= fromTop 
+      section.offsetTop-10 <= fromTop 
       &&
-      section.offsetTop + section.offsetHeight > fromTop
+      section.offsetTop + section.offsetHeight-10 > fromTop
     ) {
       link.classList.add("current");
     } else {
@@ -214,6 +220,7 @@ let mainNavLinks = document.querySelectorAll("#navigation a");
     }
   });
 });
+
 
 
 
@@ -281,7 +288,7 @@ let mainNavLinks = document.querySelectorAll("#navigation a");
             })
             .style("width", x.bandwidth()+'px')
             .on('mouseover',function(d){
-                d3.select(this).select('.pm25').style('background-color',"#eee");
+                d3.select(this).select('.pm25').style('background-color',"#f1f3f5");
                 var content = '<div><span class="name">날짜: </span><span class="value">' +
                             d.date +
                             '</span></div>' +
@@ -289,7 +296,7 @@ let mainNavLinks = document.querySelectorAll("#navigation a");
                             d.pm25+
                             '㎍/㎥</span></div>';
                 if(x.bandwidth()<60){
-              tooltipfix.showTooltip(content, d3.event);}
+                 tooltipfix.showTooltip(content, d3.event);}
             })
             .on('mouseout', function(d){
                 d3.select(this).select('.pm25').style('background-color',"transparent");
@@ -342,7 +349,7 @@ let mainNavLinks = document.querySelectorAll("#navigation a");
                 .attr("x", function(d) { return x2(d); })
                 .attr("width", x2.bandwidth())
                 .attr("height",rectheight)
-                .attr('fill','#ddd');
+                .attr('fill','#dee2e6');
 
             
             context.append('g')

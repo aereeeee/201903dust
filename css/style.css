@@ -1,6 +1,6 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
 
-*{
+*,html,body{
     -webkit-tap-highlight-color:rgba(255,255,255,0);
     user-select: none;
     -webkit-touch-callout: none;
@@ -16,6 +16,7 @@
 
     /* 스크롤네비 */
         #navigation{
+            opacity:0;
             position:fixed;
             right:20px;
             top:40%;
@@ -33,7 +34,7 @@
             box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         }
         #navigation a.current{
-            background-color:#999;
+            background-color:#ff4713;
         }
 
         body{
@@ -59,7 +60,8 @@
             bottom:100px;
             left:50%;
             transform: translateX(-50%);
-            width:40px;
+            width:80px;
+            padding:20px;
             cursor:pointer;
         }
         .scrolldown img{
@@ -80,23 +82,43 @@
             .btn div{
                 /* width:30px; */
                 float:left;
-                margin:5px;
-                height:30px;
-                border:1px solid #000;
+                margin-right:5px;
+                padding:0 5px;
+                border-radius:2px;
+                height:20px;
+                background-color:#212529;
+                font-size:14px;
+                line-height:20px;
+                color:#fff;
                 cursor: pointer;
+            }
+            .btn div:hover{
+                background-color:#495057;
             }
             .guide{
                 position:absolute;
                 width:100%;
                 height:85%;
                 bottom:5%;
-                background-color:#000;
                 color:#fff;
-                z-index:9999;
-                opacity:.5;
+                z-index:999;
                 display:none;
+                text-align: center;
             }
+            .guideback{
+                position:absolute;
+                width:100%;
+                height:100%;
+                background-color:#212529;
+                opacity:.5;
+            }
+            .guide img{
+                position:absolute;
+                height:100%;
+                left:50%;
+                transform:translateX(-50%);
 
+            }
         /* 아티클섹션 */
         .article{
             padding:100px 0;
@@ -185,7 +207,7 @@
             padding:2px 4px;
             font-size:12px;
             color:#fff;
-            background-color: #000;
+            background-color: #212529;
             line-height:12px;
         }
         .order{
@@ -213,7 +235,7 @@
         }
         .subtitle{
             margin-top:10px;
-            color:#999;
+            color:#888;
             font-weight: bold;
         }
 
@@ -222,7 +244,7 @@
             position: absolute;
             top: 100px;
             left:100px;
-            border: 2px solid #000;
+            border: 2px solid #212529;
             background: #fff;
             opacity: .9;
             color: black;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"content="width=device-width, initial-scale=1, maximumscale=1.0, minimum-scale=1, user-scalable=0">
+    <meta name="viewport"content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>스브스 시점으로 본 대한민국 하늘(feat.미세먼지)</title>
     <meta property="og:image" content="./img/title.jpg">
@@ -25,41 +25,44 @@
       overflow-y: hidden;
       white-space: nowrap;
       scrollbar-width: none;
-    -ms-overflow-style: none; 
+        -ms-overflow-style: none; 
     }
     .itemcontainer::-webkit-scrollbar {
-       display: none;
+        display: none !important;
        width: 0;
         height: 0;
     }
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+
     .flexitem {
       width:80vw;
       height:60vh;
       display: inline-block;
       scroll-snap-align: center;
       box-shadow:none;
-      opacity: .2;
-      transition:all .5s;
+      opacity: .5;
+      /* transition:all .5s; */
     }
-    .flexitem.active{
+    /* .flexitem.active{
       transition: all .5s;
       opacity: 1;
-    }   
+    }    */
     .itemcontainer {
     -webkit-overflow-scrolling: touch;
-    }
-    ::-webkit-scrollbar {
-        display: none;
     }
 
     /* .......... */
     .date{
-            height:10%;
+            height:8%;
             overflow:visible !important;
             text-align: right;
         }
         .date span{
-            font-size:16px;
+            font-size:18px;
+            font-weight:bold;
         }
         .picture{
             width:100%;
@@ -104,7 +107,7 @@
             /* background-color:#000; */
             padding:0 10px;
             color:#000;
-            font-size:21px;
+            font-size:18px;
             font-weight: bold;
         }
         .baraxis{
@@ -127,21 +130,21 @@
             height:25%;
             width:100%;
             position:absolute;
-            top:65%;
+            top:63%;
         }
         .axisline{
             height:1px;
             position: absolute;
             bottom:34px;
             z-index:999;
-            border-top:1px solid #f00;
+            border-top:1px solid #ff4713;
         }
         .axisline span{
             display:block;
             position:absolute;
             top:-18px;
             left:10vw;
-            background-color:#f00;
+            background-color:#ff4713;
             color:white;
             font-size: .7em;
         }
@@ -345,17 +348,8 @@ $(window).load(function() {
         flexitem.append('div')
             .attr('class','date')
             .html(function(d,i){
-                if(d.pm25<16){
-                    return "<span class='status'>&#x1F606; 좋음</span>"
-                }else if(d.pm25>=16 && d.pm25<36){
-                    return "<span class='status'>&#x1F644; 보통</span>"
-                }else if(d.pm25>=36 && d.pm25<76){
-                    return "<span class='status'>&#x1F61F; 나쁨</span>"
-                }else{
-                    return "<span class='status'>&#x1F631; 매우 나쁨</span>"
-                }
-            });
-        
+                return '<span>'+dayformat(parseDate(d.date))+'</span>';
+            })
         const picture=flexitem.append('div')
             .attr('class',function(d){
                 return 'picture';
@@ -395,32 +389,39 @@ $(window).load(function() {
             });
 
        var baraxis = flexitem.append('div')
-            .attr('class','baraxis')
-            .html(function(d,i){
-                return '<span>'+dayformat(parseDate(d.date))+'</span>';
-            });
+            .attr('class','baraxis');
+
             d3.selectAll('.pm25bar').html(function(d,i){
-            return '<span>'+d.pm25+'</span>';
+                if(d.pm25<16){
+                    return "<span class='status'>&#x1F606; "+d.pm25+"</span>"
+                }else if(d.pm25>=16 && d.pm25<36){
+                    return "<span class='status'>&#x1F644; "+d.pm25+"</span>"
+                }else if(d.pm25>=36 && d.pm25<76){
+                    return "<span class='status'>&#x1F61F; "+d.pm25+"</span>"
+                }else{
+                    return "<span class='status'>&#x1F631; "+d.pm25+"</span>"
+                }
             });
+        
+
     container.append('div')
             .attr('class','label')
-            .style('top','10%')
+            .style('top','8%')
             .html('하늘 사진');
     container.append('div')
             .attr('class','label')
-            .style('top','50%')
+            .style('top','48%')
             .html('하늘 색상 추출');
     container.append('div')
             .attr('class','label')
-            .style('top','65%')
+            .style('top','63%')
             .html('PM2.5 초미세먼지 농도');
 
 
 
             var cards=$('.flexitem');
             var cardwidth=$('#item0').width();
-            var cardpadding=width*0.2;
-            // var slider = document.getElementById("myRange");
+
             var slider=$('.slider');
             var plag=0;
             
@@ -428,13 +429,7 @@ $(window).load(function() {
                 plag=1;
                 var val = slider.val();
                 var trans=cardwidth*val;
-                // if(val==0){trans=0;}
-                // else{trans=cardwidth*val;}
                 $('.itemcontainer').scrollLeft(trans);
-
-                // console.log($section.offset().left);
-                // console.log('아이템 인덱스'+val)
-                // console.log('현재 스크롤레프트'+$('.itemcontainer').scrollLeft())
             });
             slider.on('change',function(){
                 plag=0;              
@@ -442,16 +437,32 @@ $(window).load(function() {
 
         if(plag==0){
             $('.itemcontainer').scroll(function(){
-              cards.each(function(){      
-                var offset=$(this).offset();
-                if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){
-                    $(this).addClass( 'active' ); 
-                       var idx=$(this).index();
-                        slider.val(idx);
-                }else{
-                  $(this).removeClass( 'active' );
-                }
-              })
+                d3.selectAll('.flexitem')
+                .transition().duration(100)
+                .style('opacity',function(d,i){
+                    var offset=$('#item'+i).offset();
+                    if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){
+                        slider.val(i);
+                        return '1';
+                    }else{return '.5'}
+                })
+                d3.selectAll('.pm25bar')
+                .transition().duration(100)
+                .style('background-color',function(d,i){
+                    var offset=$('#item'+i).offset();
+                    if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){
+                        if(d.pm25<16){
+                        return "#99e6d8"
+                        }else if(d.pm25>=16 && d.pm25<36){
+                        return "#f3efa1"
+                        }else if(d.pm25>=36 && d.pm25<76){
+                        return "#ff9d6c"
+                        }else{
+                        return "#ff4713"
+                        }
+                    }else{return '#888'}
+                })
+
 
             })
         }

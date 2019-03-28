@@ -9,8 +9,6 @@
                 background-position: center;
                 background-size:cover;
             }
-
-
             .article{
                 padding:50px 0;
             }
@@ -102,7 +100,7 @@
                 height: 50px;
                 width: 30px;
                 /* border-radius: 100%; */
-                border:1px solid #000;
+                border:1px solid #212529;
                 background: #fff;
                 cursor: pointer;
                 margin-top:-4px;
