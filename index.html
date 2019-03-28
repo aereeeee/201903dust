@@ -10,16 +10,15 @@
     <link rel="stylesheet" type="text/css" href="css/template.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/vis.css">
-    <link href="css/twentytwenty.css" rel="stylesheet" type="text/css" />
+    <link href="css/twentytwenty.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         if (isMobile()) {
-            window.location.href = "horizon.html";
+            window.location.href = "mobile.html";
         }
         function isMobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
     </script>
-    <script src="d3v4.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>
@@ -41,9 +40,8 @@
         <a data-scroll href="#section6"></a>
     </div>
     <div class="intro">
-        <!-- <img src="banner.png" alt=""> -->
         <a data-scroll class="scrolldown" href="#section1">
-            <img src="down.gif" alt="">
+            <img src="img/down.gif" alt="">
         </a>    
     </div>
     <div class="article" id="section1">
@@ -72,7 +70,7 @@
     <div class="articlefull" id="section2">
             <div class="guide">
                 <div class="guideback"></div>
-               <img src="guide.png" alt="">
+               <img src="img/guide.png" alt="">
             </div>
         <div class="btn">
         <div class="reset">처음으로</div>
@@ -87,9 +85,8 @@
             매일 정오 방송하는 SBS 12시 뉴스는, 뉴스 말미에 SBS 옥상에 설치된 카메라를 통해 서울 하늘을 실시간으로 보여줍니다. 카메라가 동쪽을 비추면 목동운동장과 국회의사당, 남산서울타워 등이 볼 수 있고, 북쪽을 비추면 성산대교를 내다볼 수 있습니다.  
         </p>
         <div class="imgsection">
-            <div class="map"><img src="map.png" alt=""></div>
-            <div class="cam"><img src="news.gif" alt="" srcset=""><div class="camnum">12시 뉴스 영상</div></div>
-            <!-- <div class="cam"><img src="img/east.png" alt="" srcset=""><div class="camnum">카메라②</div></div> -->
+            <div class="map"><img src="img/map.png" alt=""></div>
+            <div class="cam"><img src="img/news.gif" alt="" srcset=""><div class="camnum">12시 뉴스 영상</div></div>
         </div>
         <p>
             카메라는 서울 양천구 목동 SBS 본사 옥상에 고정돼 있습니다. 카메라가 동쪽을 찍으면 목동운동장과 국회의사당, 남산서울타워 등이 보이고, 북쪽을 찍으면 성산대교 등이 보입니다.
@@ -101,11 +98,9 @@
         <div class="title">남산타워가 사라진 날... 초미세먼지와 가시거리
             </div>
         <div id="diff">
-            <img src="good.png">
-            <img src="bad.png">
+            <img src="img/good.png">
+            <img src="img/bad.png">
         </div>
-        <!-- <p class="explain">*화면 중앙의 버튼을 마우스로 클릭하고 오른쪽으로 이동하면 2018년 7월 7일, 왼쪽으로 이동하면 2019년 3월 4일의 하늘을 볼 수 있습니다.
-        </p> -->
         <p>     
             청명한 날과 미세먼지 가득한 날의 가시거리 차이는 상당합니다. 초미세먼지(PM 2.5) 농도가 높아지면 빛이 미세먼지에 의해 여러 방향으로 흩어지거나, 미세먼지에 흡수돼 가시거리가 감소합니다. 황산염, 질산염 등 초미세먼지 농도가 높은 상태에서 습도까지 높아지면 대기오염물질이 수분을 흡수해 가시거리는 더욱 짧아집니다. 물론 미세먼지 농도가 높을 때뿐 아니라 날씨가 흐리거나 안개 낀 날에도 가시거리는 짧아집니다. 
             <br><br>
@@ -172,9 +167,10 @@
 <!-- image compare -->
 <script src="lib/jquery.event.move.js"></script>
 <script src="lib/jquery.twentytwenty.js"></script>
+<script src="d3v4.js"></script>
 <script src="js/tooltip.js"></script>
 <script>
-$(window).load(function() {
+$(document).ready(function(){
 
     $("#diff").twentytwenty({
     default_offset_pct: 0.2, 
@@ -230,7 +226,7 @@ window.addEventListener("scroll", event => {
     
 
     const datasize=365;
-    const imagewidth=height*0.58
+    const imagewidth=height*0.55
     const monthdata=[3,4,5,6,7,8,9,10,11,12,1,2];
     const parseDate = d3.timeParse("%Y-%m-%d");
 
@@ -246,7 +242,7 @@ window.addEventListener("scroll", event => {
     const dayformat= d3.timeFormat('%_m월 %_d일');
     const yearformat= d3.timeFormat('%_y년 %_m월 %_d일');
     
-    const firstwidth=width/365;
+    const firstwidth=(width-margin.left-margin.right)/365;
     const maxextent=imagewidth/firstwidth;
     
     const extent = [[0,0], [width-margin.left-margin.right,height]];       
@@ -254,13 +250,17 @@ window.addEventListener("scroll", event => {
             .scaleExtent([1, maxextent])
             .translateExtent(extent)
             .extent(extent)
-            .duration(750)
+            // .duration(750)
             .on("zoom", zoomed);
     
     var brush = d3.brushX()
     .extent(extent)
     .on("brush end", brushed);
-
+    d3.selection.prototype.moveToFront = function() {
+        return this.each(function(){
+          this.parentNode.appendChild(this);
+        });
+      };
 
     const container=d3.select('.container');
 
@@ -288,7 +288,6 @@ window.addEventListener("scroll", event => {
             })
             .style("width", x.bandwidth()+'px')
             .on('mouseover',function(d){
-                d3.select(this).select('.pm25').style('background-color',"#f1f3f5");
                 var content = '<div><span class="name">날짜: </span><span class="value">' +
                             d.date +
                             '</span></div>' +
@@ -296,14 +295,21 @@ window.addEventListener("scroll", event => {
                             d.pm25+
                             '㎍/㎥</span></div>';
                 if(x.bandwidth()<60){
-                 tooltipfix.showTooltip(content, d3.event);}
+                d3.select(this).select('.pm25').style('background-color',"#f1f3f5");
+                d3.select(this).select('.pm25bar').style('background-color',"#000");
+                 tooltipfix.showTooltip(content, d3.event);
+                }
             })
             .on('mouseout', function(d){
-                d3.select(this).select('.pm25').style('background-color',"transparent");
                 tooltipfix.hideTooltip();
+                d3.select(this).select('.pm25').style('background-color',"transparent");
+                if(x.bandwidth()<60){
+                    d3.select(this).select('.pm25bar').style('background-color',"#888");
+                 }
             })
             .on('click',function(d,i){
                 var item=d3.select(this);
+                item.moveToFront();
                 d3.selectAll('.flexitem').attr('id',null);
                 d3.selectAll('.pm25bar').style('background-color','#888')
                 d3.selectAll('.date').style('opacity','0');
@@ -322,11 +328,11 @@ window.addEventListener("scroll", event => {
                     item.select('.pm25bar').transition().duration(500).style('background-color','#ff4713');
                 }
 
-                // if(x.bandwidth()<60){             
-                //     item.transition().delay(800).attr('id','active');}
-                // else{
-                //     item.transition().delay(100).attr('id','active');
-                // }
+                if(x.bandwidth()<60){             
+                    item.transition().delay(400).attr('id','active');}
+                else{
+                    item.transition().delay(100).attr('id','active');
+                }
             });
         
 
