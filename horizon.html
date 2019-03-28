@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/semantic.css">
     <link rel="stylesheet" type="text/css" href="css/template.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <link href="css/twentytwenty.css" rel="stylesheet" type="text/css" />
     <script src="d3v4.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -33,17 +34,15 @@
     }
     .flexitem {
       width:80vw;
-      height:70vh;
+      height:60vh;
       display: inline-block;
       scroll-snap-align: center;
-      /* z-index:0; */
       box-shadow:none;
       opacity: .2;
       transition:all .5s;
     }
     .flexitem.active{
       transition: all .5s;
-      /* z-index:999; */
       opacity: 1;
     }   
     .itemcontainer {
@@ -55,7 +54,7 @@
 
     /* .......... */
     .date{
-            height:5%;
+            height:10%;
             overflow:visible !important;
             text-align: right;
         }
@@ -70,23 +69,23 @@
             z-index: initial;
         }
 
-        .picture img{
+        .picture .skyimg{
+            width:100%;
             height:99%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
         }
         .Palette{
-            /* position:absolute;
-            bottom:0; */
             width:100%;
-            height:20%;
-            /* margin-top:3px; */
+            height:15%;
         }
         .Palette div{
             width:100%;
             height:100%
-            /* height:20%; */
         }
         .pm25{
-            height:30%;
+            height:25%;
             width:100%;
             /* margin:0 1px; */
             /* background-color:#ddd; */
@@ -109,7 +108,7 @@
             font-weight: bold;
         }
         .baraxis{
-            height:5%;
+            height:10%;
             position:relative;
         }
         .baraxis span{
@@ -125,7 +124,7 @@
             font-size:.7em;
         }
         .axis{
-            height:30%;
+            height:25%;
             width:100%;
             position:absolute;
             top:65%;
@@ -162,38 +161,42 @@
             <div id="progress">
                 <div id="bar"></div>
             </div>
-            <a class="intro">
-                    <img src="banner.png" alt="">
+            <div class="intro">
+                    <!-- <img src="banner.png" alt=""> -->
                     <a data-scroll class="scrolldown" href="#section1">
                         <img src="down.gif" alt="">
                     </a>    
                 </div>
                 <div class="article" id="section1">
                     <div class="content">
-                    <p>
-                        2019년 3월 5일. 최악의 초미세먼지(PM 2.5)가 한반도를 덮쳤습니다. 이날 서울의 하루 평균 초미세먼지 농도는 137㎍/㎥, 2015년 초미세먼지 농도를 공식 관측한 이후 역대 최고치를 5기록했습니다. 수도권에 3월 1일부터 7일 연속 고농도 초미세먼지 비상저감조치가 시행된 것도 사상 최초입니다.
-                        <br><br>
-                        SBS 데이터저널리즘팀 <마부작침>은 최근 1년간(2018.3.11~2019.3.10) 대한민국 서울의 하늘 영상을 모았습니다. 영상의 출처는 SBS 12시 뉴스로, 남북정상회담 등 대형이벤트로 뉴스가 결방된 날을 제외하면 영상은 350개입니다. 이를 서울의 일평균 초미세먼지 농도와 함께 비교해서 볼 수 있게 시각화했습니다.
-                        <br>
-                        (매일 정오 방송되는 SBS 12시 뉴스는 뉴스 말미에 SBS 목동사옥 옥상에 설치된 카메라로 서울 하늘을 실시간으로 보여줍니다.)
-                        <br><br>
-                        <마부작침>은 또 각 영상의 대표 색을 추출해 그날의 하늘을 색상 하나로 표현했습니다.  
-                        <br><br>
-                        *그래픽 감상법<br>
-                        아래 영상은 2018.3.11~2019.3.10 SBS 목동사옥 주변의 하늘을 촬영한 것입니다. 화면을 좌우로 밀면서 각 날짜의 하늘을 볼 수 있습니다. 그 아래 막대 차트는 같은 기간 서울의 일평균 초미세먼지 농도를 가리킵니다. 각 막대를 누르면 그날 초미세먼지 농도가 얼마였는지 확인할 수 있습니다.
-            
-                    </p>
-                    </div>
+                            <p>
+                                2019년 3월 5일. 최악의 초미세먼지(PM 2.5)가 한반도를 덮쳤습니다. 이날 서울의 하루 평균 초미세먼지 농도는 137㎍/㎥, 2015년 초미세먼지 농도를 공식 관측한 이후 역대 최고치를 5기록했습니다. 수도권에 3월 1일부터 7일 연속 고농도 초미세먼지 비상저감조치가 시행된 것도 사상 최초입니다.
+                                <br><br>
+                                SBS 데이터저널리즘팀 <마부작침>은 최근 1년간(2018.3.11~2019.3.10) 대한민국 서울의 하늘 영상을 모았습니다. 영상의 출처는 SBS 12시 뉴스로, 남북정상회담 등 대형이벤트로 뉴스가 결방된 날을 제외하면 영상은 351개입니다. 이를 서울의 일평균 초미세먼지 농도와 함께 비교해서 볼 수 있게 시각화했습니다.
+                                <br>
+                                (매일 정오 방송되는 SBS 12시 뉴스는 뉴스 말미에 SBS 목동사옥 옥상에 설치된 카메라로 서울 하늘을 실시간으로 보여줍니다.)
+                                <br><br>
+                                <마부작침>은 또 각 영상의 대표 색을 추출해 그날의 하늘을 색상 하나로 표현했습니다.  
+                                <br><br>
+                                하늘 영상이 빠진 14일(빗금 표시)<br>
+                                2018년 4월 27일, 5월 4일, 5월 27일, 6월 11일, 6월 12일, 8월 23일, 8월 24일, 9월 17일, 9월 18일, 9월 19일, 9월 20일, 10월 6일
+                                2019년 2월 27일, 2월 28일
+                            </p>
+                            <div class=manual>
+                            *그래픽 감상법<br>
+                            아래 영상은 2018.3.11~2019.3.10 SBS 목동사옥 주변의 하늘을 촬영한 것입니다. 화면을 좌우로 밀면서 각 날짜의 하늘을 볼 수 있습니다. 그 아래 막대 차트는 같은 기간 서울의 일평균 초미세먼지 농도를 가리킵니다. 각 막대를 누르면 그날 초미세먼지 농도가 얼마였는지 확인할 수 있습니다.
+                            </div>
+                            </div> 
                 </div>
                 <div class="articlefull" id="section2">
                 <div class="container">
                 </div>
-                <input type="range" min="0" max="364" value="0" class="slider" id="myRange">
+                    <input type="range" min="0" max="364" value="0" class="slider" id="myRange">
                 </div>
                 <div class="article" id="section3">
                     <div class="content">
                     <p>
-                            매일 정오 방송하는 SBS 12시 뉴스는, 뉴스 말미에 SBS 옥상에 설치된 카메라를 통해 서울 하늘을 실시간으로 보여줍니다. 카메라가 동쪽을 비추면 목동운동장과 국회의사당, 남산서울타워 등이 볼 수 있고, 북쪽을 비추면 성산대교를 내다볼 수 있습니다.  
+                        매일 정오 방송하는 SBS 12시 뉴스는, 뉴스 말미에 SBS 옥상에 설치된 카메라를 통해 서울 하늘을 실시간으로 보여줍니다. 카메라가 동쪽을 비추면 목동운동장과 국회의사당, 남산서울타워 등이 볼 수 있고, 북쪽을 비추면 성산대교를 내다볼 수 있습니다.  
                     </p>
                     <div class="imgsection">
                         <div class="map"><img src="map.png" alt=""></div>
@@ -201,7 +204,7 @@
                         <!-- <div class="cam"><img src="img/east.png" alt="" srcset=""><div class="camnum">카메라②</div></div> -->
                     </div>
                     <p>
-                            카메라는 서울 양천구 목동 SBS 본사 옥상에 고정돼 있습니다. 카메라가 동쪽을 찍으면 목동운동장과 국회의사당, 남산서울타워 등이 보이고, 북쪽을 찍으면 성산대교 등이 보입니다.
+                        카메라는 서울 양천구 목동 SBS 본사 옥상에 고정돼 있습니다. 카메라가 동쪽을 찍으면 목동운동장과 국회의사당, 남산서울타워 등이 보이고, 북쪽을 찍으면 성산대교 등이 보입니다.
                     </p> 
                     </div>
                 </div>
@@ -213,8 +216,8 @@
                         <img src="good.png">
                         <img src="bad.png">
                     </div>
-                    <p class="explain">*화면 중앙의 버튼을 마우스로 클릭하고 오른쪽으로 이동하면 2018년 7월 7일, 왼쪽으로 이동하면 2019년 3월 4일의 하늘을 볼 수 있습니다.
-                    </p>
+                    <!-- <p class="explain">*화면 중앙의 버튼을 마우스로 클릭하고 오른쪽으로 이동하면 2018년 7월 7일, 왼쪽으로 이동하면 2019년 3월 4일의 하늘을 볼 수 있습니다.
+                    </p> -->
                     <p>     
                         청명한 날과 미세먼지 가득한 날의 가시거리 차이는 상당합니다. 초미세먼지(PM 2.5) 농도가 높아지면 빛이 미세먼지에 의해 여러 방향으로 흩어지거나, 미세먼지에 흡수돼 가시거리가 감소합니다. 황산염, 질산염 등 초미세먼지 농도가 높은 상태에서 습도까지 높아지면 대기오염물질이 수분을 흡수해 가시거리는 더욱 짧아집니다. 물론 미세먼지 농도가 높을 때뿐 아니라 날씨가 흐리거나 안개 낀 날에도 가시거리는 짧아집니다. 
                         <br><br>
@@ -251,19 +254,19 @@
                     </div>
                 </div>
                 <div class="article" id="section6">
-                    <div class="content">
-                    <div class="title">닷새 중 하루는 숨 편히 쉬기 힘들었다... 달력으로 보는 서울 초미세먼지(PM 2.5)
+                        <div class="content">
+                        <div class="title">닷새 중 하루는 힘들었다... 달력으로 보는 서울 초미세먼지(PM 2.5)
+                            </div>
+                        <div class="imgcalendar"><img src="img/cal.png" alt="" srcset=""></div>
+                        <p>
+                            서울의 초미세먼지 농도가 '좋음'이었던 날은 지난 1년간 116일, '보통'은 171일이었고, '나쁨'은 67일, '매우 나쁨'은 11일이었습니다. 2018년 3월 11일부터 지난 3월 10일까지 365일 중 78일이 '나쁨' 이상으로, 닷새 중 하루 꼴로 숨 쉬기 힘든 날이었다는 게 기록으로 확인됩니다.
+                            <br><br>
+                            2018년에는 초미세먼지 '나쁨' 이상을 8일 연속 기록한 게 최장이었습니다. 2018년 3월 23일부터 3월 30일까지입니다. 2019년에는 2월 27일부터 3월 7일까지 '나쁨' 이상이 9일 동안 이어졌습니다.
+                            <br><br>              
+                            세계보건기구(WHO) 기준으로 서울의 초미세먼지 농도를 살펴보면 더욱 심각합니다. WHO의 일평균 권고기준은 25㎍/㎥ 이하, 이 수준을 유지해야 초미세먼지로 인한 사망률 증가를 막을 수 있다는 의미입니다. 지난 1년간 WHO의 기준을 만족하지 못한 날은 총 140일. 특히 2월과 3월은 한 달에 20일 이상씩 권고기준을 넘었습니다.
+                        </p>
                         </div>
-                    <div class="imgcalendar"><img src="img/cal.png" alt="" srcset=""></div>
-                    <p>
-                        서울의 초미세먼지 농도가 '좋음'이었던 날은 지난 1년간 116일, '보통'은 171일이었고, '나쁨'은 67일, '매우 나쁨'은 11일이었습니다. 2018년 3월 11일부터 지난 3월 10일까지 365일 중 78일이 '나쁨' 이상으로, 닷새 중 하루 꼴로 숨 쉬기 힘든 날이었다는 게 기록으로 확인됩니다.
-                        <br><br>
-                        2018년에는 초미세먼지 '나쁨' 이상을 8일 연속 기록한 게 최장이었습니다. 2018년 3월 23일부터 3월 30일까지입니다. 2019년에는 2월 27일부터 3월 7일까지 '나쁨' 이상이 9일 동안 이어졌습니다.
-                        <br><br>              
-                        세계보건기구(WHO) 기준으로 서울의 초미세먼지 농도를 살펴보면 더욱 심각합니다. WHO의 일평균 권고기준은 25㎍/㎥ 이하, 이 수준을 유지해야 초미세먼지로 인한 사망률 증가를 막을 수 있다는 의미입니다. 지난 1년간 WHO의 기준을 만족하지 못한 날은 총 140일. 특히 2월과 3월은 한 달에 20일 이상씩 권고기준을 넘었습니다.
-                    </p>
                     </div>
-                </div>
             <footer id="footerbar">
                 <div class="articlebox">
                     <a href="http://news.sbs.co.kr/news/newsPlusList.do?themeId=10000000114">
@@ -293,11 +296,21 @@ $(window).load(function() {
 
   });
 
-    const datasize=365;
-    const imagewidth=498;
+  function scrollToSection(event) {
+    event.preventDefault();
+    var $section = $($(this).attr('href')); 
+    $('html, body').animate({
+      scrollTop: $section.offset().top
+    }, 500);
+  }
+  $('[data-scroll]').on('click', scrollToSection);
+
     var margin = {top: 0, right: 20, bottom: 0, left: 20},
     width = window.innerWidth,
     height = window.innerHeight;
+    const datasize=365;
+    const imagewidth=width*0.8;;
+
 
     const parseDate = d3.timeParse("%Y-%m-%d");
     const monthformat = d3.timeFormat('%_m월');
@@ -310,8 +323,7 @@ $(window).load(function() {
       if (error) throw error;
       
       container.append('div')
-            .attr('class','axis')
-            .style('top','65%');
+            .attr('class','axis');
         d3.select('.axis').append('div')
             .attr('class','axisline')
             .style('width',width+'px')
@@ -349,11 +361,10 @@ $(window).load(function() {
                 return 'picture';
             })    
     
-        picture.append('img')
-            .attr('src',function(d,i){
-            return 'image/img'+(i+1)+'.png';
-                // return 'sky.jpg'
-            })
+        picture.append('div').attr('class','skyimg')
+            .style('background-image',function(d,i){
+                return 'url("image/img'+(i+1)+'.png")';
+            });
 
         flexitem.append('div')
             .attr('class','Palette')
@@ -386,7 +397,6 @@ $(window).load(function() {
        var baraxis = flexitem.append('div')
             .attr('class','baraxis')
             .html(function(d,i){
-                // if(i%30==1)
                 return '<span>'+dayformat(parseDate(d.date))+'</span>';
             });
             d3.selectAll('.pm25bar').html(function(d,i){
@@ -394,11 +404,11 @@ $(window).load(function() {
             });
     container.append('div')
             .attr('class','label')
-            .style('top','5%')
+            .style('top','10%')
             .html('하늘 사진');
     container.append('div')
             .attr('class','label')
-            .style('top','45%')
+            .style('top','50%')
             .html('하늘 색상 추출');
     container.append('div')
             .attr('class','label')

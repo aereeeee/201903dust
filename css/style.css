@@ -1,18 +1,20 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
 *{
     -webkit-tap-highlight-color:rgba(255,255,255,0);
     user-select: none;
     -webkit-touch-callout: none;
+    /* scroll-behavior: smooth; */
 }
-html{
-    scroll-behavior: smooth;
-}
-*,body,p { font-family: 'Spoqa Han Sans', 'Sans-serif';
+*,body,p { 
+    font-family: 'Spoqa Han Sans', 'Sans-serif';
     font-weight:300; 
     font-size:16px;
     line-height:170%;
     word-break: keep-all;
     }
+
+    /* 스크롤네비 */
         #navigation{
             position:fixed;
             right:20px;
@@ -27,26 +29,30 @@ html{
             background-color:#fff;
             margin:20px;
             -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
--moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
+            -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
+            box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         }
         #navigation a.current{
             background-color:#999;
         }
+
         body{
             overflow-x:hidden;
             background-color:#fff;
-            /* scroll-snap-type: y proximity; */
         }
         h2{
             margin:20px 20px;
         }
+
+        /* 인트로 */
         .intro{
             width:100%;
+            height:90vh;
             position: relative;
-        }
-        .intro img{
-            width:100%;
+            background-image: url('../banner.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size:cover;
         }
         .scrolldown{
             position: absolute;
@@ -59,48 +65,46 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         .scrolldown img{
             width:100%;
         }
-        .btn{
-            position: absolute;
-            top:5%;
-            right:20px;
-        }
-        .btn div{
-            /* width:30px; */
-            float:left;
-            margin:5px;
-            height:30px;
-            border:1px solid #000;
-            cursor: pointer;
-        }
-        .manual{
-            width:100%;
-            margin:0 auto;
-            background-color: #eee;
-            text-align: center;
-            padding:20px;
-        }
+
+
+        /* 인터랙티브섹션 */
         .articlefull{
             position: relative;
             height:100vh;
         }
-        .guide{
-            position:absolute;
-            width:100%;
-            height:85%;
-            bottom:5%;
-            background-color:#000;
-            color:#fff;
-            z-index:9999;
-            opacity:.5;
-            display:none;
-        }
+            .btn{
+                position: absolute;
+                top:5%;
+                right:20px;
+            }
+            .btn div{
+                /* width:30px; */
+                float:left;
+                margin:5px;
+                height:30px;
+                border:1px solid #000;
+                cursor: pointer;
+            }
+            .guide{
+                position:absolute;
+                width:100%;
+                height:85%;
+                bottom:5%;
+                background-color:#000;
+                color:#fff;
+                z-index:9999;
+                opacity:.5;
+                display:none;
+            }
+
+        /* 아티클섹션 */
         .article{
-            margin:50px 0;
+            padding:100px 0;
         }
         .content{
             width:900px;
             margin:0 auto;
-            padding:50px 0;
+            /* padding:50px 0; */
         }
         .content p{
             padding:0 50px;
@@ -110,6 +114,15 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
             font-weight:bold;
             margin-bottom:20px;
         }
+        /* 아티클1 인터렉티브 설명 */
+        .manual{
+            width:100%;
+            margin:0 auto;
+            background-color: #eee;
+            text-align: center;
+            padding:20px;
+        }
+        /* 지도,뉴스이미지 */
         .imgsection{
             width:100%;
             margin:30px 0;
@@ -117,7 +130,6 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         }
         .imgsection .cam{
             width:100%;
-            margin:0 auto;
             position: relative;
         }
         .cam .camnum{
@@ -130,12 +142,13 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         }
         .imgsection .map{
             width:100%;
-            margin:0 auto;
         }
         .imgsection img{
             width:100%;
         }
         .imagesection::after { content: ''; dispaly: table; clear: both }
+
+        /* 투엔티투엔티 */
         #diff{
             width:100%;
             margin-bottom:30px;
@@ -143,6 +156,8 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         #diff img{
             width:100%;
         }
+
+        /* 탑5이미지 */
         .imgsection2{
             width:100%;
             overflow:hidden;
@@ -152,8 +167,9 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         .top5{
             width:100%;
             overflow:hidden;
-            margin-bottom:5px;
+            margin-bottom:10px;
         }
+            /* 각각이미지 */
         .imgpart2{
             float:left;
             width:178px;
@@ -163,7 +179,6 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         }
         .imgpart2 img{
             height:100px;
-            /* width:100%; */
         }
         .order{
             position:absolute;
@@ -181,6 +196,9 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
             font-size:12px;
             line-height:14px;
         }
+
+
+        /* 캘린더섹션 */
         .imgcalendar{
             width:100%;
             margin:50px 0;
@@ -188,6 +206,8 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         .imgcalendar img{
             width:100%;
         }
+
+        /* 푸터 */
         footer{
             margin-top:50px;
         }
@@ -196,12 +216,12 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
             color:#999;
             font-weight: bold;
         }
+
+        /* 툴팁 */
         .tooltip {
             position: absolute;
             top: 100px;
             left:100px;
-            /* -moz-border-radius:5px;
-            border-radius: 5px; */
             border: 2px solid #000;
             background: #fff;
             opacity: .9;
@@ -218,208 +238,4 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
           .tooltip .value {
             font-weight:bold;
           }
-          .date{
-              position: relative;
-          }
-          .red{
-              position: absolute;
-              bottom:5px;
-              width:100%;
-              height:10px;
-              background-color:#f00;
-          }
-        @media screen and (max-width: 900px) {
-           
-            body{
-                overflow-x:hidden;
-                background-color:#fff;
-                scroll-snap-type:none;
-            }
-            .scrolldown{
-                display:none;
-            }
-            .articlefull{
-                width:100%;
-                position: relative;
-                /* margin-top:20px; */
-                height:auto;
-                scroll-snap-align:none;
-            }
-            .article{
-                scroll-snap-align:none;
-            }
-            .content{
-                width:90%;
-                margin:0 auto;
-                padding:30px 0;
-            }
-            .content p{
-                padding:0;
-            }
-            .title{
-                font-size:21px;
-                font-weight:bold;
-                margin-bottom:5px;
-            }
-            .imgsection{
-                margin:20px 0;
-            }
-            #diff{
-                margin-bottom:30px;
-            }
-            .imgsection2{
-                margin-bottom:30px;
-            }
 
-            .top5{
-                width:100%;
-                float:none;
-                overflow:hidden;
-                margin-bottom:5px;
-            }
-            .imgpart2{
-                float:none;
-                width:100%;
-                margin:20px 0;
-            }
-            .imgpart2 img{
-                width:100%;
-                height:auto;
-                /* width:100%; */
-            }
-            .imgcalendar{
-                width:100%;
-                margin:30px 0;
-            }
-            .imgcalendar img{
-                width:100%;
-            }
-        
-
-              /* .slider {
-                -webkit-appearance: none;
-                width: 100%;
-                height: 40px;
-                background-image: url('../colorbar.png');
-                background-size: cover;
-                background-repeat: no-repeat;
-                outline: none;
-                margin-bottom:20px;
-              }
-              
-              .slider:hover {
-                opacity: 1;
-              }
-              
-              .slider::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 3px;
-                height: 40px;
-                background: #f00;
-                cursor: pointer;
-              }
-              
-              .slider::-moz-range-thumb {
-                width: 3px;
-                height: 40px;
-                background: #f00;
-                cursor: pointer;
-              } */
-
-              input[type=range] {
-                -webkit-appearance: none;
-                width: 80%;
-                position: absolute;
-                left:10vw;
-                margin-top:30px;
-              }
-              
-              input[type=range]::-webkit-slider-thumb {
-                -webkit-appearance: none;
-              }
-              
-              input[type=range]:focus {
-                outline: none;
-              }
-              
-              input[type=range]::-ms-track {
-                width: 100%;
-                background: transparent;
-                border-color: transparent;
-                color: transparent;
-              }
-              /*#############Thumb##############*/
-              
-              input[type=range]::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                height: 50px;
-                width: 30px;
-                /* border-radius: 100%; */
-                border:1px solid #000;
-                background: #fff;
-                cursor: pointer;
-                margin-top:-4px;
-                -webkit-box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.25);
-                -moz-box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.25);
-                box-shadow: 10px 10px 16px -2px rgba(0,0,0,0.25);
-              }
-              
-              input[type=range]::-moz-range-thumb {
-                height: 46px;
-                width: 10px;
-                background: #555;
-                cursor: pointer;
-                margin-top:-3px;
-              }
-              
-              input[type=range]::-ms-thumb {
-                height: 46px;
-                width: 10px;
-                background: #555;
-                cursor: pointer;
-                margin-top:-3px;
-              }
-              /*#############Track##############*/
-              
-              input[type=range]::-webkit-slider-runnable-track {
-                width: 100%;
-                height: 40px;
-                background-image: url('../colorbar.png');
-                background-size: cover;
-                background-repeat: no-repeat;
-                outline: none;
-              }
-              
-              /* input[type=range]:active::-webkit-slider-runnable-track {
-                background: #d6d6d6;
-              } */
-              
-              input[type=range]::-moz-range-track {
-                width: 100%;
-                height: 40px;
-                background-image: url('../colorbar.png');
-                background-size: cover;
-                background-repeat: no-repeat;
-                outline: none;
-                margin-bottom:20px;
-              }
-              
-              input[type=range]::-ms-track {
-                width: 100%;
-                height: 40px;
-                background-image: url('../colorbar.png');
-                background-size: cover;
-                background-repeat: no-repeat;
-                outline: none;
-                margin-bottom:20px;
-              }
-
-
-              #fteamname{
-                  font-size:18px;
-              }
-              .credit{
-                  font-size:14px;
-              }
-        }
