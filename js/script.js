@@ -7,6 +7,7 @@ window.onload = function () {
         no_overlay: true,
     
       });
+
     // 스크롤내브
       function scrollToSection(event) {
         event.preventDefault();
@@ -37,10 +38,10 @@ window.onload = function () {
     );
     
     //스크롤내브 위치에서 커렌트
-    let mainNavLinks = document.querySelectorAll("#navigation a");
+    var mainNavLinks = document.querySelectorAll("#navigation a");
       
     window.addEventListener("scroll", function(event){
-        let fromTop = window.scrollY;
+        var fromTop = window.scrollY;
     
         if($(document).scrollTop()>$('#section1').offset().top-200){
             $('#navigation').css({opacity:'1'});
@@ -49,7 +50,7 @@ window.onload = function () {
         }
         for(i=0;i<mainNavLinks.length;i++){
                     var link=mainNavLinks[i];
-                    let section = document.querySelector(link.hash);            
+                    var section = document.querySelector(link.hash);            
                     if (
                       section.offsetTop-10 <= fromTop 
                       &&

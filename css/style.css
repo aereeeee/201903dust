@@ -35,10 +35,10 @@
             box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.41);
         }
         #navigation a.current{
-            background-color:#ff4713;
+            background-color:#c49f89;
         }
         #navigation a.hover{
-            background-color:#000;
+            background-color:#925153;
         }
         #navigation a .navindex{
             position: absolute;
@@ -46,7 +46,7 @@
             opacity:0;
             top:-10px;
             color:#fff;
-            background-color:#000; 
+            background-color:#925153; 
             padding:0 5px;
             border-radius:2px;
             display:none;         
@@ -149,7 +149,15 @@
         .article{
             padding:100px 0;
         }
+        .titlebar{
+            position: absolute;
+            top:-20px;
+            width:60px;
+            height:10px;
+            background-color: #b9a598;
+        }
         .content{
+            position: relative;
             width:900px;
             margin:0 auto;
             /* padding:50px 0; */
