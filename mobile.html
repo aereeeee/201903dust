@@ -43,7 +43,7 @@
       display: inline-block;
       scroll-snap-align: center;
       box-shadow:none;
-      opacity: .5;
+      opacity: .3;
       /* transition:all .5s; */
     }
     /* .flexitem.active{
@@ -91,8 +91,8 @@
         .outitem{
             position: absolute;
             right:0;
-            background-color:#888;
-            color:#fff;
+            background-color:#dee2e6;
+            color:#000;
         }
         .pm25{
             height:25%;
@@ -229,8 +229,7 @@
                         <img src="img/good.png">
                         <img src="img/bad.png">
                     </div>
-                    <!-- <p class="explain">*화면 중앙의 버튼을 마우스로 클릭하고 오른쪽으로 이동하면 2018년 7월 7일, 왼쪽으로 이동하면 2019년 3월 4일의 하늘을 볼 수 있습니다.
-                    </p> -->
+                    <div class="explain">&#8251; 화면 중앙의 버튼을 움직여보세요.</div>
                     <p>     
                         청명한 날과 미세먼지 가득한 날의 가시거리 차이는 상당합니다. 초미세먼지(PM 2.5) 농도가 높아지면 빛이 미세먼지에 의해 여러 방향으로 흩어지거나, 미세먼지에 흡수돼 가시거리가 감소합니다. 황산염, 질산염 등 초미세먼지 농도가 높은 상태에서 습도까지 높아지면 대기오염물질이 수분을 흡수해 가시거리는 더욱 짧아집니다. 물론 미세먼지 농도가 높을 때뿐 아니라 날씨가 흐리거나 안개 낀 날에도 가시거리는 짧아집니다. 
                         <br><br>
@@ -454,16 +453,16 @@ $(window).load(function() {
         if(plag==0){
             $('.itemcontainer').scroll(function(){
                 d3.selectAll('.flexitem')
-                .transition().duration(100)
+                .transition().duration(300).ease(d3.easeLinear)
                 .style('opacity',function(d,i){
                     var offset=$('#item'+i).offset();
                     if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){
                         slider.val(i);
                         return '1';
-                    }else{return '.5'}
+                    }else{return '.3'}
                 })
                 d3.selectAll('.pm25bar')
-                .transition().duration(100)
+                .transition().duration(300).ease(d3.easeLinear)
                 .style('background-color',function(d,i){
                     var offset=$('#item'+i).offset();
                     if(offset.left>-window.innerWidth/2 && offset.left<window.innerWidth/2){

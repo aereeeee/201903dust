@@ -19,7 +19,8 @@
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
     </script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
     <header id="headerbar">
@@ -104,6 +105,7 @@
             <img src="img/good.png">
             <img src="img/bad.png">
         </div>
+        <div class="explain">&#8251; 화면 중앙의 버튼을 움직여보세요.</div>
         <p>     
             청명한 날과 미세먼지 가득한 날의 가시거리 차이는 상당합니다. 초미세먼지(PM 2.5) 농도가 높아지면 빛이 미세먼지에 의해 여러 방향으로 흩어지거나, 미세먼지에 흡수돼 가시거리가 감소합니다. 황산염, 질산염 등 초미세먼지 농도가 높은 상태에서 습도까지 높아지면 대기오염물질이 수분을 흡수해 가시거리는 더욱 짧아집니다. 물론 미세먼지 농도가 높을 때뿐 아니라 날씨가 흐리거나 안개 낀 날에도 가시거리는 짧아집니다. 
             <br><br>
@@ -173,70 +175,5 @@
 <script src="d3v4.js"></script>
 <script src="js/tooltip.js"></script>
 <script src="js/script.js"></script>
-<script>
-$(document).ready(function(){
-
-    $("#diff").twentytwenty({
-    default_offset_pct: 0.2, 
-    before_label: 'January 2017',
-    after_label: 'March 2017',
-    no_overlay: true,
-
-  });
-
-  function scrollToSection(event) {
-    event.preventDefault();
-    var $section = $($(this).attr('href')); 
-    $('html, body').animate({
-      scrollTop: $section.offset().top
-    }, 400);
-  }
-
-  $('[data-scroll]').on('click', scrollToSection);
-
-  $('#navigation a').hover(
-  function() {
-        $( this ).addClass( "hover" );
-        $(this).children().css( "display", "block" )
-        .animate({
-            right:'30px',
-            opacity: 1,
-        }, 100, );
-  }, function() {
-        $( this ).removeClass( "hover" );
-        $(this).children().css( "display", "none" )
-        .animate({
-            right:'0px',
-            opacity: 0,
-        }, 100 );
-  }
-);
-
-let mainNavLinks = document.querySelectorAll("#navigation a");
-  
-window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    if($(document).scrollTop()>$('#section1').offset().top-200){
-        $('#navigation').css({opacity:'1'});
-    }else{
-        $('#navigation').css({opacity:'0'});
-    }
-  mainNavLinks.forEach(link => {
-    let section = document.querySelector(link.hash);
-
-    if (
-      section.offsetTop-10 <= fromTop 
-      &&
-      section.offsetTop + section.offsetHeight-9 > fromTop
-    ) {
-      link.classList.add("current");
-    } else {
-      link.classList.remove("current");
-    }
-  });
-});
-});
-</script>
 </body>
 </html>

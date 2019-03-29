@@ -12,6 +12,9 @@
             .article{
                 padding:50px 0;
             }
+            #section3{
+              padding-top:70px; 
+            }
             .content{
                 width:90%;
                 margin:0 auto;
@@ -72,15 +75,15 @@
             }
             .drag{
               width:100%;
-              font-size:12px;
+              font-size:14px;
               color:#888;
               text-align:center;
               position:absolute;
-              bottom:0;
-              line-height:16px;
+              bottom:-20px;
+              line-height:18px;
             }
             .drag br{
-              line-height:16px;
+              line-height:18px;
             }
               input[type=range] {
                 -webkit-appearance: none;

@@ -1,4 +1,4 @@
-$(document).ready(function(){
+window.onload = function () {
 
 
     d3.selection.prototype.moveToFront = function() {
@@ -6,19 +6,6 @@ $(document).ready(function(){
           this.parentNode.appendChild(this);
         });
       };
-    d3.select('.reset').on('click',function(){
-        container.call(zoom.transform, d3.zoomIdentity
-        .scale(1)
-        .translate(0, 0));
-    });
-    d3.select('.help').on('mouseover',function(){
-        d3.select('.guide').style('display','block')
-        .transition()
-        .duration(300)
-        .style('opacity','1')
-    }).on('mouseout',function(){
-        d3.select('.guide').style('opacity','0').style('display','none')
-    });
     
     var tooltipfix = floatingTooltip('tooltip-fix', 240);
     var margin = {top: 0, right: 40, bottom: 0, left: 20},
@@ -26,7 +13,7 @@ $(document).ready(function(){
     height = window.innerHeight,
     corewidth=width-margin.left-margin.right;
     
-    const imagewidth=height*0.55;
+    const imagewidth=height*0.58;
     const monthdata=[3,4,5,6,7,8,9,10,11,12,1,2];
     const parseDate = d3.timeParse("%Y-%m-%d");
 
@@ -57,8 +44,25 @@ $(document).ready(function(){
             .extent(extent)
             .on("brush end", brushed);
 
+    var ts = d3.transition()
+            .duration(350)
+            .ease(d3.easeLinear);
 
     const container=d3.select('.container').call(zoom);
+
+    d3.select('.reset').on('click',function(){
+        container.call(zoom.transform, d3.zoomIdentity
+        .scale(1)
+        .translate(0, 0));
+    });
+    d3.select('.help').on('mouseover',function(){
+        d3.select('.guide').style('display','block')
+        .transition(ts)
+        .style('opacity','1')
+    }).on('mouseout',function(){
+        d3.select('.guide').style('opacity','0').style('display','none')
+    });
+    
 
     d3.csv("data.csv", type, function(error, data) {
       if (error) throw error;
@@ -93,7 +97,7 @@ $(document).ready(function(){
                             '㎍/㎥</span></div>';
                 if(x.bandwidth()<80){
                 d3.select(this).select('.pm25').style('background-color',"#f1f3f5");
-                d3.select(this).select('.pm25bar').style('background-color',"#000");
+                d3.select(this).select('.pm25bar').style('background-color',"#212529");
                  tooltipfix.showTooltip(content, d3.event);
                 }
             })
@@ -114,17 +118,17 @@ $(document).ready(function(){
             
                 // 변형
                 if(d.pm25<16){
-                    item.select('.date').transition().duration(300).style('opacity','1');
-                    item.select('.pm25bar').transition().duration(300).style('background-color','#99e6d8');
+                    item.select('.date').transition(ts).style('opacity','1');
+                    item.select('.pm25bar').transition(ts).style('background-color','#99e6d8');
                 }else if(d.pm25>=16 && d.pm25<36){
-                    item.select('.date').transition().duration(300).style('opacity','1');
-                    item.select('.pm25bar').transition().duration(300).style('background-color','#f3efa1');
+                    item.select('.date').transition(ts).style('opacity','1');
+                    item.select('.pm25bar').transition(ts).style('background-color','#f3efa1');
                 }else if(d.pm25>=36 && d.pm25<76){
-                    item.select('.date').transition().duration(300).style('opacity','1');
-                    item.select('.pm25bar').transition().duration(300).style('background-color','#ff9d6c');
+                    item.select('.date').transition(ts).style('opacity','1');
+                    item.select('.pm25bar').transition(ts).style('background-color','#ff9d6c');
                 }else{
-                    item.select('.date').transition().duration(300).style('opacity','1');
-                    item.select('.pm25bar').transition().duration(300).style('background-color','#ff4713');
+                    item.select('.date').transition(ts).style('opacity','1');
+                    item.select('.pm25bar').transition(ts).style('background-color','#ff4713');
                 }
                 if(x.bandwidth()<80){             
                     item.transition().delay(300).attr('id','active');}
@@ -165,7 +169,7 @@ $(document).ready(function(){
 
         const flexitem=d3.selectAll('.flexitem');
 
-// 이모지    -연도를 어케해결하지
+
         flexitem.append('div')
             .attr('class','date')
             .html(function(d,i){                         
@@ -178,21 +182,17 @@ $(document).ready(function(){
                 }else{
                     return "<span class='status'>&#x1F631; 매우 나쁨</span>"
                 }
-                // if(i==0)
-                // return '2018';
-                // else if(i==296)
-                // return '2019';
             });
 
 // 사진       - 스프라이트로 백그라운드유알엘 써야할지도 
-        const picture=flexitem.append('div')
-            .attr('class',function(d){
-                return 'picture';
-            })           
-            picture.append('img')
-                .attr('src',function(d,i){
-                return 'image/img'+(i+1)+'.png';
-                })
+        var picture=flexitem.append('div')
+            .attr('class','picture');
+
+            picture.append('div')
+            .style('background',function(d){
+                return "url('css_sprites.jpg') -"+d.x+"px -"+d.y+"px";
+            });
+
 // 팔레트  - 빗금이미지 다시
         flexitem.append('div')
             .attr('class','Palette')
@@ -315,9 +315,6 @@ function brushed() {
         if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return;
         x.range([0, width - margin.right-margin.left].map(d => d3.event.transform.applyX(d)));
         var t = d3.event.transform;
-        // console.log(t)
-        // console.log(x.range())
-        // console.log(x2.range())
         container.selectAll(".flexitem")
         .style('transform', function(d){
         return 'translateX('+x(d.date)+'px)'
@@ -337,9 +334,6 @@ function brushed() {
             });
             d3.selectAll('.pmlabel').style('opacity','1');
             d3.selectAll('.outitem').style('display','none');
-            // d3.selectAll('.pm25bar').html(function(d,i){
-            // return '<span>'+d.pm25+'</span>';
-            // });
         }else{
             d3.selectAll('.baraxis').html(function(d,i){
             if(i%30==1){
@@ -363,4 +357,68 @@ function brushed() {
         return d;
     }
 
- });   
+
+    // 투엔티투엔티
+    $("#diff").twentytwenty({
+        default_offset_pct: 0.2, 
+        before_label: 'January 2017',
+        after_label: 'March 2017',
+        no_overlay: true,
+    
+      });
+    // 스크롤내브
+      function scrollToSection(event) {
+        event.preventDefault();
+        var $section = $($(this).attr('href')); 
+        $('html, body').animate({
+          scrollTop: $section.offset().top
+        }, 400,'easeInCubic');
+      }
+      $('[data-scroll]').on('click', scrollToSection);
+    
+    //   스크롤내브호버
+      $('#navigation a').hover(
+      function() {
+            $( this ).addClass( "hover" );
+            $(this).children().css( "display", "block" )
+            .animate({
+                right:'30px',
+                opacity: 1,
+            }, 100,'easeInCubic' );
+      }, function() {
+            $( this ).removeClass( "hover" );
+            $(this).children().css( "display", "none" )
+            .animate({
+                right:'0px',
+                opacity: 0,
+            }, 100 );
+      }
+    );
+    
+    //스크롤내브 위치에서 커렌트
+    let mainNavLinks = document.querySelectorAll("#navigation a");
+      
+    window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+    
+        if($(document).scrollTop()>$('#section1').offset().top-200){
+            $('#navigation').css({opacity:'1'});
+        }else{
+            $('#navigation').css({opacity:'0'});
+        }
+      mainNavLinks.forEach(link => {
+        let section = document.querySelector(link.hash);
+    
+        if (
+          section.offsetTop-10 <= fromTop 
+          &&
+          section.offsetTop + section.offsetHeight-9 > fromTop
+        ) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");
+        }
+      });
+    });
+
+ };   
