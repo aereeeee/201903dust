@@ -1,5 +1,67 @@
 window.onload = function () {
+    // 투엔티투엔티
+    $("#diff").twentytwenty({
+        default_offset_pct: 0.2, 
+        before_label: 'January 2017',
+        after_label: 'March 2017',
+        no_overlay: true,
+    
+      });
+    // 스크롤내브
+      function scrollToSection(event) {
+        event.preventDefault();
+        var $section = $($(this).attr('href')); 
+        $('html, body').animate({
+          scrollTop: $section.offset().top
+        }, 400,'easeInCubic');
+      }
+      $('[data-scroll]').on('click', scrollToSection);
+    
+    //   스크롤내브호버
+      $('#navigation a').hover(
+      function() {
+            $( this ).addClass( "hover" );
+            $(this).children().css( "display", "block" )
+            .animate({
+                right:'30px',
+                opacity: 1,
+            }, 100,'easeInCubic' );
+      }, function() {
+            $( this ).removeClass( "hover" );
+            $(this).children().css( "display", "none" )
+            .animate({
+                right:'0px',
+                opacity: 0,
+            }, 100 );
+      }
+    );
+    
+    //스크롤내브 위치에서 커렌트
+    let mainNavLinks = document.querySelectorAll("#navigation a");
+      
+    window.addEventListener("scroll", function(event){
+        let fromTop = window.scrollY;
+    
+        if($(document).scrollTop()>$('#section1').offset().top-200){
+            $('#navigation').css({opacity:'1'});
+        }else{
+            $('#navigation').css({opacity:'0'});
+        }
+        for(i=0;i<mainNavLinks.length;i++){
+                    var link=mainNavLinks[i];
+                    let section = document.querySelector(link.hash);            
+                    if (
+                      section.offsetTop-10 <= fromTop 
+                      &&
+                      section.offsetTop + section.offsetHeight-9 > fromTop
+                    ) {
+                      link.classList.add("current");
+                    } else {
+                      link.classList.remove("current");
+                    }
 
+        };
+    });
 
     d3.selection.prototype.moveToFront = function() {
         return this.each(function(){
@@ -184,7 +246,6 @@ window.onload = function () {
                 }
             });
 
-// 사진       - 스프라이트로 백그라운드유알엘 써야할지도 
         var picture=flexitem.append('div')
             .attr('class','picture');
             picture.append('img')
@@ -196,7 +257,7 @@ window.onload = function () {
             //     return "url('css_sprites.jpg') -"+d.x+"px -"+d.y+"px";
             // });
 
-// 팔레트  - 빗금이미지 다시
+
         flexitem.append('div')
             .attr('class','Palette')
             .attr('id',function(d,i){
@@ -310,13 +371,17 @@ function brushed() {
         }
 
         container.call(zoom.transform, d3.zoomIdentity
-        .scale((width-margin.left-margin.right) / (s[1] - s[0]))
+        .scale(corewidth / (s[1] - s[0]))
         .translate(-s[0], 0));
 
 }
     function zoomed() {
         if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return;
-        x.range([0, width - margin.right-margin.left].map(d => d3.event.transform.applyX(d)));
+        x.range([0, corewidth].map(
+            function(d){
+                return d3.event.transform.applyX(d);
+            }
+        ));
         var t = d3.event.transform;
         container.selectAll(".flexitem")
         .style('transform', function(d){
@@ -359,69 +424,5 @@ function brushed() {
         d.pm25 = +d.pm25;
         return d;
     }
-
-
-    // 투엔티투엔티
-    $("#diff").twentytwenty({
-        default_offset_pct: 0.2, 
-        before_label: 'January 2017',
-        after_label: 'March 2017',
-        no_overlay: true,
-    
-      });
-    // 스크롤내브
-      function scrollToSection(event) {
-        event.preventDefault();
-        var $section = $($(this).attr('href')); 
-        $('html, body').animate({
-          scrollTop: $section.offset().top
-        }, 400,'easeInCubic');
-      }
-      $('[data-scroll]').on('click', scrollToSection);
-    
-    //   스크롤내브호버
-      $('#navigation a').hover(
-      function() {
-            $( this ).addClass( "hover" );
-            $(this).children().css( "display", "block" )
-            .animate({
-                right:'30px',
-                opacity: 1,
-            }, 100,'easeInCubic' );
-      }, function() {
-            $( this ).removeClass( "hover" );
-            $(this).children().css( "display", "none" )
-            .animate({
-                right:'0px',
-                opacity: 0,
-            }, 100 );
-      }
-    );
-    
-    //스크롤내브 위치에서 커렌트
-    let mainNavLinks = document.querySelectorAll("#navigation a");
-      
-    window.addEventListener("scroll", event => {
-        let fromTop = window.scrollY;
-    
-        if($(document).scrollTop()>$('#section1').offset().top-200){
-            $('#navigation').css({opacity:'1'});
-        }else{
-            $('#navigation').css({opacity:'0'});
-        }
-      mainNavLinks.forEach(link => {
-        let section = document.querySelector(link.hash);
-    
-        if (
-          section.offsetTop-10 <= fromTop 
-          &&
-          section.offsetTop + section.offsetHeight-9 > fromTop
-        ) {
-          link.classList.add("current");
-        } else {
-          link.classList.remove("current");
-        }
-      });
-    });
 
  };   
