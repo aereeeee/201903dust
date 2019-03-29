@@ -26,21 +26,3 @@ $('#facebook').on("click", function() {
 $('#twitter').on("click", function() {
     sharetwit('http://mabu.newscloud.sbs.co.kr/201903dust', 'SBS마부작침: ');
 });
-
-
-// PROGRESS BAR
-// $(document).ready(function(){
-
-//     var windowWidth = $(window).width();
-
-//     $(window).scroll(function() {
-
-//         var winScroll = $(window).scrollTop();
-//         var docheight = $(document).height();
-//         var winheight = $(window).height();
-
-//         var totalScroll = (winScroll/(docheight - winheight)) * 100;
-//         $("#bar").css("width", totalScroll + "%");
-
-//     });
-// });
