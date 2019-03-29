@@ -62,6 +62,8 @@
             width:100%;
             height:15%;
             position:relative;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         .outitem{
             position: absolute;

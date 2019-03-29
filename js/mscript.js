@@ -69,7 +69,7 @@ $(window).load(function() {
             })
             .style('background-color',function(d,i){
                if(d.R==''){
-                    d3.select(this).style('background-image','url("line.png")')
+                    d3.select(this).style('background-image','url("img/line.png")')
                     .html(function(){
                         if(i==27||i==28||i==43||i==52||i==62||i==66||i==107){
                             return '<span class="outitem">&#8251; 하늘 미촬영<span>'; 
