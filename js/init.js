@@ -1,13 +1,3 @@
-// ANIMATION ON SCROLL
-// $(function() {
-//     AOS.init();
-// });
-
-// $(window).on('load', function() {
-//     AOS.refresh();
-// });
-
-
 // GOOGLE ANALYTICS
 $(document).ready(function() {
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -30,27 +20,27 @@ function sharetwit(url, text) {
 };
 
 $('#facebook').on("click", function() {
-    sharefb('http://mabu.newscloud.sbs.co.kr/201902budget');
+    sharefb('http://mabu.newscloud.sbs.co.kr/201903dust');
 });
 
 $('#twitter').on("click", function() {
-    sharetwit('http://mabu.newscloud.sbs.co.kr/201902budget', 'SBS마부작침: ');
+    sharetwit('http://mabu.newscloud.sbs.co.kr/201903dust', 'SBS마부작침: ');
 });
 
 
 // PROGRESS BAR
-$(document).ready(function(){
+// $(document).ready(function(){
 
-    var windowWidth = $(window).width();
+//     var windowWidth = $(window).width();
 
-    $(window).scroll(function() {
+//     $(window).scroll(function() {
 
-        var winScroll = $(window).scrollTop();
-        var docheight = $(document).height();
-        var winheight = $(window).height();
+//         var winScroll = $(window).scrollTop();
+//         var docheight = $(document).height();
+//         var winheight = $(window).height();
 
-        var totalScroll = (winScroll/(docheight - winheight)) * 100;
-        $("#bar").css("width", totalScroll + "%");
+//         var totalScroll = (winScroll/(docheight - winheight)) * 100;
+//         $("#bar").css("width", totalScroll + "%");
 
-    });
-});
+//     });
+// });
