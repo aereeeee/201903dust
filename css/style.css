@@ -24,8 +24,9 @@
         }
         #navigation a{
             display:block;
-            width:10px;
-            height:10px;
+            position: relative;
+            width:12px;
+            height:12px;
             border-radius: 100px;
             background-color:#fff;
             margin:20px;
@@ -36,7 +37,20 @@
         #navigation a.current{
             background-color:#ff4713;
         }
-
+        #navigation a.hover{
+            background-color:#000;
+        }
+        #navigation a .navindex{
+            position: absolute;
+            right:0px;
+            opacity:0;
+            top:-10px;
+            color:#fff;
+            background-color:#000; 
+            padding:0 5px;
+            border-radius:2px;
+            display:none;         
+        }
         body{
             overflow-x:hidden;
             background-color:#fff;
@@ -75,9 +89,10 @@
             height:100vh;
         }
             .btn{
+                width:100%;
                 position: absolute;
                 top:5%;
-                right:20px;
+                padding:20px;
             }
             .btn div{
                 /* width:30px; */
@@ -86,14 +101,25 @@
                 padding:0 5px;
                 border-radius:2px;
                 height:20px;
-                background-color:#212529;
                 font-size:14px;
                 line-height:20px;
+            }
+            .btnbtn{
+                position: absolute;
+                right:20px;
+            }
+            .btn .func{
+                background-color:#212529;
                 color:#fff;
                 cursor: pointer;
             }
-            .btn div:hover{
+            .btn .func:hover{
                 background-color:#495057;
+            }
+            .btn .click{
+                background-color:#fff;
+                color:#ff4713;
+                cursor: default;
             }
             .guide{
                 position:absolute;
@@ -104,13 +130,14 @@
                 z-index:999;
                 display:none;
                 text-align: center;
+                opacity: 0;
             }
             .guideback{
                 position:absolute;
                 width:100%;
                 height:100%;
                 background-color:#212529;
-                opacity:.5;
+                opacity:.7;
             }
             .guide img{
                 position:absolute;
@@ -136,10 +163,14 @@
             font-weight:bold;
             margin-bottom:20px;
         }
+        .outday{
+            font-size:14px;
+            color:#888;
+        }
         /* 아티클1 인터렉티브 설명 */
         .manual{
             width:100%;
-            margin:0 auto;
+            margin-top:70px;
             background-color: #eee;
             text-align: center;
             padding:20px;
@@ -252,10 +283,10 @@
             z-index: 1000;
           }
           .tooltip div{
-            line-height:12px !important;
+            line-height:14px !important;
           }
           .tooltip span{
-            font-size:12px !important;
+            font-size:14px !important;
           }
           .tooltip .value {
             font-weight:bold;

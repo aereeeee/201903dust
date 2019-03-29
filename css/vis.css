@@ -17,7 +17,7 @@
         }
         .brushsec{
             position:absolute;
-            bottom:0;
+            bottom:-20px;
             height:5%;
             width:100%;
         }
@@ -56,21 +56,24 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
             height:99%;
         }
         .Palette{
-            /* position:absolute;
-            bottom:0; */
             width:100%;
             height:20%;
             z-index:3;
+            position:relative;
             /* margin-top:3px; */
             /* background-color:#dee2e6; */
             /* background-repeat: no-repeat; 
             background-size: initial; */
         }
-        /* .Palette div{
-            width:100%;
-            height:100%
-         height:20%;
-        } */
+        .outitem{
+            position: absolute;
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%);
+            background-color:#888;
+            color:#fff;
+            display:none;
+        }
         .pm25{
             height:25%;
             width:100%;
@@ -95,12 +98,13 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
         }
         .baraxis{
             height:5%;
+            font-size:21px;
         }
         .label{
             position:absolute;
             background-color:#212529;
             color:#fff;
-            font-size:.7em;
+            font-size:14px;
         }
         .axis{
             height:25%;
@@ -119,10 +123,10 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
         .axisline span{
             display:block;
             position:absolute;
-            top:-18px;
+            top:-23px;
             left:20px;
             background-color:#ff4713;
             color:white;
             z-index:99;
-            font-size: .7em;
+            font-size: 14px;
         }

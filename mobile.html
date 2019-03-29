@@ -82,10 +82,17 @@
         .Palette{
             width:100%;
             height:15%;
+            position:relative;
         }
-        .Palette div{
+        /* .Palette div{
             width:100%;
             height:100%
+        } */
+        .outitem{
+            position: absolute;
+            right:0;
+            background-color:#888;
+            color:#fff;
         }
         .pm25{
             height:25%;
@@ -124,7 +131,7 @@
             left:10vw;
             background-color:#000;
             color:#fff;
-            font-size:.7em;
+            font-size:12px;
         }
         .axis{
             height:25%;
@@ -142,11 +149,11 @@
         .axisline span{
             display:block;
             position:absolute;
-            top:-18px;
+            top:-20px;
             left:10vw;
             background-color:#ff4713;
             color:white;
-            font-size: .7em;
+            font-size: 12px;
         }
 
         h2{
@@ -165,15 +172,14 @@
                 <div id="bar"></div>
             </div>
             <div class="intro">
-                    <!-- <img src="banner.png" alt=""> -->
                     <a data-scroll class="scrolldown" href="#section1">
-                        <img src="down.gif" alt="">
+                        <img src="img/down.gif" alt="">
                     </a>    
                 </div>
                 <div class="article" id="section1">
                     <div class="content">
                             <p>
-                                2019년 3월 5일. 최악의 초미세먼지(PM 2.5)가 한반도를 덮쳤습니다. 이날 서울의 하루 평균 초미세먼지 농도는 137㎍/㎥, 2015년 초미세먼지 농도를 공식 관측한 이후 역대 최고치를 5기록했습니다. 수도권에 3월 1일부터 7일 연속 고농도 초미세먼지 비상저감조치가 시행된 것도 사상 최초입니다.
+                                2019년 3월 5일. 최악의 초미세먼지(PM 2.5)가 한반도를 덮쳤습니다. 이날 서울의 하루 평균 초미세먼지 농도는 137㎍/㎥, 2015년 초미세먼지 농도를 공식 관측한 이후 역대 최고치를 기록했습니다. 수도권에 3월 1일부터 7일 연속 고농도 초미세먼지 비상저감조치가 시행된 것도 사상 최초입니다.
                                 <br><br>
                                 SBS 데이터저널리즘팀 <마부작침>은 최근 1년간(2018.3.11~2019.3.10) 대한민국 서울의 하늘 영상을 모았습니다. 영상의 출처는 SBS 12시 뉴스로, 남북정상회담 등 대형이벤트로 뉴스가 결방된 날을 제외하면 영상은 351개입니다. 이를 서울의 일평균 초미세먼지 농도와 함께 비교해서 볼 수 있게 시각화했습니다.
                                 <br>
@@ -181,9 +187,9 @@
                                 <br><br>
                                 <마부작침>은 또 각 영상의 대표 색을 추출해 그날의 하늘을 색상 하나로 표현했습니다.  
                                 <br><br>
-                                하늘 영상이 빠진 14일(빗금 표시)<br>
-                                2018년 4월 27일, 5월 4일, 5월 27일, 6월 11일, 6월 12일, 8월 23일, 8월 24일, 9월 17일, 9월 18일, 9월 19일, 9월 20일, 10월 6일
-                                2019년 2월 27일, 2월 28일
+                                &#8251; 하늘 영상이 빠진 14일(빗금 표시)<br>
+                                <span class='outday'>2018년 4월 27일, 5월 4일, 5월 27일, 6월 11일, 6월 12일, 8월 23일, 8월 24일, 9월 17일, 9월 18일, 9월 19일, 9월 20일, 10월 6일, 
+                                2019년 2월 27일, 2월 28일</span>
                             </p>
                             <div class=manual>
                             *그래픽 감상법<br>
@@ -202,8 +208,8 @@
                         매일 정오 방송하는 SBS 12시 뉴스는, 뉴스 말미에 SBS 옥상에 설치된 카메라를 통해 서울 하늘을 실시간으로 보여줍니다. 카메라가 동쪽을 비추면 목동운동장과 국회의사당, 남산서울타워 등이 볼 수 있고, 북쪽을 비추면 성산대교를 내다볼 수 있습니다.  
                     </p>
                     <div class="imgsection">
-                        <div class="map"><img src="map.png" alt=""></div>
-                        <div class="cam"><img src="news.gif" alt="" srcset=""><div class="camnum">12시 뉴스 영상</div></div>
+                        <div class="map"><img src="img/map.png" alt=""></div>
+                        <div class="cam"><img src="img/news.gif" alt="" srcset=""><div class="camnum">12시 뉴스 영상</div></div>
                         <!-- <div class="cam"><img src="img/east.png" alt="" srcset=""><div class="camnum">카메라②</div></div> -->
                     </div>
                     <p>
@@ -216,8 +222,8 @@
                     <div class="title">남산타워가 사라진 날... 초미세먼지와 가시거리
                         </div>
                     <div id="diff">
-                        <img src="good.png">
-                        <img src="bad.png">
+                        <img src="img/good.png">
+                        <img src="img/bad.png">
                     </div>
                     <!-- <p class="explain">*화면 중앙의 버튼을 마우스로 클릭하고 오른쪽으로 이동하면 2018년 7월 7일, 왼쪽으로 이동하면 2019년 3월 4일의 하늘을 볼 수 있습니다.
                     </p> -->
@@ -365,9 +371,15 @@ $(window).load(function() {
             .attr('id',function(d,i){
                 return 'palette'+i;
             })
-            .style('background-color',function(d){
-                if(d.R==''){
-                    d3.select(this).style('background-image','url("line.png")');
+            .style('background-color',function(d,i){
+               if(d.R==''){
+                    d3.select(this).style('background-image','url("line.png")')
+                    .html(function(){
+                        if(i==27||i==28||i==43||i==52||i==62||i==66||i==107){
+                            return '<span class="outitem">&#8251; 하늘 미촬영<span>'; 
+                        }else{
+                            return '<span class="outitem">&#8251; 뉴스 결방<span>';}  
+                    });
                 }else{
                 return 'rgb('+d.R+','+d.G+','+d.B+')';
                 }

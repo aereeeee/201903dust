@@ -6,7 +6,19 @@ $(document).ready(function(){
           this.parentNode.appendChild(this);
         });
       };
-
+    d3.select('.reset').on('click',function(){
+        container.call(zoom.transform, d3.zoomIdentity
+        .scale(1)
+        .translate(0, 0));
+    });
+    d3.select('.help').on('mouseover',function(){
+        d3.select('.guide').style('display','block')
+        .transition()
+        .duration(300)
+        .style('opacity','1')
+    }).on('mouseout',function(){
+        d3.select('.guide').style('opacity','0').style('display','none')
+    });
     
     var tooltipfix = floatingTooltip('tooltip-fix', 240);
     var margin = {top: 0, right: 40, bottom: 0, left: 20},
@@ -46,7 +58,7 @@ $(document).ready(function(){
             .on("brush end", brushed);
 
 
-    const container=d3.select('.container');
+    const container=d3.select('.container').call(zoom);
 
     d3.csv("data.csv", type, function(error, data) {
       if (error) throw error;
@@ -79,7 +91,7 @@ $(document).ready(function(){
                             '<div><span class="name">초미세먼지 농도: </span><span class="value">' +
                             d.pm25+
                             '㎍/㎥</span></div>';
-                if(x.bandwidth()<60){
+                if(x.bandwidth()<80){
                 d3.select(this).select('.pm25').style('background-color',"#f1f3f5");
                 d3.select(this).select('.pm25bar').style('background-color',"#000");
                  tooltipfix.showTooltip(content, d3.event);
@@ -88,13 +100,13 @@ $(document).ready(function(){
             .on('mouseout', function(d){
                 d3.select(this).select('.pm25').style('background-color',"transparent");
                 tooltipfix.hideTooltip();
-                if(x.bandwidth()<60){
+                if(x.bandwidth()<80){
                     d3.select(this).select('.pm25bar').style('background-color',"#888");
                  }
             })
             .on('click',function(d,i){
                 var item=d3.select(this);
-                // 초기화
+
                 item.moveToFront();
                 d3.selectAll('.flexitem').attr('id',null);
                 d3.selectAll('.pm25bar').style('background-color','#888')
@@ -102,23 +114,22 @@ $(document).ready(function(){
             
                 // 변형
                 if(d.pm25<16){
-                    item.select('.date').transition().duration(500).style('opacity','1');
-                    item.select('.pm25bar').transition().duration(500).style('background-color','#99e6d8');
+                    item.select('.date').transition().duration(300).style('opacity','1');
+                    item.select('.pm25bar').transition().duration(300).style('background-color','#99e6d8');
                 }else if(d.pm25>=16 && d.pm25<36){
-                    item.select('.date').transition().duration(500).style('opacity','1');
-                    item.select('.pm25bar').transition().duration(500).style('background-color','#f3efa1');
+                    item.select('.date').transition().duration(300).style('opacity','1');
+                    item.select('.pm25bar').transition().duration(300).style('background-color','#f3efa1');
                 }else if(d.pm25>=36 && d.pm25<76){
-                    item.select('.date').transition().duration(500).style('opacity','1');
-                    item.select('.pm25bar').transition().duration(500).style('background-color','#ff9d6c');
+                    item.select('.date').transition().duration(300).style('opacity','1');
+                    item.select('.pm25bar').transition().duration(300).style('background-color','#ff9d6c');
                 }else{
-                    item.select('.date').transition().duration(500).style('opacity','1');
-                    item.select('.pm25bar').transition().duration(500).style('background-color','#ff4713');
+                    item.select('.date').transition().duration(300).style('opacity','1');
+                    item.select('.pm25bar').transition().duration(300).style('background-color','#ff4713');
                 }
-
-                if(x.bandwidth()<60){             
-                    item.transition().delay(800).attr('id','active');}
+                if(x.bandwidth()<80){             
+                    item.transition().delay(300).attr('id','active');}
                 else{
-                    item.transition().delay(100).attr('id','active');
+                    item.transition().attr('id','active');
                 }
             });
         
@@ -188,9 +199,15 @@ $(document).ready(function(){
             .attr('id',function(d,i){
                 return 'palette'+i;
             })
-            .style('background-color',function(d){
+            .style('background-color',function(d,i){
                 if(d.R==''){
-                    d3.select(this).style('background-image','url("line.png")');
+                    d3.select(this).style('background-image','url("line.png")')
+                    .html(function(){
+                        if(i==27||i==28||i==43||i==52||i==62||i==66||i==107){
+                            return '<span class="outitem">&#8251; 하늘 미촬영<span>'; 
+                        }else{
+                            return '<span class="outitem">&#8251; 뉴스 결방<span>';}  
+                    });
                 }else{
                 return 'rgb('+d.R+','+d.G+','+d.B+')';
                 }
@@ -212,7 +229,7 @@ $(document).ready(function(){
                 .html(function(d,i){
                 return '<span class="pmlabel">'+d.pm25+'</span>';
                 });
-// 날짜  - 날짜 볼드하게
+
         flexitem.append('div')
             .attr('class','baraxis')
             .html(function(d,i){
@@ -232,8 +249,6 @@ $(document).ready(function(){
             .attr('class','label')
             .style('top','65%')
             .html('PM2.5 초미세먼지 농도');
-
-            container.call(zoom);
     
     });
 
@@ -264,20 +279,19 @@ function brushed() {
         .style("width", (x.bandwidth())+'px');
 
 
-        if(x.bandwidth()>100){
+        if(x.bandwidth()>120){
             d3.selectAll('.baraxis').html(function(d,i){
             return yearformat(parseDate(d.date));
             });
             d3.selectAll('.pmlabel').style('opacity','1');
+            d3.selectAll('.outitem').style('display','block');
         }
-        else if(x.bandwidth()>60 && x.bandwidth()<=100 ){
+        else if(x.bandwidth()>80 && x.bandwidth()<=120 ){
             d3.selectAll('.baraxis').html(function(d,i){
             return dayformat(parseDate(d.date));
             });
             d3.selectAll('.pmlabel').style('opacity','1');
-            // d3.selectAll('.pm25bar').html(function(d,i){
-            // return '<span>'+d.pm25+'</span>';
-            // });
+            d3.selectAll('.outitem').style('display','none');
         }else{
             d3.selectAll('.baraxis').html(function(d,i){
             if(i%30==1){
@@ -288,6 +302,7 @@ function brushed() {
             d3.selectAll('.pm25bar').style('background-color','#888')
             d3.selectAll('.date').style('opacity','0');
             d3.selectAll('.pmlabel').style('opacity','0');
+            d3.selectAll('.outitem').style('display','none');
             d3.selectAll('.flexitem').attr('id',null);
         }
 
@@ -309,17 +324,19 @@ function brushed() {
         })
         .style("width", (x.bandwidth())+'px');
 
-        if(x.bandwidth()>100){
+        if(x.bandwidth()>120){
             d3.selectAll('.baraxis').html(function(d,i){
             return yearformat(parseDate(d.date));
             });
             d3.selectAll('.pmlabel').style('opacity','1');
+            d3.selectAll('.outitem').style('display','block');
         }
-        else if(x.bandwidth()>60 && x.bandwidth()<=100 ){
+        else if(x.bandwidth()>80 && x.bandwidth()<=120 ){
             d3.selectAll('.baraxis').html(function(d,i){
             return dayformat(parseDate(d.date));
             });
             d3.selectAll('.pmlabel').style('opacity','1');
+            d3.selectAll('.outitem').style('display','none');
             // d3.selectAll('.pm25bar').html(function(d,i){
             // return '<span>'+d.pm25+'</span>';
             // });
@@ -333,6 +350,7 @@ function brushed() {
             d3.selectAll('.pm25bar').style('background-color','#888')
             d3.selectAll('.date').style('opacity','0');
             d3.selectAll('.pmlabel').style('opacity','0');
+            d3.selectAll('.outitem').style('display','none');
             d3.selectAll('.flexitem').attr('id',null);
         }
 
@@ -345,14 +363,4 @@ function brushed() {
         return d;
     }
 
-    d3.select('.reset').on('click',function(){
-        container.call(zoom.transform, d3.zoomIdentity
-        .scale(1)
-        .translate(0, 0));
-    });
-    d3.select('.help').on('mouseover',function(){
-        d3.select('.guide').style('display','block')
-    }).on('mouseout',function(){
-        d3.select('.guide').style('display','none')
-    })
  });   
