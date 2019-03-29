@@ -13,7 +13,7 @@ window.onload = function () {
     height = window.innerHeight,
     corewidth=width-margin.left-margin.right;
     
-    const imagewidth=height*0.58;
+    const imagewidth=height*0.55;
     const monthdata=[3,4,5,6,7,8,9,10,11,12,1,2];
     const parseDate = d3.timeParse("%Y-%m-%d");
 
@@ -187,11 +187,14 @@ window.onload = function () {
 // 사진       - 스프라이트로 백그라운드유알엘 써야할지도 
         var picture=flexitem.append('div')
             .attr('class','picture');
-
-            picture.append('div')
-            .style('background',function(d){
-                return "url('css_sprites.jpg') -"+d.x+"px -"+d.y+"px";
-            });
+            picture.append('img')
+                .attr('src',function(d,i){
+                return 'image/img'+(i+1)+'.png';
+                })
+            // picture.append('div')
+            // .style('background',function(d){
+            //     return "url('css_sprites.jpg') -"+d.x+"px -"+d.y+"px";
+            // });
 
 // 팔레트  - 빗금이미지 다시
         flexitem.append('div')
