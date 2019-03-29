@@ -1,0 +1,129 @@
+    .container {
+      position:relative;
+      overflow:hidden;
+    }
+    .itemcontainer{
+      padding:0 10vw;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      overflow-y: hidden;
+      white-space: nowrap;
+      scrollbar-width: none;
+        -ms-overflow-style: none; 
+    }
+    .itemcontainer::-webkit-scrollbar {
+        display: none !important;
+       width: 0;
+        height: 0;
+    }
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .flexitem {
+      width:80vw;
+      height:60vh;
+      display: inline-block;
+      scroll-snap-align: center;
+      box-shadow:none;
+      opacity: .3;
+    }
+    .itemcontainer {
+    -webkit-overflow-scrolling: touch;
+    }
+
+    /* .......... */
+    .date{
+            height:8%;
+            overflow:visible !important;
+            text-align: right;
+        }
+        .date span{
+            font-size:18px;
+            font-weight:bold;
+        }
+        .picture{
+            width:100%;
+            height:40%;
+            overflow:hidden;
+            box-shadow:none;
+            z-index: initial;
+        }
+
+        .picture .skyimg{
+            width:100%;
+            height:99%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .Palette{
+            width:100%;
+            height:15%;
+            position:relative;
+        }
+        .outitem{
+            position: absolute;
+            right:0;
+            background-color:#dee2e6;
+            color:#000;
+        }
+        .pm25{
+            height:25%;
+            width:100%;
+            position:relative;
+        }
+        .pm25bar{
+            width:100%;
+            position:absolute;
+            bottom:0;
+            background-color:#888;
+        }
+        .pm25bar span{
+            position:absolute;
+            top:-30px;
+            right:0;
+            padding:0 10px;
+            color:#000;
+            font-size:18px;
+            font-weight: bold;
+        }
+        .baraxis{
+            height:10%;
+            position:relative;
+        }
+        .baraxis span{
+            position:absolute;
+            right:0;
+            font-weight: bold;
+        }
+        .label{
+            position:absolute;
+            left:10vw;
+            background-color:#000;
+            color:#fff;
+            font-size:12px;
+        }
+        .axis{
+            height:25%;
+            width:100%;
+            position:absolute;
+            top:63%;
+        }
+        .axisline{
+            height:1px;
+            position: absolute;
+            bottom:34px;
+            z-index:999;
+            border-top:1px solid #ff4713;
+        }
+        .axisline span{
+            display:block;
+            position:absolute;
+            top:-20px;
+            left:10vw;
+            background-color:#ff4713;
+            color:white;
+            font-size: 12px;
+        }
