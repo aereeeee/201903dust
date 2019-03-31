@@ -76,8 +76,6 @@
               font-size:14px;
               color:#888;
               text-align:center;
-              position:absolute;
-              bottom:-20px;
               line-height:18px;
             }
             .drag br{
@@ -88,8 +86,7 @@
               input[type=range] {
                 -webkit-appearance: none;
                 width: 80%;
-                position: absolute;
-                left:10vw;
+                transform: translateX(10vw);
               }
               
               input[type=range]::-webkit-slider-thumb {

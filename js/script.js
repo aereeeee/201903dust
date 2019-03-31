@@ -1,1 +1,425 @@
-var _0x213c=['class','axis','65%','.axis','append','axisline','width','html','<span>\x27나쁨\x27\x20기준\x20(35㎍/㎥)</span>','selectAll','.flexitem','data','enter','flexitem','translateX(','px)','bandwidth','<div><span\x20class=\x22name\x22>날짜:\x20</span><span\x20class=\x22value\x22>','</span></div>','<div><span\x20class=\x22name\x22>초미세먼지\x20농도:\x20</span><span\x20class=\x22value\x22>','pm25','㎍/㎥</span></div>','.pm25','#f1f3f5','.pm25bar','background-color','#212529','showTooltip','event','mouseout','transparent','hideTooltip','#888','.date','#99e6d8','#ff9d6c','#ff4713','delay','active','brushsec','svg','height','context','rect','fill','#dee2e6','brush','<span\x20class=\x27status\x27>&#x1F606;\x20좋음</span>','<span\x20class=\x27status\x27>&#x1F61F;\x20나쁨</span>','<span\x20class=\x27status\x27>&#x1F631;\x20매우\x20나쁨</span>','img','src','image/img','.png','Palette','palette','background-image','url(\x22img/line.png\x22)','<span\x20class=\x22outitem\x22>&#8251;\x20하늘\x20미촬영<span>','<span\x20class=\x22outitem\x22>&#8251;\x20뉴스\x20결방<span>','rgb(','pm25bar','<span\x20class=\x22pmlabel\x22>','</span>','baraxis','label','하늘\x20사진','45%','하늘\x20색상\x20추출','PM2.5\x20초미세먼지\x20농도','sourceEvent','selection','.baraxis','.pmlabel','.outitem','scale','translate','type','applyX','.brush','map','invertX','onload','#diff','January\x202017','March\x202017','preventDefault','attr','href','html,\x20body','animate','easeInCubic','[data-scroll]','click','#navigation\x20a','hover','addClass','children','css','display','block','30px','removeClass','none','0px','querySelectorAll','scrollY','scrollTop','#section1','offset','top','#navigation','length','hash','offsetTop','offsetHeight','classList','add','current','moveToFront','each','appendChild','innerWidth','innerHeight','left','right','timeParse','%Y-%m-%d','scaleBand','range','padding','domain','timeFormat','%_m월','%_m월\x20%_d일','%_y년\x20%_m월\x20%_d일','zoom','scaleExtent','translateExtent','extent','brushX','brush\x20end','transition','ease','easeLinear','select','.container','call','.reset','transform','zoomIdentity','.help','mouseover','.guide','style','opacity','data.csv','date','div'];(function(_0x4aef97,_0x150975){var _0x373c1b=function(_0x2b2491){while(--_0x2b2491){_0x4aef97['push'](_0x4aef97['shift']());}};_0x373c1b(++_0x150975);}(_0x213c,0xf1));var _0x1346=function(_0x2d8f05,_0x4b81bb){_0x2d8f05=_0x2d8f05-0x0;var _0x4d74cb=_0x213c[_0x2d8f05];return _0x4d74cb;};window[_0x1346('0x0')]=function(){$(_0x1346('0x1'))['twentytwenty']({'default_offset_pct':0.2,'before_label':_0x1346('0x2'),'after_label':_0x1346('0x3'),'no_overlay':!![]});function _0x529181(_0x123ff8){_0x123ff8[_0x1346('0x4')]();var _0x57a114=$($(this)[_0x1346('0x5')](_0x1346('0x6')));$(_0x1346('0x7'))[_0x1346('0x8')]({'scrollTop':_0x57a114['offset']()['top']},0x190,_0x1346('0x9'));}$(_0x1346('0xa'))['on'](_0x1346('0xb'),_0x529181);$(_0x1346('0xc'))[_0x1346('0xd')](function(){$(this)[_0x1346('0xe')](_0x1346('0xd'));$(this)[_0x1346('0xf')]()[_0x1346('0x10')](_0x1346('0x11'),_0x1346('0x12'))[_0x1346('0x8')]({'right':_0x1346('0x13'),'opacity':0x1},0x64,_0x1346('0x9'));},function(){$(this)[_0x1346('0x14')]('hover');$(this)[_0x1346('0xf')]()[_0x1346('0x10')](_0x1346('0x11'),_0x1346('0x15'))[_0x1346('0x8')]({'right':_0x1346('0x16'),'opacity':0x0},0x64);});var _0x7b11e6=document[_0x1346('0x17')](_0x1346('0xc'));window['addEventListener']('scroll',function(_0x29c5c7){var _0x27e4d8=window[_0x1346('0x18')];if($(document)[_0x1346('0x19')]()>$(_0x1346('0x1a'))[_0x1346('0x1b')]()[_0x1346('0x1c')]-0xc8){$(_0x1346('0x1d'))[_0x1346('0x10')]({'opacity':'1'});}else{$('#navigation')[_0x1346('0x10')]({'opacity':'0'});}for(i=0x0;i<_0x7b11e6[_0x1346('0x1e')];i++){var _0x47f547=_0x7b11e6[i];var _0x569bbd=document['querySelector'](_0x47f547[_0x1346('0x1f')]);if(_0x569bbd[_0x1346('0x20')]-0xa<=_0x27e4d8&&_0x569bbd[_0x1346('0x20')]+_0x569bbd[_0x1346('0x21')]-0x9>_0x27e4d8){_0x47f547[_0x1346('0x22')][_0x1346('0x23')](_0x1346('0x24'));}else{_0x47f547[_0x1346('0x22')]['remove'](_0x1346('0x24'));}};});d3['selection']['prototype'][_0x1346('0x25')]=function(){return this[_0x1346('0x26')](function(){this['parentNode'][_0x1346('0x27')](this);});};var _0x31e1c8=floatingTooltip('tooltip-fix',0xf0);var _0x1f6669={'top':0x0,'right':0x28,'bottom':0x0,'left':0x14},_0x15401c=window[_0x1346('0x28')],_0x633869=window[_0x1346('0x29')],_0x3dbfc8=_0x15401c-_0x1f6669[_0x1346('0x2a')]-_0x1f6669[_0x1346('0x2b')];const _0xe0f981=_0x633869*0.55;const _0x1088ac=[0x3,0x4,0x5,0x6,0x7,0x8,0x9,0xa,0xb,0xc,0x1,0x2];const _0x241fae=d3[_0x1346('0x2c')](_0x1346('0x2d'));var _0x19ea91=d3[_0x1346('0x2e')]()[_0x1346('0x2f')]([0x0,_0x3dbfc8,_0x633869])[_0x1346('0x30')](0x0);var _0x1a90d7=d3[_0x1346('0x2e')]()['range']([0x0,_0x3dbfc8,_0x633869])[_0x1346('0x31')](_0x1088ac)[_0x1346('0x30')](0.01);const _0x5c3c38=d3[_0x1346('0x32')](_0x1346('0x33'));const _0x5457b6=d3[_0x1346('0x32')](_0x1346('0x34'));const _0x3babb5=d3['timeFormat'](_0x1346('0x35'));const _0x4ef6e2=_0x3dbfc8/0x16d;const _0x402fae=_0xe0f981/_0x4ef6e2;const _0x4bd045=[[0x0,0x0],[_0x3dbfc8,_0x633869]];var _0xec6dae=d3[_0x1346('0x36')]()[_0x1346('0x37')]([0x1,_0x402fae])[_0x1346('0x38')](_0x4bd045)[_0x1346('0x39')](_0x4bd045)['on'](_0x1346('0x36'),_0x47763d);var _0x21afa8=d3[_0x1346('0x3a')]()[_0x1346('0x39')](_0x4bd045)['on'](_0x1346('0x3b'),_0x1f4849);var _0x58eb55=d3[_0x1346('0x3c')]()['duration'](0x15e)[_0x1346('0x3d')](d3[_0x1346('0x3e')]);const _0x1b7f42=d3[_0x1346('0x3f')](_0x1346('0x40'))[_0x1346('0x41')](_0xec6dae);d3[_0x1346('0x3f')](_0x1346('0x42'))['on'](_0x1346('0xb'),function(){_0x1b7f42[_0x1346('0x41')](_0xec6dae[_0x1346('0x43')],d3[_0x1346('0x44')]['scale'](0x1)['translate'](0x0,0x0));});d3[_0x1346('0x3f')](_0x1346('0x45'))['on'](_0x1346('0x46'),function(){d3[_0x1346('0x3f')](_0x1346('0x47'))[_0x1346('0x48')](_0x1346('0x11'),_0x1346('0x12'))[_0x1346('0x3c')](_0x58eb55)[_0x1346('0x48')]('opacity','1');})['on']('mouseout',function(){d3['select'](_0x1346('0x47'))['style'](_0x1346('0x49'),'0')[_0x1346('0x48')](_0x1346('0x11'),'none');});d3['csv'](_0x1346('0x4a'),_0x521ba4,function(_0x1c81a6,_0x33be9f){if(_0x1c81a6)throw _0x1c81a6;_0x19ea91[_0x1346('0x31')](_0x33be9f['map'](function(_0x1892f4){return _0x1892f4[_0x1346('0x4b')];}));_0x1b7f42['append'](_0x1346('0x4c'))[_0x1346('0x5')](_0x1346('0x4d'),_0x1346('0x4e'))[_0x1346('0x48')](_0x1346('0x1c'),_0x1346('0x4f'));d3[_0x1346('0x3f')](_0x1346('0x50'))[_0x1346('0x51')](_0x1346('0x4c'))[_0x1346('0x5')](_0x1346('0x4d'),_0x1346('0x52'))['style'](_0x1346('0x53'),_0x15401c+'px')[_0x1346('0x54')](_0x1346('0x55'));_0x1b7f42[_0x1346('0x56')](_0x1346('0x57'))[_0x1346('0x58')](_0x33be9f)[_0x1346('0x59')]()[_0x1346('0x51')](_0x1346('0x4c'))[_0x1346('0x5')]('class',_0x1346('0x5a'))['style'](_0x1346('0x43'),function(_0x39eccd){return _0x1346('0x5b')+_0x19ea91(_0x39eccd[_0x1346('0x4b')])+_0x1346('0x5c');})[_0x1346('0x48')](_0x1346('0x53'),_0x19ea91[_0x1346('0x5d')]()+'px')['on'](_0x1346('0x46'),function(_0x1cfe8f){var _0x143904=_0x1346('0x5e')+_0x1cfe8f[_0x1346('0x4b')]+_0x1346('0x5f')+_0x1346('0x60')+_0x1cfe8f[_0x1346('0x61')]+_0x1346('0x62');if(_0x19ea91['bandwidth']()<0x50){d3[_0x1346('0x3f')](this)[_0x1346('0x3f')](_0x1346('0x63'))['style']('background-color',_0x1346('0x64'));d3[_0x1346('0x3f')](this)[_0x1346('0x3f')](_0x1346('0x65'))[_0x1346('0x48')](_0x1346('0x66'),_0x1346('0x67'));_0x31e1c8[_0x1346('0x68')](_0x143904,d3[_0x1346('0x69')]);}})['on'](_0x1346('0x6a'),function(_0x2c75d2){d3[_0x1346('0x3f')](this)[_0x1346('0x3f')](_0x1346('0x63'))['style'](_0x1346('0x66'),_0x1346('0x6b'));_0x31e1c8[_0x1346('0x6c')]();if(_0x19ea91[_0x1346('0x5d')]()<0x50){d3['select'](this)[_0x1346('0x3f')](_0x1346('0x65'))['style']('background-color',_0x1346('0x6d'));}})['on'](_0x1346('0xb'),function(_0x2c2432,_0x141c1c){var _0x39205e=d3[_0x1346('0x3f')](this);_0x39205e[_0x1346('0x25')]();d3[_0x1346('0x56')](_0x1346('0x57'))[_0x1346('0x5')]('id',null);d3[_0x1346('0x56')](_0x1346('0x65'))[_0x1346('0x48')](_0x1346('0x66'),_0x1346('0x6d'));d3[_0x1346('0x56')](_0x1346('0x6e'))[_0x1346('0x48')]('opacity','0');if(_0x2c2432['pm25']<0x10){_0x39205e[_0x1346('0x3f')](_0x1346('0x6e'))['transition'](_0x58eb55)[_0x1346('0x48')]('opacity','1');_0x39205e[_0x1346('0x3f')](_0x1346('0x65'))[_0x1346('0x3c')](_0x58eb55)[_0x1346('0x48')](_0x1346('0x66'),_0x1346('0x6f'));}else if(_0x2c2432[_0x1346('0x61')]>=0x10&&_0x2c2432[_0x1346('0x61')]<0x24){_0x39205e[_0x1346('0x3f')](_0x1346('0x6e'))[_0x1346('0x3c')](_0x58eb55)['style'](_0x1346('0x49'),'1');_0x39205e[_0x1346('0x3f')]('.pm25bar')[_0x1346('0x3c')](_0x58eb55)[_0x1346('0x48')]('background-color','#f3efa1');}else if(_0x2c2432[_0x1346('0x61')]>=0x24&&_0x2c2432[_0x1346('0x61')]<0x4c){_0x39205e[_0x1346('0x3f')]('.date')[_0x1346('0x3c')](_0x58eb55)[_0x1346('0x48')](_0x1346('0x49'),'1');_0x39205e[_0x1346('0x3f')](_0x1346('0x65'))['transition'](_0x58eb55)[_0x1346('0x48')](_0x1346('0x66'),_0x1346('0x70'));}else{_0x39205e['select'](_0x1346('0x6e'))[_0x1346('0x3c')](_0x58eb55)['style'](_0x1346('0x49'),'1');_0x39205e[_0x1346('0x3f')](_0x1346('0x65'))[_0x1346('0x3c')](_0x58eb55)[_0x1346('0x48')](_0x1346('0x66'),_0x1346('0x71'));}if(_0x19ea91[_0x1346('0x5d')]()<0x50){_0x39205e[_0x1346('0x3c')]()[_0x1346('0x72')](0x12c)[_0x1346('0x5')]('id','active');}else{_0x39205e[_0x1346('0x3c')]()[_0x1346('0x5')]('id',_0x1346('0x73'));}});const _0x1c043e=_0x633869*0.05;var _0x11e5af=_0x1b7f42[_0x1346('0x51')](_0x1346('0x4c'))['attr'](_0x1346('0x4d'),_0x1346('0x74'))[_0x1346('0x51')](_0x1346('0x75'))['attr'](_0x1346('0x53'),_0x3dbfc8)[_0x1346('0x5')](_0x1346('0x76'),_0x1c043e);var _0x6e5b8f=_0x11e5af[_0x1346('0x51')]('g')[_0x1346('0x48')]('transform',_0x1346('0x5b')+_0x1f6669[_0x1346('0x2a')]+')')[_0x1346('0x5')](_0x1346('0x4d'),_0x1346('0x77'));_0x6e5b8f[_0x1346('0x51')]('g')[_0x1346('0x56')](_0x1346('0x78'))['data'](_0x1088ac)['enter']()[_0x1346('0x51')]('rect')[_0x1346('0x5')](_0x1346('0x4d'),'monthrect')[_0x1346('0x5')]('x',function(_0x2e638c){return _0x1a90d7(_0x2e638c);})[_0x1346('0x5')](_0x1346('0x53'),_0x1a90d7[_0x1346('0x5d')]())[_0x1346('0x5')]('height',_0x1c043e)[_0x1346('0x5')](_0x1346('0x79'),_0x1346('0x7a'));_0x6e5b8f[_0x1346('0x51')]('g')['attr'](_0x1346('0x4d'),_0x1346('0x7b'))['call'](_0x21afa8)[_0x1346('0x41')](_0x21afa8['move'],_0x19ea91[_0x1346('0x2f')]());const _0x21a336=d3[_0x1346('0x56')](_0x1346('0x57'));_0x21a336[_0x1346('0x51')](_0x1346('0x4c'))['attr'](_0x1346('0x4d'),'date')['html'](function(_0x1fbeef,_0xffe614){if(_0x1fbeef[_0x1346('0x61')]<0x10){return _0x1346('0x7c');}else if(_0x1fbeef[_0x1346('0x61')]>=0x10&&_0x1fbeef[_0x1346('0x61')]<0x24){return'<span\x20class=\x27status\x27>&#x1F644;\x20보통</span>';}else if(_0x1fbeef[_0x1346('0x61')]>=0x24&&_0x1fbeef[_0x1346('0x61')]<0x4c){return _0x1346('0x7d');}else{return _0x1346('0x7e');}});var _0xe27fff=_0x21a336[_0x1346('0x51')](_0x1346('0x4c'))['attr'](_0x1346('0x4d'),'picture');_0xe27fff['append'](_0x1346('0x7f'))[_0x1346('0x5')](_0x1346('0x80'),function(_0x5c4614,_0x591516){return _0x1346('0x81')+(_0x591516+0x1)+_0x1346('0x82');});_0x21a336['append'](_0x1346('0x4c'))[_0x1346('0x5')](_0x1346('0x4d'),_0x1346('0x83'))[_0x1346('0x5')]('id',function(_0x4a7099,_0x28f5d3){return _0x1346('0x84')+_0x28f5d3;})[_0x1346('0x48')]('background-color',function(_0x263272,_0x1e2eb4){if(_0x263272['R']==''){d3[_0x1346('0x3f')](this)[_0x1346('0x48')](_0x1346('0x85'),_0x1346('0x86'))[_0x1346('0x54')](function(){if(_0x1e2eb4==0x1b||_0x1e2eb4==0x1c||_0x1e2eb4==0x2b||_0x1e2eb4==0x34||_0x1e2eb4==0x3e||_0x1e2eb4==0x42||_0x1e2eb4==0x6b){return _0x1346('0x87');}else{return _0x1346('0x88');}});}else{return _0x1346('0x89')+_0x263272['R']+','+_0x263272['G']+','+_0x263272['B']+')';}});const _0x2c9b87=_0x21a336[_0x1346('0x51')]('div')[_0x1346('0x5')](_0x1346('0x4d'),_0x1346('0x61'))['attr']('id',function(_0x1718a0,_0x3cf150){return _0x1346('0x61')+_0x3cf150;});_0x2c9b87['append'](_0x1346('0x4c'))['attr'](_0x1346('0x4d'),_0x1346('0x8a'))[_0x1346('0x5')]('id',function(_0x1f607c,_0x3984ad){return _0x1346('0x8a')+_0x3984ad;})[_0x1346('0x48')](_0x1346('0x76'),function(_0x15ab0b){return _0x15ab0b[_0x1346('0x61')]+'px';})[_0x1346('0x54')](function(_0x91fb5e,_0x43c406){return _0x1346('0x8b')+_0x91fb5e[_0x1346('0x61')]+_0x1346('0x8c');});_0x21a336[_0x1346('0x51')]('div')[_0x1346('0x5')](_0x1346('0x4d'),_0x1346('0x8d'))[_0x1346('0x54')](function(_0x11cc42,_0x2321b6){if(_0x2321b6%0x1e==0x1)return _0x5c3c38(_0x241fae(_0x11cc42[_0x1346('0x4b')]));});_0x1b7f42['append'](_0x1346('0x4c'))[_0x1346('0x5')](_0x1346('0x4d'),_0x1346('0x8e'))[_0x1346('0x48')]('top','5%')[_0x1346('0x54')](_0x1346('0x8f'));_0x1b7f42['append']('div')[_0x1346('0x5')](_0x1346('0x4d'),_0x1346('0x8e'))[_0x1346('0x48')]('top',_0x1346('0x90'))[_0x1346('0x54')](_0x1346('0x91'));_0x1b7f42[_0x1346('0x51')]('div')['attr'](_0x1346('0x4d'),_0x1346('0x8e'))[_0x1346('0x48')]('top','65%')[_0x1346('0x54')](_0x1346('0x92'));});function _0x1f4849(){if(d3[_0x1346('0x69')][_0x1346('0x93')]&&d3['event'][_0x1346('0x93')]['type']===_0x1346('0x36'))return;var _0x70bb6c=d3[_0x1346('0x69')][_0x1346('0x94')]||_0x1a90d7[_0x1346('0x2f')]();_0x1b7f42[_0x1346('0x56')](_0x1346('0x57'))['style'](_0x1346('0x43'),function(_0x2b47fc){return _0x1346('0x5b')+_0x19ea91(_0x2b47fc['date'])+'px)';})['style'](_0x1346('0x53'),_0x19ea91[_0x1346('0x5d')]()+'px');if(_0x19ea91[_0x1346('0x5d')]()>0x78){d3[_0x1346('0x56')](_0x1346('0x95'))['html'](function(_0x45f1ee,_0x4cda12){return _0x3babb5(_0x241fae(_0x45f1ee[_0x1346('0x4b')]));});d3['selectAll']('.pmlabel')[_0x1346('0x48')](_0x1346('0x49'),'1');d3[_0x1346('0x56')]('.outitem')[_0x1346('0x48')](_0x1346('0x11'),_0x1346('0x12'));}else if(_0x19ea91[_0x1346('0x5d')]()>0x50&&_0x19ea91[_0x1346('0x5d')]()<=0x78){d3['selectAll'](_0x1346('0x95'))[_0x1346('0x54')](function(_0x26124b,_0x5e9662){return _0x5457b6(_0x241fae(_0x26124b[_0x1346('0x4b')]));});d3[_0x1346('0x56')](_0x1346('0x96'))[_0x1346('0x48')](_0x1346('0x49'),'1');d3[_0x1346('0x56')](_0x1346('0x97'))[_0x1346('0x48')]('display',_0x1346('0x15'));}else{d3['selectAll'](_0x1346('0x95'))[_0x1346('0x54')](function(_0x3e24f4,_0x26c6b3){if(_0x26c6b3%0x1e==0x1){return _0x5c3c38(_0x241fae(_0x3e24f4[_0x1346('0x4b')]));}else return;});d3[_0x1346('0x56')](_0x1346('0x65'))[_0x1346('0x48')](_0x1346('0x66'),_0x1346('0x6d'));d3[_0x1346('0x56')]('.date')[_0x1346('0x48')]('opacity','0');d3[_0x1346('0x56')](_0x1346('0x96'))[_0x1346('0x48')](_0x1346('0x49'),'0');d3[_0x1346('0x56')](_0x1346('0x97'))[_0x1346('0x48')](_0x1346('0x11'),_0x1346('0x15'));d3[_0x1346('0x56')]('.flexitem')[_0x1346('0x5')]('id',null);}_0x1b7f42[_0x1346('0x41')](_0xec6dae['transform'],d3[_0x1346('0x44')][_0x1346('0x98')](_0x3dbfc8/(_0x70bb6c[0x1]-_0x70bb6c[0x0]))[_0x1346('0x99')](-_0x70bb6c[0x0],0x0));}function _0x47763d(){if(d3[_0x1346('0x69')]['sourceEvent']&&d3[_0x1346('0x69')]['sourceEvent'][_0x1346('0x9a')]==='brush')return;_0x19ea91[_0x1346('0x2f')]([0x0,_0x3dbfc8]['map'](function(_0xdd996d){return d3['event']['transform'][_0x1346('0x9b')](_0xdd996d);}));var _0x44bac7=d3[_0x1346('0x69')][_0x1346('0x43')];_0x1b7f42[_0x1346('0x56')](_0x1346('0x57'))[_0x1346('0x48')](_0x1346('0x43'),function(_0x179a79){return _0x1346('0x5b')+_0x19ea91(_0x179a79[_0x1346('0x4b')])+_0x1346('0x5c');})[_0x1346('0x48')](_0x1346('0x53'),_0x19ea91['bandwidth']()+'px');if(_0x19ea91[_0x1346('0x5d')]()>0x78){d3[_0x1346('0x56')]('.baraxis')['html'](function(_0x14f578,_0x513bf6){return _0x3babb5(_0x241fae(_0x14f578[_0x1346('0x4b')]));});d3[_0x1346('0x56')](_0x1346('0x96'))[_0x1346('0x48')]('opacity','1');d3[_0x1346('0x56')](_0x1346('0x97'))[_0x1346('0x48')](_0x1346('0x11'),_0x1346('0x12'));}else if(_0x19ea91[_0x1346('0x5d')]()>0x50&&_0x19ea91[_0x1346('0x5d')]()<=0x78){d3[_0x1346('0x56')](_0x1346('0x95'))[_0x1346('0x54')](function(_0x38cfe9,_0x30b038){return _0x5457b6(_0x241fae(_0x38cfe9[_0x1346('0x4b')]));});d3[_0x1346('0x56')](_0x1346('0x96'))[_0x1346('0x48')](_0x1346('0x49'),'1');d3[_0x1346('0x56')](_0x1346('0x97'))[_0x1346('0x48')](_0x1346('0x11'),_0x1346('0x15'));}else{d3[_0x1346('0x56')](_0x1346('0x95'))[_0x1346('0x54')](function(_0x5d2718,_0x58575e){if(_0x58575e%0x1e==0x1){return _0x5c3c38(_0x241fae(_0x5d2718[_0x1346('0x4b')]));}else return;});d3[_0x1346('0x56')]('.pm25bar')[_0x1346('0x48')](_0x1346('0x66'),'#888');d3['selectAll'](_0x1346('0x6e'))[_0x1346('0x48')](_0x1346('0x49'),'0');d3[_0x1346('0x56')](_0x1346('0x96'))[_0x1346('0x48')]('opacity','0');d3[_0x1346('0x56')](_0x1346('0x97'))[_0x1346('0x48')](_0x1346('0x11'),_0x1346('0x15'));d3[_0x1346('0x56')]('.flexitem')['attr']('id',null);}d3[_0x1346('0x3f')](_0x1346('0x9c'))[_0x1346('0x41')](_0x21afa8['move'],_0x1a90d7[_0x1346('0x2f')]()[_0x1346('0x9d')](_0x44bac7[_0x1346('0x9e')],_0x44bac7));}function _0x521ba4(_0x1b73f9){_0x1b73f9[_0x1346('0x61')]=+_0x1b73f9[_0x1346('0x61')];return _0x1b73f9;}};
+window.onload = function () {
+    // 투엔티투엔티
+    $("#diff").twentytwenty({
+        default_offset_pct: 0.2, 
+        before_label: 'January 2017',
+        after_label: 'March 2017',
+        no_overlay: true,
+    
+      });
+
+    // 스크롤내브
+      function scrollToSection(event) {
+        event.preventDefault();
+        var $section = $($(this).attr('href')); 
+        $('html, body').animate({
+          scrollTop: $section.offset().top
+        }, 400,'easeInCubic');
+      }
+      $('[data-scroll]').on('click', scrollToSection);
+    
+    //   스크롤내브호버
+      $('#navigation a').hover(
+      function() {
+            $( this ).addClass( "hover" );
+            $(this).children().css( "display", "block" )
+            .animate({
+                right:'30px',
+                opacity: 1,
+            }, 100,'easeInCubic' );
+      }, function() {
+            $( this ).removeClass( "hover" );
+            $(this).children().css( "display", "none" )
+            .animate({
+                right:'0px',
+                opacity: 0,
+            }, 100 );
+      }
+    );
+    
+    //스크롤내브 위치에서 커렌트
+    var mainNavLinks = document.querySelectorAll("#navigation a");
+      
+    window.addEventListener("scroll", function(event){
+        var fromTop = window.scrollY;
+    
+        if($(document).scrollTop()>$('#section1').offset().top-200){
+            $('#navigation').css({opacity:'1'});
+        }else{
+            $('#navigation').css({opacity:'0'});
+        }
+        for(i=0;i<mainNavLinks.length;i++){
+                    var link=mainNavLinks[i];
+                    var section = document.querySelector(link.hash);            
+                    if (
+                      section.offsetTop-10 <= fromTop 
+                      &&
+                      section.offsetTop + section.offsetHeight-9 > fromTop
+                    ) {
+                      link.classList.add("current");
+                    } else {
+                      link.classList.remove("current");
+                    }
+
+        };
+    });
+
+    d3.selection.prototype.moveToFront = function() {
+        return this.each(function(){
+          this.parentNode.appendChild(this);
+        });
+      };
+    
+    var tooltipfix = floatingTooltip('tooltip-fix', 240);
+    var margin = {top: 0, right: 40, bottom: 0, left: 20},
+    width = window.innerWidth,
+    height = window.innerHeight,
+    corewidth=width-margin.left-margin.right;
+    
+    const imagewidth=height*0.55;
+    const monthdata=[3,4,5,6,7,8,9,10,11,12,1,2];
+    const parseDate = d3.timeParse("%Y-%m-%d");
+
+    var x = d3.scaleBand()
+          .range([0,corewidth,height])
+          .padding(0);
+    var x2 = d3.scaleBand()
+          .range([0,corewidth,height])
+          .domain(monthdata)
+          .padding(0.03);
+
+    const monthformat = d3.timeFormat('%_m월');
+    const dayformat= d3.timeFormat('%_m월 %_d일');
+    const yearformat= d3.timeFormat('%_y년 %_m월 %_d일');
+    
+    const firstwidth=corewidth/365;
+    const maxextent=imagewidth/firstwidth;
+    
+    const extent = [[0,0], [corewidth,height]];       
+    var zoom=d3.zoom()
+            .scaleExtent([1, maxextent])
+            .translateExtent(extent)
+            .extent(extent)
+            // .duration()
+            .on("zoom", zoomed);
+    
+    var brush = d3.brushX()
+            .extent(extent)
+            .on("brush end", brushed);
+
+    var ts = d3.transition()
+            .duration(350)
+            .ease(d3.easeLinear);
+
+    const container=d3.select('.container').call(zoom);
+
+    d3.select('.reset').on('click',function(){
+        container.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
+    });
+    d3.select('.help').on('mouseover',function(){
+        d3.select('.guide').style('display','block')
+        .transition(ts)
+        .style('opacity','1')
+    }).on('mouseout',function(){
+        d3.select('.guide').style('opacity','0').style('display','none')
+    });
+    
+
+    d3.csv("data.csv", type, function(error, data) {
+      if (error) throw error;
+
+        x.domain(data.map(function(d) { return d.date; }));
+
+// 나쁨기준선
+        container.append('div')
+            .attr('class','axis')
+            .style('top','65%');
+        d3.select('.axis').append('div')
+            .attr('class','axisline')
+            .style('width',width+'px')
+            .html("<span>'나쁨' 기준 (35㎍/㎥)</span>");
+
+// 365개아이템
+        container.selectAll('.flexitem')
+            .data(data)
+            .enter()
+            .append('div')
+            .attr('class','flexitem')
+            .style('transform', function(d){
+                return 'translateX('+x(d.date)+'px)'
+            })
+            .style("width", x.bandwidth()+'px')
+            .on('mouseover',function(d){
+                var content = '<div><span class="name">날짜: </span><span class="value">' +
+                            d.date +
+                            '</span></div>' +
+                            '<div><span class="name">초미세먼지 농도: </span><span class="value">' +
+                            d.pm25+
+                            '㎍/㎥</span></div>';
+                if(x.bandwidth()<80){
+                d3.select(this).select('.pm25').style('background-color',"#f1f3f5");
+                d3.select(this).select('.pm25bar').style('background-color',"#212529");
+                 tooltipfix.showTooltip(content, d3.event);
+                }
+            })
+            .on('mouseout', function(d){
+                d3.select(this).select('.pm25').style('background-color',"transparent");
+                tooltipfix.hideTooltip();
+                if(x.bandwidth()<80){
+                    d3.select(this).select('.pm25bar').style('background-color',"#888");
+                 }
+            })
+            .on('click',function(d,i){
+
+                var item=d3.select(this);
+
+                item.moveToFront();
+                d3.selectAll('.flexitem').attr('id',null);
+                d3.selectAll('.pm25bar').style('background-color','#888')
+                d3.selectAll('.date').style('opacity','0');
+            
+                // 변형
+                if(d.pm25<16){
+                    item.select('.date').transition(ts).style('opacity','1');
+                    item.select('.pm25bar').transition(ts).style('background-color','#99e6d8');
+                }else if(d.pm25>=16 && d.pm25<36){
+                    item.select('.date').transition(ts).style('opacity','1');
+                    item.select('.pm25bar').transition(ts).style('background-color','#f3efa1');
+                }else if(d.pm25>=36 && d.pm25<76){
+                    item.select('.date').transition(ts).style('opacity','1');
+                    item.select('.pm25bar').transition(ts).style('background-color','#ff9d6c');
+                }else{
+                    item.select('.date').transition(ts).style('opacity','1');
+                    item.select('.pm25bar').transition(ts).style('background-color','#ff4713');
+                }
+                if(x.bandwidth()<80){             
+                    item.transition().delay(300).attr('id','active');}
+                else{
+                    item.transition().attr('id','active');
+                }
+            });
+        
+
+// 브러쉬구역
+        const rectheight=height*0.05;
+        var svg=container.append('div').attr('class','brushsec')
+                .append('svg')
+                .attr('width',corewidth)
+                .attr('height',rectheight)
+
+        var context = svg.append("g")
+            .style('transform','translateX('+margin.left+')')
+            .attr("class", "context");
+
+        context.append('g')
+                .selectAll('rect')
+                .data(monthdata)
+                .enter() 
+                .append('rect')
+                .attr("class", "monthrect")
+                .attr("x", function(d) { return x2(d); })
+                .attr("width", x2.bandwidth())
+                .attr("height",rectheight)
+                .attr('fill','#dee2e6');
+            
+            context.append('g')
+                .attr("class", "brush")
+                .call(brush)
+                .call(brush.move, x.range());
+
+
+
+        const flexitem=d3.selectAll('.flexitem');
+
+        // 맨위나쁨좋음
+        flexitem.append('div')
+            .attr('class','date')
+            .html(function(d,i){                         
+                if(d.pm25<16){
+                    return "<span class='status'>&#x1F606; 좋음</span>"
+                }else if(d.pm25>=16 && d.pm25<36){
+                    return "<span class='status'>&#x1F644; 보통</span>"
+                }else if(d.pm25>=36 && d.pm25<76){
+                    return "<span class='status'>&#x1F61F; 나쁨</span>"
+                }else{
+                    return "<span class='status'>&#x1F631; 매우 나쁨</span>"
+                }
+            });
+        // 하늘사진
+        var picture=flexitem.append('div')
+            .attr('class','picture');
+            picture.append('img')
+                .attr('src',function(d,i){
+                return 'image/img'+(i+1)+'.png';
+                })
+
+        // 팔레트
+        flexitem.append('div')
+            .attr('class','Palette')
+            .attr('id',function(d,i){
+                return 'palette'+i;
+            })
+            .style('background-color',function(d,i){
+                if(d.R==''){
+                    d3.select(this).style('background-image','url("img/line.png")')
+                    .html(function(){
+                        if(i==27||i==28||i==43||i==52||i==62||i==66||i==107){
+                            return '<span class="outitem">&#8251; 하늘 미촬영<span>'; 
+                        }else{
+                            return '<span class="outitem">&#8251; 뉴스 결방<span>';}  
+                    });
+                }else{
+                return 'rgb('+d.R+','+d.G+','+d.B+')';
+                }
+            })
+// 수치바
+        const bar=flexitem.append('div')
+            .attr('class','pm25')
+            .attr('id',function(d,i){
+                return 'pm25'+i;
+            })
+            bar.append('div')
+                .attr('class','pm25bar')
+                .attr('id',function(d,i){
+                    return 'pm25bar'+i;
+                })
+                .style('height',function(d){
+                    return d.pm25+'px';
+                })
+                .html(function(d,i){
+                return '<span class="pmlabel">'+d.pm25+'</span>';
+                });
+
+        flexitem.append('div')
+            .attr('class','baraxis')
+            .html(function(d,i){
+                if(i%30==1)
+                return monthformat(parseDate(d.date));
+            });
+// 라벨
+    container.append('div')
+            .attr('class','label')
+            .style('top','5%')
+            .html('하늘 사진');
+    container.append('div')
+            .attr('class','label')
+            .style('top','45%')
+            .html('하늘 색상 추출');
+    container.append('div')
+            .attr('class','label')
+            .style('top','65%')
+            .html('PM2.5 초미세먼지 농도');
+    
+    });
+
+
+function brushed() {
+  if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return; // ignore brush-by-zoom
+        var s = d3.event.selection || x2.range();
+        // x.range(s.map(s.invertX, s));
+        // var r0 = x2.range()[0];
+        // var r1 = x2.range()[1];
+        // var s0= s[0];
+        // var s1= s[1];
+        //     var p=maxextent-r0;
+        //     // var left=Math.pow((s0-r0),(s0-r0)*0.0005)*p;
+        //     // var right=Math.pow((r1-s1),(r1-s1)*0.0005)*p;
+        //     var left=Math.pow((s0-r0),2)*p*0.0001;
+        //     var right=Math.pow((r1-s1),2)*p*0.0001;
+        // var mul=(width-margin.left-margin.right) / (s[1] - s[0]);
+        // console.log(mul)
+        // console.log(s[1])
+        // console.log(s[0])
+        // x.range([-s0*mul,mul*(r1)]);
+
+  container.selectAll(".flexitem")
+        .style('transform', function(d){
+        return 'translateX('+x(d.date)+'px)'
+        })
+        .style("width", (x.bandwidth())+'px');
+
+
+        if(x.bandwidth()>120){
+            d3.selectAll('.baraxis').html(function(d){
+            return yearformat(parseDate(d.date));
+            });
+            d3.selectAll('.pmlabel').style('opacity','1');
+            d3.selectAll('.outitem').style('display','block');
+        }
+        else if(x.bandwidth()>80 && x.bandwidth()<=120 ){
+            d3.selectAll('.baraxis').html(function(d){
+            return dayformat(parseDate(d.date));
+            });
+            d3.selectAll('.pmlabel').style('opacity','1');
+            d3.selectAll('.outitem').style('display','none');
+        }else{
+            d3.selectAll('.baraxis').html(function(d,i){
+            if(d.id%30==1){
+            return monthformat(parseDate(d.date));}
+            else return;
+            });
+
+            d3.selectAll('.pm25bar').style('background-color','#888')
+            d3.selectAll('.date').style('opacity','0');
+            d3.selectAll('.pmlabel').style('opacity','0');
+            d3.selectAll('.outitem').style('display','none');
+            d3.selectAll('.flexitem').attr('id',null);
+        }
+
+        container.call(zoom.transform, d3.zoomIdentity
+        .scale(corewidth / (s[1] - s[0]))
+        .translate(-s[0], 0));
+
+}
+    function zoomed() {
+        if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return;
+        x.range([0, corewidth].map(
+            function(d){
+                return d3.event.transform.applyX(d);
+            }
+        ));
+        var t = d3.event.transform;
+        container.selectAll(".flexitem")
+        .style('transform', function(d){
+        return 'translateX('+x(d.date)+'px)'
+        })
+        .style("width", (x.bandwidth())+'px');
+
+        if(x.bandwidth()>120){
+            d3.selectAll('.baraxis').html(function(d){
+            return yearformat(parseDate(d.date));
+            });
+            d3.selectAll('.pmlabel').style('opacity','1');
+            d3.selectAll('.outitem').style('display','block');
+        }
+        else if(x.bandwidth()>80 && x.bandwidth()<=120 ){
+            d3.selectAll('.baraxis').html(function(d){
+            return dayformat(parseDate(d.date));
+            });
+            d3.selectAll('.pmlabel').style('opacity','1');
+            d3.selectAll('.outitem').style('display','none');
+        }else{
+            d3.selectAll('.baraxis').html(function(d,i){
+            if(d.id%30==1){
+            return monthformat(parseDate(d.date));}
+            else return;
+            });
+
+            d3.selectAll('.pm25bar').style('background-color','#888')
+            d3.selectAll('.date').style('opacity','0');
+            d3.selectAll('.pmlabel').style('opacity','0');
+            d3.selectAll('.outitem').style('display','none');
+            d3.selectAll('.flexitem').attr('id',null);
+        }
+
+        d3.select(".brush").call(brush.move, x2.range().map(t.invertX, t));
+    }
+
+
+    function type(d,i) {
+        d.id=i;
+        d.pm25 = +d.pm25;
+        return d;
+    }
+
+ };   
